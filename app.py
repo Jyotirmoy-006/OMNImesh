@@ -97,8 +97,8 @@ class SUMOSimulationController:
         # Dynamic PPO Neural Network Policy Loader
         self.ppo_model, self.ppo_model_name = load_latest_ppo_model()
 
-        # Core Omni-Mesh components
-        self.orchestrator = GlobalZoneOrchestrator(zone_id="zone_alpha", auto_approve_sim=True)
+        # Core Omni-Mesh components under Ethical Governance
+        self.orchestrator = GlobalZoneOrchestrator(zone_id="zone_alpha", auto_approve_sim=False)
         self.consensus_filter = MultiNodeConsensusFilter(window_sec=30.0, required_nodes=2)
         self.serializer = MessageSerializer()
         self.zspf = ZSPFStateMachine(heartbeat_timeout=3.0, broker_timeout=5.0)
@@ -222,30 +222,79 @@ class SUMOSimulationController:
             self.containment_active = True
             self.containment_target = target_plate
             self.containment_node = "node_2_2"
+            # Reset HITL gateway state for new incident
+            self.orchestrator.hitl_gateway.reset()
             # Inject actual physical suspect vehicle into SUMO
             self.env.inject_suspect_vehicle(vehicle_id=target_plate, corridor_row=2)
 
         self.log_event(f"ANPR sighting for plate '{target_plate}' at node_2_0. Awaiting multi-node consensus...", category="containment")
 
-        # Simulate 2-node consensus confirmation after 1 second
+        # Simulate 2-node consensus confirmation after 1.2s
         def _confirm_consensus():
             time.sleep(1.2)
             consensus = self.consensus_filter.register_sighting(target_plate, "node_2_1", 0.96)
             if consensus:
-                with self.lock:
-                    target = self.intersections.get(self.containment_node)
-                    if target:
-                        target["barrier_lock"] = True
-                        target["phase"] = "NS"
-                    # Apply containment barrier in SUMO TraCI
-                    self.env.set_containment_lockdown("C2")
-
-                self.log_event(
-                    f"Consensus confirmed ({len(consensus)} nodes). Tier-2 commands RED barrier at C2 ({self.containment_node})!",
-                    category="containment",
+                # 2-node consensus reached!
+                # Constraint 1: Block signal override output until human authorization
+                approved = self.orchestrator.hitl_gateway.request_authorization(
+                    plate=target_plate,
+                    location=f"nodes: {consensus}",
+                    confidence=0.96,
+                    confirmed_nodes=consensus,
                 )
+                if approved:
+                    self._apply_containment_lockdown()
+                else:
+                    self.log_event(
+                        f"ANPR Consensus Verified (2/2 nodes). [ETHICAL GATEWAY LOCK] State: PENDING_AUTHORIZATION. "
+                        f"Human dispatcher approval REQUIRED before activating C2 barrier!",
+                        category="alert",
+                    )
+                    socketio.emit("containment_pending_authorization", {
+                        "plate": target_plate,
+                        "nodes": consensus,
+                        "confidence": 0.96,
+                        "state": "PENDING_AUTHORIZATION",
+                    })
+                    socketio.emit("telemetry_update", self.get_state())
 
         threading.Thread(target=_confirm_consensus, daemon=True).start()
+
+    def _apply_containment_lockdown(self):
+        """Applies physical red perimeter lock at the containment trap intersection."""
+        with self.lock:
+            target = self.intersections.get(self.containment_node)
+            if target:
+                target["barrier_lock"] = True
+                target["phase"] = "NS"
+            # Apply containment barrier in SUMO TraCI
+            self.env.set_containment_lockdown("C2")
+
+        self.log_event(
+            f"Physical perimeter RED barrier ACTIVE at C2 ({self.containment_node}). Suspect trajectory entrapped!",
+            category="containment",
+        )
+
+    def authorize_containment(self, approver_id: str = "dispatcher_lead") -> Dict[str, Any]:
+        """
+        Unlocks the HITL gate and executes the Mode 0 physical containment barrier at node C2.
+        """
+        with self.lock:
+            auth_result = self.orchestrator.hitl_gateway.authorize(approver_id=approver_id)
+            self._apply_containment_lockdown()
+
+        self.log_event(
+            f"[ETHICAL GATEWAY UNLOCKED] Dispatcher '{approver_id}' APPROVED containment for {self.containment_target}. "
+            f"Mode 0 containment barrier deployed at C2!",
+            category="containment",
+        )
+        return {
+            "status": "success",
+            "message": f"Containment authorized by {approver_id}",
+            "hitl_state": "AUTHORIZED",
+            "containment_node": self.containment_node,
+            "target_plate": self.containment_target,
+        }
 
     def toggle_thermal_throttle(self, force_throttle: Optional[bool] = None):
         with self.lock:
@@ -451,6 +500,11 @@ class SUMOSimulationController:
                 "emergency_active": self.emergency_active,
                 "containment_active": self.containment_active,
                 "containment_target": self.containment_target,
+                "hitl": {
+                    "state": self.orchestrator.hitl_gateway.state,
+                    "is_locked": self.orchestrator.hitl_gateway.is_locked,
+                    "pending_alert": self.orchestrator.hitl_gateway.pending_alert,
+                },
                 "vehicles": vehicles_list,
                 "nodes": nodes_data,
                 "telemetry": telemetry,
@@ -554,6 +608,19 @@ def trigger_containment():
     socketio.emit("telemetry_update", controller.get_state())
     return jsonify({"status": "success", "message": f"Containment initiated for plate {target_plate}"})
 
+@app.route("/api/trigger/authorize_containment", methods=["POST"])
+def trigger_authorize_containment():
+    """
+    Constraint 2: Explicit REST endpoint for dispatcher authorization.
+    Releases the HITL gate lock and executes physical Mode 0 containment barrier.
+    """
+    data = request.get_json(silent=True) or {}
+    approver_id = data.get("approver_id", "dispatcher_lead")
+    res = controller.authorize_containment(approver_id=approver_id)
+    socketio.emit("containment_authorized", res)
+    socketio.emit("telemetry_update", controller.get_state())
+    return jsonify(res)
+
 @app.route("/api/trigger/zspf", methods=["POST"])
 def trigger_zspf():
     data = request.get_json(silent=True) or {}
@@ -620,6 +687,9 @@ def handle_client_command(data):
         controller.trigger_emergency()
     elif action == "containment":
         controller.trigger_containment()
+    elif action == "authorize_containment":
+        approver = data.get("approver_id", "dispatcher_lead")
+        controller.authorize_containment(approver_id=approver)
     elif action == "zspf":
         controller.trigger_zspf_mode()
     elif action == "kill_broker":

@@ -17,6 +17,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from omnimesh.utils.logger import logger
 from omnimesh.simulation.traci_env import SUMOTraCIEnvironment
 from omnimesh.simulation.scenario_generator import ScenarioGenerator
+from omnimesh.tier2_orchestrator.human_in_loop import HumanInTheLoopGateway
+
+# Constraint 4: Automatically bypass HITL lock during headless statistical evaluations
+HumanInTheLoopGateway.GLOBAL_BYPASS = True
 
 try:
     from stable_baselines3 import PPO

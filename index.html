@@ -468,6 +468,123 @@
     .event-entry.emergency { border-left-color: var(--accent-rose); background: rgba(244, 63, 94, 0.05); }
     .event-entry.containment { border-left-color: var(--accent-amber); background: rgba(245, 158, 11, 0.05); }
     .event-entry.zspf { border-left-color: var(--accent-violet); background: rgba(139, 92, 246, 0.05); }
+    .event-entry.alert { border-left-color: var(--accent-rose); background: rgba(239, 68, 68, 0.08); font-weight: 600; }
+
+    /* Flashing HITL Authorization Button & Modal */
+    @keyframes pulse-flashing {
+      0%, 100% {
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.7);
+        border-color: #ef4444;
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 32px rgba(239, 68, 68, 1);
+        border-color: #fca5a5;
+        transform: scale(1.03);
+      }
+    }
+
+    .btn-hitl-auth {
+      animation: pulse-flashing 1.2s infinite ease-in-out;
+      font-weight: 700 !important;
+      background: rgba(220, 38, 38, 0.25) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hitl-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(3, 7, 18, 0.78);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      border-radius: 12px;
+    }
+
+    .hitl-modal-card {
+      background: #0d1527;
+      border: 2px solid #ef4444;
+      border-radius: 16px;
+      padding: 1.75rem;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 45px rgba(239, 68, 68, 0.45);
+      animation: pulse-flashing 2s infinite ease-in-out;
+    }
+
+    .hitl-modal-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #f87171;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hitl-modal-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .hitl-modal-text {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 1.35rem;
+    }
+
+    .hitl-modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .btn-hitl-confirm {
+      background: #dc2626;
+      border: 1px solid #ef4444;
+      color: #ffffff;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-hitl-confirm:hover {
+      background: #b91c1c;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    }
+
+    .btn-hitl-cancel {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-hitl-cancel:hover {
+      background: #334155;
+      color: #f8fafc;
+    }
 
     /* Architecture Breakdown & Modules */
     .section-title {
@@ -663,6 +780,9 @@
           <button class="btn-action btn-containment" id="btn-trigger-containment">
             🚨 Trigger Watchlist Containment
           </button>
+          <button class="btn-action btn-hitl-auth hidden" id="btn-hitl-authorize">
+            ⚠️ AUTHORIZATION REQUIRED (Click to Trap)
+          </button>
           <button class="btn-action btn-zspf" id="btn-toggle-failover">
             ⚡ Failover (ZSPF State: Mode 0)
           </button>
@@ -680,11 +800,33 @@
         <!-- Canvas -->
         <div class="canvas-container">
           <canvas id="traffic-canvas"></canvas>
+
+          <!-- Flashing HITL Authorization Modal -->
+          <div id="hitl-auth-modal" class="hitl-modal hidden">
+            <div class="hitl-modal-card">
+              <div class="hitl-modal-badge">ETHICAL GATEWAY (HITL)</div>
+              <div class="hitl-modal-title">🚨 AUTHORIZATION REQUIRED</div>
+              <p class="hitl-modal-text">
+                ANPR Multi-Node Consensus confirmed for target <strong id="hitl-plate-display" style="color: #fcd34d;">SUSPECT-892</strong>.
+                <br>Physical perimeter lockdown at <strong>Node C2 (node_2_2)</strong> is <strong style="color: #ef4444;">BLOCKED</strong> pending dispatcher approval.
+              </p>
+              <div class="hitl-modal-actions">
+                <button class="btn-hitl-confirm" id="btn-modal-authorize">
+                  🛡️ AUTHORIZE CONTAINMENT TRAP
+                </button>
+                <button class="btn-hitl-cancel" id="btn-modal-reject">
+                  ❌ ABORT
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div class="hud-overlay">
             <div class="hud-chip">Mesh Mode: <span id="hud-mode" style="color: #60a5fa;">Mode 0 (Full Mesh)</span></div>
             <div class="hud-chip">Throughput: <span id="hud-throughput">1,340 veh/hr</span></div>
             <div class="hud-chip">Active Vehicles: <span id="hud-vehicles">32</span></div>
             <div class="hud-chip">Consensus Queue: <span id="hud-consensus">0 / 2 nodes</span></div>
+            <div class="hud-chip">HITL Gateway: <span id="hud-hitl" style="color: #34d399;">IDLE</span></div>
           </div>
         </div>
       </div>
@@ -1021,6 +1163,80 @@
       document.getElementById('hud-mode').style.color = "#fda4af";
     });
 
+    // -------------------------------------------------------------
+    // HITL ETHICAL GATEWAY UI CONTROLS & AUTHORIZATION
+    // -------------------------------------------------------------
+    function showHITLAuthorizationUI(plate = "SUSPECT-892") {
+      const modal = document.getElementById('hitl-auth-modal');
+      const authBtn = document.getElementById('btn-hitl-authorize');
+      const plateSpan = document.getElementById('hitl-plate-display');
+      const hudHitl = document.getElementById('hud-hitl');
+
+      if (plateSpan) plateSpan.innerText = plate;
+      if (modal) modal.classList.remove('hidden');
+      if (authBtn) authBtn.classList.remove('hidden');
+      if (hudHitl) {
+        hudHitl.innerText = "PENDING_AUTHORIZATION";
+        hudHitl.style.color = "#ef4444";
+      }
+    }
+
+    function hideHITLAuthorizationUI() {
+      const modal = document.getElementById('hitl-auth-modal');
+      const authBtn = document.getElementById('btn-hitl-authorize');
+      if (modal) modal.classList.add('hidden');
+      if (authBtn) authBtn.classList.add('hidden');
+    }
+
+    function executeContainmentAuthorization(approverId = "dispatcher_lead") {
+      hideHITLAuthorizationUI();
+      logEvent(`🛡️ [ETHICAL GATEWAY UNLOCKED] Dispatcher '${approverId}' APPROVED containment! Actuating Mode 0 barrier at Node C2.`, "containment");
+
+      const hudHitl = document.getElementById('hud-hitl');
+      if (hudHitl) {
+        hudHitl.innerText = "AUTHORIZED";
+        hudHitl.style.color = "#34d399";
+      }
+
+      // Lock node (2, 2) in local visualization
+      intersections.forEach(node => {
+        if (node.row === 2 && node.col === 2) {
+          node.barrierLock = true;
+          node.phase = 'NS'; // Force red to East-West approach
+        }
+      });
+
+      // Send to Flask-SocketIO backend if available
+      if (socket && socket.connected) {
+        socket.emit('client_command', { action: 'authorize_containment', approver_id: approverId });
+      } else {
+        fetch('/api/trigger/authorize_containment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ approver_id: approverId })
+        }).catch(() => {});
+      }
+    }
+
+    // Modal & Button Listeners
+    document.getElementById('btn-modal-authorize').addEventListener('click', () => {
+      executeContainmentAuthorization("dispatcher_lead");
+    });
+
+    document.getElementById('btn-hitl-authorize').addEventListener('click', () => {
+      executeContainmentAuthorization("dispatcher_lead");
+    });
+
+    document.getElementById('btn-modal-reject').addEventListener('click', () => {
+      hideHITLAuthorizationUI();
+      logEvent("❌ [ETHICAL GATEWAY REJECTED] Containment command aborted by operator.", "alert");
+      const hudHitl = document.getElementById('hud-hitl');
+      if (hudHitl) {
+        hudHitl.innerText = "REJECTED";
+        hudHitl.style.color = "#94a3b8";
+      }
+    });
+
     // Trigger Watchlist Containment
     document.getElementById('btn-trigger-containment').addEventListener('click', () => {
       containmentActive = true;
@@ -1041,20 +1257,24 @@
 
       logEvent("📷 [node_2_0] Sighting Plate 'SUSPECT-892' (Conf: 0.96). Waiting for consensus...", "containment");
       
+      // If connected to live backend, send command
+      if (socket && socket.connected) {
+        socket.emit('client_command', { action: 'containment' });
+      } else {
+        fetch('/api/trigger/containment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ target_plate: "SUSPECT-892" })
+        }).catch(() => {});
+      }
+
+      // Standalone simulation fallback
       setTimeout(() => {
         logEvent("📷 [node_2_1] 2nd Sighting Verified! Multi-node consensus confirmed (2/2 nodes).", "containment");
         document.getElementById('hud-consensus').innerText = "2 / 2 nodes (Verified)";
-
-        setTimeout(() => {
-          logEvent("🚨 TIER-2 DIRECTIVE: Operator authorized perimeter barrier. Node (2,2) commanding RED.", "containment");
-          // Lock node (2, 2)
-          intersections.forEach(node => {
-            if (node.row === 2 && node.col === 2) {
-              node.barrierLock = true;
-              node.phase = 'NS'; // Force red to East-West
-            }
-          });
-        }, 1200);
+        logEvent("⚠️ [ETHICAL GATEWAY LOCK] State: PENDING_AUTHORIZATION. Signal override BLOCKED pending human dispatcher approval!", "alert");
+        // Constraint 3: Show flashing authorization modal & button when consensus reaches 2/2
+        showHITLAuthorizationUI("SUSPECT-892");
       }, 1500);
     });
 
@@ -1354,6 +1574,37 @@
           if (typeof data.zspf_mode === 'number' && data.zspf_mode !== zspfMode) {
             zspfMode = data.zspf_mode;
             updateZSPFUI();
+          }
+          if (data.hitl) {
+            const hudHitl = document.getElementById('hud-hitl');
+            if (hudHitl) {
+              hudHitl.innerText = data.hitl.state;
+              if (data.hitl.state === "AUTHORIZED") {
+                hudHitl.style.color = "#34d399";
+                hideHITLAuthorizationUI();
+              } else if (data.hitl.state === "PENDING_AUTHORIZATION") {
+                hudHitl.style.color = "#ef4444";
+                showHITLAuthorizationUI(data.containment_target || "SUSPECT-892");
+              } else {
+                hudHitl.style.color = "#94a3b8";
+              }
+            }
+          }
+        });
+
+        socket.on('containment_pending_authorization', (data) => {
+          logEvent(`⚠️ [ETHICAL GATEWAY LOCK] Consensus verified for ${data.plate}. State: PENDING_AUTHORIZATION. Dispatcher confirmation required!`, "alert");
+          document.getElementById('hud-consensus').innerText = "2 / 2 nodes (Verified)";
+          showHITLAuthorizationUI(data.plate);
+        });
+
+        socket.on('containment_authorized', (data) => {
+          hideHITLAuthorizationUI();
+          logEvent(`🛡️ [ETHICAL GATEWAY UNLOCKED] Containment authorized by ${data.approver_id}! Mode 0 barrier deployed at Node C2.`, "containment");
+          const hudHitl = document.getElementById('hud-hitl');
+          if (hudHitl) {
+            hudHitl.innerText = "AUTHORIZED";
+            hudHitl.style.color = "#34d399";
           }
         });
 

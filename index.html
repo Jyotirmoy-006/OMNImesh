@@ -665,6 +665,9 @@
           <button class="btn-action btn-zspf" id="btn-toggle-failover">
             ⚡ Failover (ZSPF State: Mode 0)
           </button>
+          <button class="btn-action" id="btn-kill-broker" style="background: rgba(220, 38, 38, 0.2); border-color: rgba(220, 38, 38, 0.4); color: #f87171;">
+            💥 Sever Broker (Kill to Mode 2)
+          </button>
           <button class="btn-action" id="btn-toggle-thermal" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
             🔥 Simulate Thermal Throttle (85°C)
           </button>
@@ -1359,6 +1362,15 @@
             socket.emit('client_command', { action: 'thermal' });
           } else {
             fetch('/api/trigger/thermal', { method: 'POST' }).catch(() => {});
+          }
+        });
+
+        // Wire sever MQTT broker button
+        document.getElementById('btn-kill-broker').addEventListener('click', () => {
+          if (socket && socket.connected) {
+            socket.emit('client_command', { action: 'kill_broker' });
+          } else {
+            fetch('/api/trigger/kill_broker', { method: 'POST' }).catch(() => {});
           }
         });
 

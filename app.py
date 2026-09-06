@@ -10,7 +10,7 @@ import time
 import math
 import random
 import threading
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
 import numpy as np
 
@@ -43,6 +43,7 @@ from omnimesh.tier1_edge.zspf_state_machine import ZSPFStateMachine, Operational
 from omnimesh.tier2_orchestrator.orchestrator import GlobalZoneOrchestrator
 from omnimesh.vision.consensus import MultiNodeConsensusFilter
 from omnimesh.comms.serializer import MessageSerializer
+from omnimesh.comms.mqtt_client import MeshMQTTClient
 
 def load_latest_ppo_model(checkpoint_dir: str = "models/checkpoints") -> Tuple[Optional[Any], Optional[str]]:
     """Dynamically loads the latest trained PPO .zip model from the checkpoints directory."""
@@ -100,6 +101,21 @@ class SUMOSimulationController:
         self.consensus_filter = MultiNodeConsensusFilter(window_sec=30.0, required_nodes=2)
         self.serializer = MessageSerializer()
         self.zspf = ZSPFStateMachine(heartbeat_timeout=3.0, broker_timeout=5.0)
+
+        # Async MQTT Client setup
+        self.mqtt_client = MeshMQTTClient(client_id="omnimesh_flask_gateway")
+        self.broker_alive = True
+        self.orchestrator_alive = True
+        self.last_heartbeat_sent = 0.0
+
+        # Wire MQTT callbacks to ZSPF state machine
+        self.mqtt_client.register_heartbeat_callback(
+            lambda data: self.zspf.record_heartbeat(data.get("timestamp"))
+        )
+        self.mqtt_client.register_disconnect_callback(
+            lambda: self.zspf.notify_broker_disconnected()
+        )
+        self.mqtt_client.connect()
 
         # 16 Intersection Nodes mapped to SUMO TLS IDs (Row A-D, Col 0-3)
         self.intersections: Dict[str, Dict[str, Any]] = {}
@@ -240,11 +256,40 @@ class SUMOSimulationController:
             mode_name = next_mode.name
         self.log_event(f"ZSPF state machine transitioned to {mode_name}", category="zspf")
 
+    def kill_broker(self):
+        """Simulates an abrupt MQTT broker failure, immediately severing connectivity."""
+        with self.lock:
+            self.broker_alive = False
+            if self.mqtt_client:
+                self.mqtt_client.sever_connection()
+            self.zspf.notify_broker_disconnected()
+        self.log_event(
+            "💥 BROKER SEVERED: MQTT connection terminated. ZSPF actively degraded to Mode 2 (Island Max-Pressure)!",
+            category="alert",
+        )
+
+    def restore_broker(self):
+        """Restores MQTT broker connectivity."""
+        with self.lock:
+            self.broker_alive = True
+            if self.mqtt_client:
+                self.mqtt_client.connect()
+            self.zspf.notify_broker_connected()
+        self.log_event(
+            "🔌 BROKER RESTORED: MQTT connection re-established. ZSPF returning to operational state.",
+            category="info",
+        )
+
     def reset_scenario(self):
         with self.lock:
             self.emergency_active = False
             self.emergency_corridor = []
             self.containment_active = False
+            self.broker_alive = True
+            self.orchestrator_alive = True
+            if self.mqtt_client:
+                self.mqtt_client.connect()
+            self.zspf.notify_broker_connected()
             self.zspf.current_mode = OperationalMode.MODE_0_FULL_MESH
             self.perception.set_thermal_state(temp_c=54.2, throttled=False)
             for node in self.intersections.values():
@@ -307,6 +352,26 @@ class SUMOSimulationController:
                     self.intersections[nid]["queue_ew"] = int(q_data.get("EW", 0))
                     self.intersections[nid]["queue_ns"] = int(q_data.get("NS", 0))
 
+            # Step 6: Asynchronous MQTT communications
+            now = time.time()
+            if self.broker_alive and self.orchestrator_alive:
+                if now - self.last_heartbeat_sent >= 1.0:
+                    self.mqtt_client.publish_heartbeat(timestamp=now)
+                    self.last_heartbeat_sent = now
+
+            if self.broker_alive:
+                for nid, node in self.intersections.items():
+                    self.mqtt_client.publish_agent_state(
+                        node_id=nid,
+                        phase=0 if node["phase"] == "EW" else 1,
+                        queues={"ew": float(node["queue_ew"]), "ns": float(node["queue_ns"])},
+                        timestamp=now,
+                        threat_mode=self.env.threat_mode,
+                    )
+
+            # Step 7: Continuous ZSPF liveness evaluation
+            self.zspf.evaluate_liveness(now)
+
     def get_state(self) -> Dict[str, Any]:
         with self.lock:
             total_queue = sum(n["queue_ew"] + n["queue_ns"] for n in self.intersections.values())
@@ -367,6 +432,7 @@ class SUMOSimulationController:
                 "zspf_mode_label": mode_names[mode_int],
                 "total_vehicles_queued": total_queue,
                 "total_active_vehicles": len(self.latest_ground_truth_vehicles),
+                "broker_alive": self.broker_alive,
                 "emergency_active": self.emergency_active,
                 "containment_active": self.containment_active,
                 "containment_target": self.containment_target,
@@ -409,19 +475,17 @@ def index():
 
 @app.route("/api/status", methods=["GET"])
 def get_status():
-    return jsonify({"status": "success", "data": controller.get_state()})
+    return jsonify(controller.get_state())
 
 @app.route("/api/simulation/start", methods=["POST"])
 def start_simulation():
     controller.is_running = True
-    controller.log_event("SUMO physics simulation started / resumed.", category="info")
     socketio.emit("telemetry_update", controller.get_state())
     return jsonify({"status": "success", "is_running": True})
 
 @app.route("/api/simulation/pause", methods=["POST"])
 def pause_simulation():
     controller.is_running = False
-    controller.log_event("SUMO physics simulation paused.", category="info")
     socketio.emit("telemetry_update", controller.get_state())
     return jsonify({"status": "success", "is_running": False})
 
@@ -463,6 +527,30 @@ def trigger_zspf():
     socketio.emit("telemetry_update", controller.get_state())
     return jsonify({"status": "success", "mode": int(controller.zspf.current_mode)})
 
+@app.route("/api/trigger/kill_broker", methods=["POST"])
+def trigger_kill_broker():
+    """Severs the MQTT connection to simulate broker crash, triggering ZSPF Mode 2 fail-safe."""
+    controller.kill_broker()
+    socketio.emit("telemetry_update", controller.get_state())
+    return jsonify({
+        "status": "success",
+        "message": "MQTT broker connection severed. ZSPF transitioned to Mode 2.",
+        "mode": int(controller.zspf.current_mode),
+        "mode_name": controller.zspf.current_mode.name,
+    })
+
+@app.route("/api/trigger/restore_broker", methods=["POST"])
+def trigger_restore_broker():
+    """Restores the MQTT connection."""
+    controller.restore_broker()
+    socketio.emit("telemetry_update", controller.get_state())
+    return jsonify({
+        "status": "success",
+        "message": "MQTT broker connection restored.",
+        "mode": int(controller.zspf.current_mode),
+        "mode_name": controller.zspf.current_mode.name,
+    })
+
 @app.route("/api/trigger/thermal", methods=["POST"])
 def trigger_thermal():
     """Toggles simulated hardware thermal throttle (85°C CPU spike with 40% dropout)."""
@@ -499,6 +587,10 @@ def handle_client_command(data):
         controller.trigger_containment()
     elif action == "zspf":
         controller.trigger_zspf_mode()
+    elif action == "kill_broker":
+        controller.kill_broker()
+    elif action == "restore_broker":
+        controller.restore_broker()
     elif action == "thermal":
         controller.toggle_thermal_throttle()
     elif action == "reset":

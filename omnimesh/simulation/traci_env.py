@@ -223,64 +223,25 @@ class SUMOTraCIEnvironment(gym.Env):
         """Injects a physical ambulance into the TraCI simulation along a designated corridor."""
         if not self.is_connected or self.conn is None:
             return False
-        try:
-            route_id = f"flow_we_{corridor_row}"
-            from_edge = f"left{corridor_row}A{corridor_row}"
-            to_edge = f"D{corridor_row}right{corridor_row}"
-            
-            # Create unique route if needed
-            r_id = f"route_{vehicle_id}"
-            try:
-                self.conn.route.add(r_id, [from_edge, to_edge])
-            except Exception:
-                r_id = route_id
-
-            self.conn.vehicle.add(
-                vehID=vehicle_id,
-                routeID=r_id,
-                typeID="ambulance",
-                depart="now",
-                departLane="best",
-                departSpeed="max",
-            )
-            self.conn.vehicle.setColor(vehicle_id, (255, 30, 30, 255))
-            logger.warning(f"[TraCI] Injected Emergency Vehicle [{vehicle_id}] into SUMO on {from_edge} -> {to_edge}")
-            return True
-        except Exception as e:
-            logger.error(f"[TraCI] Error injecting emergency vehicle: {e}")
-            return False
+        from omnimesh.simulation.scenario_generator import ScenarioGenerator
+        gen = ScenarioGenerator(self.conn)
+        return gen.inject_emergency_vehicle(vehicle_id=vehicle_id, corridor_row=corridor_row)
 
     def inject_suspect_vehicle(
         self,
         vehicle_id: str = "SUSPECT-892",
         corridor_row: int = 2,
+        direct_approach: bool = True,
     ) -> bool:
-        """Injects a tracked suspect vehicle into the TraCI simulation."""
+        """Injects a tracked suspect vehicle with forced routing through C2."""
         if not self.is_connected or self.conn is None:
             return False
-        try:
-            from_edge = f"left{corridor_row}A{corridor_row}"
-            to_edge = f"D{corridor_row}right{corridor_row}"
-            r_id = f"route_{vehicle_id}"
-            try:
-                self.conn.route.add(r_id, [from_edge, to_edge])
-            except Exception:
-                r_id = f"flow_we_{corridor_row}"
-
-            self.conn.vehicle.add(
-                vehID=vehicle_id,
-                routeID=r_id,
-                typeID="suspect",
-                depart="now",
-                departLane="best",
-                departSpeed="max",
-            )
-            self.conn.vehicle.setColor(vehicle_id, (245, 158, 11, 255))
-            logger.warning(f"[TraCI] Injected Suspect Vehicle [{vehicle_id}] into SUMO on {from_edge} -> {to_edge}")
-            return True
-        except Exception as e:
-            logger.error(f"[TraCI] Error injecting suspect vehicle: {e}")
-            return False
+        from omnimesh.simulation.scenario_generator import ScenarioGenerator
+        gen = ScenarioGenerator(self.conn)
+        return gen.inject_watchlist_suspect(
+            vehicle_id=vehicle_id,
+            direct_approach=direct_approach,
+        )
 
     def set_containment_lockdown(self, target_tls: str = "C2"):
         """Forces an all-red containment barrier on a specific intersection via TraCI."""

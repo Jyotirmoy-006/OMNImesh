@@ -377,4 +377,4 @@ if __name__ == "__main__":
     # Start the background co-simulation loop
     threading.Thread(target=simulation_worker, daemon=True).start()
     # Launch Flask-SocketIO server
-    socketio.run(app, host="0.0.0.0", port=5000, debug=False)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=False, allow_unsafe_werkzeug=True)

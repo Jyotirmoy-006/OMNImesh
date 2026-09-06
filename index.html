@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
   <style>
     :root {
       --bg-primary: #080b11;
@@ -1295,6 +1296,43 @@
 
     initGrid();
     render();
+
+    // -------------------------------------------------------------
+    // OPTIONAL FLASK-SOCKETIO BACKEND AUTO-DISCOVERY & BINDING
+    // -------------------------------------------------------------
+    let socket = null;
+    if (typeof io !== 'undefined') {
+      try {
+        socket = io('http://localhost:5000', {
+          transports: ['websocket', 'polling'],
+          timeout: 2000,
+          reconnectionAttempts: 3
+        });
+
+        socket.on('connect', () => {
+          logEvent("Connected to Omni-Mesh Flask-SocketIO Backend (http://localhost:5000)!", "zspf");
+          const pill = document.querySelector('.live-status-pill span');
+          if (pill) pill.innerText = "BACKEND CONNECTED: LIVE WS STREAM";
+        });
+
+        socket.on('telemetry_update', (data) => {
+          if (data.telemetry) {
+            document.getElementById('stat-temp').innerText = `${data.telemetry.cpu_temp_c} °C (PWM Fan)`;
+            document.getElementById('stat-fps').innerText = `${data.telemetry.yolo_fps} FPS`;
+          }
+          if (typeof data.zspf_mode === 'number' && data.zspf_mode !== zspfMode) {
+            zspfMode = data.zspf_mode;
+            updateZSPFUI();
+          }
+        });
+
+        socket.on('disconnect', () => {
+          logEvent("Disconnected from backend server. Running standalone client simulation.");
+        });
+      } catch (err) {
+        console.log("Standalone mode: Backend server not currently running.");
+      }
+    }
   </script>
 </body>
 </html>

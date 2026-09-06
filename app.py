@@ -29,6 +29,12 @@ except ImportError:
     )
     sys.exit(1)
 
+try:
+    from stable_baselines3 import PPO
+    HAS_PPO = True
+except ImportError:
+    HAS_PPO = False
+
 from omnimesh.utils.logger import logger
 from omnimesh.simulation.traci_env import SUMOTraCIEnvironment
 from omnimesh.simulation.mock_perception import MockPerception
@@ -37,6 +43,27 @@ from omnimesh.tier1_edge.zspf_state_machine import ZSPFStateMachine, Operational
 from omnimesh.tier2_orchestrator.orchestrator import GlobalZoneOrchestrator
 from omnimesh.vision.consensus import MultiNodeConsensusFilter
 from omnimesh.comms.serializer import MessageSerializer
+
+def load_latest_ppo_model(checkpoint_dir: str = "models/checkpoints") -> Tuple[Optional[Any], Optional[str]]:
+    """Dynamically loads the latest trained PPO .zip model from the checkpoints directory."""
+    if not HAS_PPO:
+        return None, None
+    p = Path(checkpoint_dir)
+    if not p.exists():
+        return None, None
+    checkpoints = list(p.glob("*.zip"))
+    if not checkpoints:
+        return None, None
+
+    latest_ckpt = max(checkpoints, key=lambda f: f.stat().st_mtime)
+    logger.info(f"Loading latest trained PPO policy from: {latest_ckpt}...")
+    try:
+        model = PPO.load(str(latest_ckpt))
+        logger.info(f"PPO Neural Network policy [{latest_ckpt.name}] loaded successfully for live dashboard inference!")
+        return model, latest_ckpt.name
+    except Exception as e:
+        logger.error(f"Failed to load PPO checkpoint from {latest_ckpt}: {e}")
+        return None, None
 
 # -----------------------------------------------------------------------------
 # FLASK & SOCKET-IO CONFIGURATION
@@ -64,6 +91,9 @@ class SUMOSimulationController:
         # SUMO Gymnasium Environment & Perception
         self.env = SUMOTraCIEnvironment(gui=False, step_length=1.0)
         self.perception = MockPerception(mean_accuracy=0.98, std_accuracy=0.03)
+
+        # Dynamic PPO Neural Network Policy Loader
+        self.ppo_model, self.ppo_model_name = load_latest_ppo_model()
 
         # Core Omni-Mesh components
         self.orchestrator = GlobalZoneOrchestrator(zone_id="zone_alpha", auto_approve_sim=True)
@@ -239,19 +269,23 @@ class SUMOSimulationController:
             self.step_count += 1
             self.sim_time = round(self.step_count * self.step_duration, 1)
 
-            # Step 1: Collect actions from Tier-1 Edge Agents
-            actions = []
-            for node in self.intersections.values():
-                if node["green_wave"]:
-                    action = 0  # Green on arterial (EW)
-                elif node["barrier_lock"]:
-                    action = 1  # Red barrier on EW, green cross
-                else:
-                    action = node["agent"].step(current_time=self.sim_time)
-                actions.append(action)
-                node["phase"] = "EW" if action == 0 else "NS"
+            # Step 1: Query action from trained PPO Neural Network policy
+            obs_current = self.env._get_observation()
+            if self.ppo_model is not None:
+                action_pred, _ = self.ppo_model.predict(obs_current, deterministic=True)
+                actions = list(action_pred)
+            else:
+                actions = [0] * len(self.intersections)
 
-            # Step 2: Step the actual SUMO physics via Gymnasium TraCI environment
+            # Apply Green Wave / Containment overrides if active
+            for idx, (nid, node) in enumerate(self.intersections.items()):
+                if node["green_wave"]:
+                    actions[idx] = 0  # Green on arterial (EW)
+                elif node["barrier_lock"]:
+                    actions[idx] = 1  # Red barrier on EW, green cross
+                node["phase"] = "EW" if actions[idx] == 0 else "NS"
+
+            # Step 2: Step the actual SUMO physics via Gymnasium TraCI environment driven by PPO
             actions_arr = np.array(actions, dtype=np.int32)
             obs, reward, terminated, truncated, info = self.env.step(actions_arr)
 
@@ -328,6 +362,7 @@ class SUMOSimulationController:
                 "is_running": self.is_running,
                 "step_count": self.step_count,
                 "sim_time": round(self.sim_time, 1),
+                "active_policy": f"PPO Neural Network ({self.ppo_model_name})" if self.ppo_model else "Max-Pressure Fallback",
                 "zspf_mode": mode_int,
                 "zspf_mode_label": mode_names[mode_int],
                 "total_vehicles_queued": total_queue,

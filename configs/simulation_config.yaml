@@ -1,0 +1,20 @@
+simulation:
+  simulator: "sumo" # "sumo" or "cityflow"
+  gui: false
+  step_length: 1.0 # seconds per simulation step
+  total_steps: 3600
+  network_file: "data/networks/grid_4x5.net.xml"
+  route_file: "data/networks/grid_4x5.rou.xml"
+
+emergency_scenario:
+  enabled: true
+  injection_interval_steps: 600
+  vehicle_type: "ambulance"
+  origin_edge: "edge_0_0_to_1_0"
+  destination_edge: "edge_3_4_to_4_4"
+
+containment_scenario:
+  enabled: true
+  target_plate: "SUSPECT-892"
+  detection_step: 1200
+  containment_zone_node: "node_2_2"

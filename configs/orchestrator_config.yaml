@@ -1,0 +1,9 @@
+orchestrator:
+  zone_id: "zone_alpha"
+  heartbeat_interval_sec: 1.0
+  consensus_threshold_nodes: 2
+  consensus_window_sec: 30.0
+
+containment:
+  auto_arm: false # Requires human-in-the-loop authorization
+  barrier_radius_hops: 2

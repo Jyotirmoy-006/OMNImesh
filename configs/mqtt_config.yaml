@@ -1,0 +1,10 @@
+mqtt:
+  broker_host: "localhost"
+  broker_port: 1883
+  keepalive: 60
+  serialization: "msgpack" # "msgpack" or "json"
+  topics:
+    state_broadcast: "omnimesh/zone_alpha/states"
+    green_wave_negotiate: "omnimesh/zone_alpha/green_wave"
+    orchestrator_directives: "omnimesh/zone_alpha/orchestrator"
+    heartbeat: "omnimesh/zone_alpha/heartbeat"

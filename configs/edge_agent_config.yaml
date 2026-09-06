@@ -1,0 +1,15 @@
+edge_agent:
+  node_id: "node_1_1"
+  control_frequency_hz: 1.0
+  perception_fps: 15.0
+  quantization_format: "ncnn_int8" # "fp32", "onnx", "ncnn_int8"
+
+zspf:
+  heartbeat_timeout_sec: 3.0 # Mode 0 -> Mode 1
+  broker_timeout_sec: 5.0    # Mode 1 -> Mode 2
+
+rl_policy:
+  model_type: "dqn"
+  state_dim: 16
+  action_dim: 4
+  epsilon: 0.05

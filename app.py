@@ -42,6 +42,7 @@ from omnimesh.tier1_edge.agent import EdgeNodeAgent
 from omnimesh.tier1_edge.zspf_state_machine import ZSPFStateMachine, OperationalMode
 from omnimesh.tier2_orchestrator.orchestrator import GlobalZoneOrchestrator
 from omnimesh.vision.consensus import MultiNodeConsensusFilter
+from omnimesh.vision.pipeline_manager import DecoupledPipelineManager
 from omnimesh.comms.serializer import MessageSerializer
 from omnimesh.comms.mqtt_client import MeshMQTTClient
 
@@ -117,6 +118,13 @@ class SUMOSimulationController:
         )
         self.mqtt_client.connect()
 
+        # Decoupled Multiprocessing Vision Pipeline (Process A @ 15 Hz)
+        self.pipeline_manager = DecoupledPipelineManager(
+            queue_maxsize=20,
+            frequency_hz=15.0,
+            nodes=[f"node_{r}_{c}" for r in range(4) for c in range(4)],
+        )
+
         # 16 Intersection Nodes mapped to SUMO TLS IDs (Row A-D, Col 0-3)
         self.intersections: Dict[str, Dict[str, Any]] = {}
         self._init_intersections()
@@ -137,6 +145,7 @@ class SUMOSimulationController:
     def _init_intersections(self):
         # 16 internal intersections in grid_4x4.net.xml are A0..A3, B0..B3, C0..C3, D0..D3
         rows = ["A", "B", "C", "D"]
+        ipc_q = self.pipeline_manager.get_queue()
         for r_idx, r in enumerate(rows):
             for c in range(4):
                 node_id = f"node_{r_idx}_{c}"
@@ -157,13 +166,19 @@ class SUMOSimulationController:
                     "queue_ns": 0,
                     "green_wave": False,
                     "barrier_lock": False,
-                    "agent": EdgeNodeAgent(node_id, incoming_lanes=["north", "south", "east", "west"]),
+                    "agent": EdgeNodeAgent(
+                        node_id,
+                        incoming_lanes=["north", "south", "east", "west"],
+                        ipc_queue=ipc_q,
+                    ),
                 }
 
     def start_environment(self):
-        """Initializes or restarts the SUMO TraCI process."""
+        """Initializes or restarts the SUMO TraCI process and starts the multiprocessing pipeline."""
         with self.lock:
             try:
+                # Start decoupled multiprocessing perception worker (Process A)
+                self.pipeline_manager.start()
                 obs, info = self.env.reset()
                 self.step_count = 0
                 self.sim_time = 0.0
@@ -481,6 +496,14 @@ def architecture():
 def methodology():
     return send_from_directory("docs", "methodology_slide.html")
 
+@app.route("/methodology_diagram.svg")
+def methodology_svg():
+    return send_from_directory("docs", "methodology_diagram.svg")
+
+@app.route("/architecture_diagram.svg")
+def architecture_svg():
+    return send_from_directory("docs", "architecture_diagram.svg")
+
 @app.route("/docs/<path:filename>")
 def docs_static(filename):
     return send_from_directory("docs", filename)
@@ -614,6 +637,14 @@ def handle_client_command(data):
 # SERVER ENTRY POINT
 # -------------------------------------------------------------
 if __name__ == "__main__":
+    # Ensure Windows/macOS multiprocessing safety to prevent recursive fork bombs
+    import multiprocessing
+    multiprocessing.freeze_support()
+    try:
+        multiprocessing.set_start_method("spawn", force=False)
+    except RuntimeError:
+        pass
+
     logger.info("Starting Omni-Mesh SUMO TraCI Local Backend Server on http://localhost:5000 ...")
     threading.Thread(target=simulation_worker, daemon=True).start()
     socketio.run(app, host="0.0.0.0", port=5000, debug=False, allow_unsafe_werkzeug=True)

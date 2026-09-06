@@ -11,6 +11,8 @@
 
 | Deliverable | Status | Files / Artifacts | Key Features |
 | :--- | :--- | :--- | :--- |
+| **Decoupled Multiprocessing Vision Pipeline** | Completed & Active | [`omnimesh/vision/pipeline_manager.py`](omnimesh/vision/pipeline_manager.py), [`omnimesh/vision/detector.py`](omnimesh/vision/detector.py) | Eliminates Python GIL contention using OS-level `multiprocessing.Process` (`daemon=True`) and `multiprocessing.Queue`. MockPerception runs in Process A at 15 Hz with oldest-frame eviction on full queue to prevent IPC memory bloat. |
+| **Non-Blocking IPC Edge Agent Reads** | Completed & Active | [`omnimesh/tier1_edge/agent.py`](omnimesh/tier1_edge/agent.py) | RL Control loop fetches latest perception state non-blockingly via `ipc_queue.get_nowait()`, handling `queue.Empty` cleanly and smoothly falling back to last known state if perception lags. |
 | **Research Methodology Slide (PPT/Vector)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | Widescreen 16:9 methodology slide (1920×1080) in pure vector SVG detailing 5 pipeline stages, mathematical formulations, and scientific pillars; zero AI distortions, with 1-click 4K UHD PNG export. |
 | **System Architecture Slide (PPT/Vector)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG; razor-sharp engineering aesthetics, zero "AI slop" distortions, with 1-click 4K UHD PNG export for PowerPoint. |
 | **P2P Comms & Async MQTT Client** | Completed | [`omnimesh/comms/mqtt_client.py`](omnimesh/comms/mqtt_client.py) | Asynchronous `paho-mqtt` client with dual subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, binary payload dispatch, and graceful pure-software simulation bus fallback. |
@@ -31,7 +33,7 @@
 | **Vision & ANPR Pipeline** | Completed | [`omnimesh/vision/`](omnimesh/vision/) | `detector.py` (YOLOv8n NCNN INT8), `anpr_engine.py`, `consensus.py` ($\ge 2$ node consensus within 30s), and `pipeline_manager.py`. |
 | **Interactive Web Dashboard** | Completed | [`index.html`](index.html) | Live canvas rendering real TraCI vehicles driven by neural policy, dynamic lights, P2P Green Wave trigger, ANPR containment trap, ZSPF failover toggle, and thermal stress button. |
 | **SUMO Network & Flow Graph** | Completed | `data/networks/grid_4x4.*` | 4×4 grid network, traffic light programs, and continuous multi-directional vehicle demand flows. |
-| **Test Suite** | Completed & Passing | `tests/` | **16/16 tests passing** (unit and integration tests for comms, MQTT, ZSPF, RL, simulation, and perception). |
+| **Test Suite** | Completed & Passing | `tests/` | **19/19 tests passing** (unit and integration tests for multiprocessing, comms, MQTT, ZSPF, RL, simulation, and perception). |
 | **GitHub Repository Sync** | Completed | Remote: `OMNImesh.git` | All changes committed and pushed to `origin/main` (working tree clean). |
 
 ---
@@ -83,22 +85,46 @@ To represent the complete 5-stage research and engineering workflow with mathema
 
 ---
 
-## 4. Phase 3: P2P Comms & ZSPF State Machine
+## 4. Phase 4: Decoupled Multiprocessing Vision Pipeline
 
-### 4.1 MessagePack Binary Serializer (`serializer.py`)
+To eliminate Python Global Interpreter Lock (GIL) contention and prevent the high-frequency perception sampling loop (Process A) from starving the low-frequency RL Control loop (Process C), we implemented an OS-level `multiprocessing` architecture using IPC queues:
+
+### 4.1 Decoupled Pipeline Manager (`pipeline_manager.py`)
+- Spawns isolated `multiprocessing.Process` instances with `daemon=True`, ensuring child processes terminate cleanly with the main Flask/SUMO thread.
+- Manages inter-process communication using `multiprocessing.Queue(maxsize=15-20)`.
+- Eliminates thread lock contention between the 15 Hz perception pipeline and the 1-2 Hz RL inference cycle.
+
+### 4.2 Isolated Perception Worker & Oldest-Frame Eviction (`detector.py`)
+- Runs in dedicated process space (`Process A`), executing high-frequency MockPerception sampling at **15 Hz**.
+- Pushes mocked TraCI queue state payloads into the IPC queue using `push_to_ipc_queue(ipc_queue, item)`.
+- If the queue is full (`queue.Full`), it automatically purges the oldest queued frame before inserting the newest frame, strictly preventing memory bloat and stale queue buildup.
+
+### 4.3 Non-Blocking IPC Reads & Clean Fallback in RL Agent (`agent.py`)
+- Tier-1 Edge Agents consume the IPC queue non-blockingly via `ipc_queue.get_nowait()`.
+- Catches `queue.Empty` cleanly, gracefully falling back to the agent's last known state if perception lags.
+- Drains the queue to always consume the freshest available perception state.
+
+### 4.4 Windows/macOS Fork-Bomb Prevention (`app.py`)
+- Initialized `multiprocessing.freeze_support()` and `multiprocessing.set_start_method("spawn", force=False)` within `if __name__ == '__main__':` in [`app.py`](app.py) to prevent recursive process spawning on Windows and macOS.
+
+---
+
+## 5. Phase 3: P2P Comms & ZSPF State Machine
+
+### 5.1 MessagePack Binary Serializer (`serializer.py`)
 - Strictly enforces binary MessagePack serialization via `msgpack.packb(..., use_bin_type=True)` and `msgpack.unpackb(..., raw=False)`.
 - Replaces verbose JSON strings (~350 bytes) with a compact binary state vector (~80 bytes):
   $$\text{Payload} = \{\text{"node\_id"}: \text{str}, \text{"phase"}: \text{int}, \text{"queues"}: \{\text{str}: \text{float}\}, \text{"timestamp"}: \text{float}, \text{"threat\_mode"}: \text{int}\}$$
 - Enforces strict prohibition against JSON payloads for inter-agent communication, throwing explicit exceptions upon non-binary inputs.
 
-### 4.2 Asynchronous MQTT Client (`mqtt_client.py`)
+### 5.2 Asynchronous MQTT Client (`mqtt_client.py`)
 - Implemented with `paho-mqtt` (`paho.mqtt.client.Client`).
 - Automatically establishes required subscriptions:
   1. `omnimesh/tier2/heartbeat`: Receives binary heartbeat broadcasts from Tier-2 Orchestrator.
   2. `omnimesh/tier1/+/state`: Receives binary peer-to-peer state frames from adjacent Tier-1 intersection nodes.
 - Built with an automatic pure-software simulation bus fallback if no physical Mosquitto broker daemon is active, ensuring complete local testability without external hardware dependencies.
 
-### 4.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
+### 5.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
 Deterministic 3-tier active failover state machine:
 - **Mode 0 (Full Mesh)**: Nominal state where Tier-2 Orchestrator heartbeats and MQTT broker are healthy.
 - **Mode 1 (Autonomous P2P MARL)**: Triggered when:
@@ -106,14 +132,14 @@ Deterministic 3-tier active failover state machine:
   Intersection agents transition from global coordination to localized peer-to-peer MARL using neighbor messages received on `omnimesh/tier1/+/state`.
 - **Mode 2 (Max-Pressure Island Mode)**: Triggered immediately if the MQTT client disconnects entirely (`is_broker_connected == False`) or broker timeout occurs. Edge agents execute localized Max-Pressure signal control independently, guaranteeing a provable $\le 25\%$ performance degradation floor.
 
-### 4.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
+### 5.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
 - Added REST endpoint `POST /api/trigger/kill_broker` and companion `POST /api/trigger/restore_broker`.
 - Added dashboard button `💥 Sever Broker (Kill to Mode 2)` in [`index.html`](index.html) allowing real-time interactive testing of the fail-safe transition.
 - Emits real-time WebSocket state updates, immediately switching the active badge to `MODE 2 Island Mode` and updating system telemetry.
 
 ---
 
-## 5. Hardened RL Pipeline & Empirical Benchmark Results
+## 6. Hardened RL Pipeline & Empirical Benchmark Results
 
 Deterministic 10-episode benchmark evaluation comparing trained PPO neural policy vs. Mode 2 Max-Pressure baseline:
 
@@ -135,33 +161,36 @@ Deterministic 10-episode benchmark evaluation comparing trained PPO neural polic
 
 ---
 
-## 6. Automated Test Suite Results
+## 7. Automated Test Suite Results
 
-All 16 unit and integration tests pass cleanly:
+All 19 unit and integration tests pass cleanly:
 ```bash
 .\.venv\Scripts\python.exe -m unittest discover tests
 ```
 ```text
-Ran 16 tests in 8.191s — OK
+Ran 19 tests in 8.556s — OK
 ```
 
 ### Verified Test Cases:
-1. `test_mqtt_client_subscriptions_and_callbacks`: Verifies `MeshMQTTClient` subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, with binary `msgpack` serialization roundtrip.
-2. `test_mqtt_sever_triggers_zspf_mode_2`: Verifies instant transition from Mode 0 to Mode 2 upon client disconnect.
-3. `test_zspf_default_3s_timeout`: Verifies that exceeding 3.0s heartbeat delay transitions ZSPF to Mode 1 (Autonomous P2P).
-4. `test_zspf_mqtt_disconnect_entirely`: Validates instant Mode 2 fail-safe on full broker severance.
-5. `test_zspf_heartbeat_restoration`: Validates automatic Mode 1 -> Mode 0 recovery when fresh heartbeats arrive.
-6. `test_zspf_broker_timeout`: Validates Mode 2 transition upon broker ack expiration.
-7. `test_pure_civilian_traffic_mode`: Mathematical validation that when $m(t) = 0$, composite reward strictly equals Max-Pressure $r^{\text{traffic}}$.
-8. `test_security_override_mode`: Mathematical validation that when $m(t) = 1$, composite reward strictly equals containment $r^{\text{security}}$.
-9. `test_unauthorized_breakout_penalty`: Verifies severe penalty on perimeter breakout.
-10. `test_mock_perception_gaussian_noise`: Gaussian noise injection ($\mu=0.98, \sigma=0.03$) on TraCI ground truth.
-11. `test_mock_perception_thermal_dropout`: Simulated thermal throttling detection dropout (spiking to 40% at 80°C+).
-12. `test_edge_agent_initialization`: Agent step loops and action selection bounds.
-13. `test_emergency_green_wave`: P2P green wave corridor priority enforcement.
-14. `test_multi_node_consensus`: Multi-node temporal consensus filtering ($\ge 2$ nodes in 30s).
-15. `test_serializer_roundtrip`: Binary MessagePack roundtrip encoding and decoding.
-16. `test_zspf_heartbeat_timeout`: Basic heartbeat threshold degradation test.
+1. `test_ipc_queue_drop_oldest_frame_when_full`: Verifies that when the IPC queue fills to capacity, oldest frames are evicted to avoid memory bloat.
+2. `test_agent_non_blocking_read_and_empty_fallback`: Verifies non-blocking `get_nowait()` reads and graceful fallback to last known state on `queue.Empty`.
+3. `test_pipeline_manager_daemon_lifecycle`: Verifies `multiprocessing.Process` spawning with `daemon=True`, 15-25 Hz IPC frame streaming, and clean termination.
+4. `test_mqtt_client_subscriptions_and_callbacks`: Verifies `MeshMQTTClient` subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, with binary `msgpack` serialization roundtrip.
+5. `test_mqtt_sever_triggers_zspf_mode_2`: Verifies instant transition from Mode 0 to Mode 2 upon client disconnect.
+6. `test_zspf_default_3s_timeout`: Verifies that exceeding 3.0s heartbeat delay transitions ZSPF to Mode 1 (Autonomous P2P).
+7. `test_zspf_mqtt_disconnect_entirely`: Validates instant Mode 2 fail-safe on full broker severance.
+8. `test_zspf_heartbeat_restoration`: Validates automatic Mode 1 -> Mode 0 recovery when fresh heartbeats arrive.
+9. `test_zspf_broker_timeout`: Validates Mode 2 transition upon broker ack expiration.
+10. `test_pure_civilian_traffic_mode`: Mathematical validation that when $m(t) = 0$, composite reward strictly equals Max-Pressure $r^{\text{traffic}}$.
+11. `test_security_override_mode`: Mathematical validation that when $m(t) = 1$, composite reward strictly equals containment $r^{\text{security}}$.
+12. `test_unauthorized_breakout_penalty`: Verifies severe penalty on perimeter breakout.
+13. `test_mock_perception_gaussian_noise`: Gaussian noise injection ($\mu=0.98, \sigma=0.03$) on TraCI ground truth.
+14. `test_mock_perception_thermal_dropout`: Simulated thermal throttling detection dropout (spiking to 40% at 80°C+).
+15. `test_edge_agent_initialization`: Agent step loops and action selection bounds.
+16. `test_emergency_green_wave`: P2P green wave corridor priority enforcement.
+17. `test_multi_node_consensus`: Multi-node temporal consensus filtering ($\ge 2$ nodes in 30s).
+18. `test_serializer_roundtrip`: Binary MessagePack roundtrip encoding and decoding.
+19. `test_zspf_heartbeat_timeout`: Basic heartbeat threshold degradation test.
 
 ---
 

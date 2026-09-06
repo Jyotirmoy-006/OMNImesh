@@ -665,6 +665,9 @@
           <button class="btn-action btn-zspf" id="btn-toggle-failover">
             ⚡ Failover (ZSPF State: Mode 0)
           </button>
+          <button class="btn-action" id="btn-toggle-thermal" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
+            🔥 Simulate Thermal Throttle (85°C)
+          </button>
           <button class="btn-action" id="btn-reset-sim">
             🔄 Reset Scenario
           </button>
@@ -723,7 +726,11 @@
           </div>
           <div class="stat-row">
             <span class="stat-label">Thermal Throttling</span>
-            <span class="stat-value good" id="stat-throttle">Inactive (0 events)</span>
+            <span class="stat-value good" id="stat-throttle">Inactive (54.2°C)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Thermal Dropout Loss</span>
+            <span class="stat-value good" id="stat-dropout">0 dropped</span>
           </div>
         </div>
 
@@ -1317,12 +1324,41 @@
 
         socket.on('telemetry_update', (data) => {
           if (data.telemetry) {
-            document.getElementById('stat-temp').innerText = `${data.telemetry.cpu_temp_c} °C (PWM Fan)`;
+            const isThrottled = data.telemetry.thermal_throttle;
+            document.getElementById('stat-temp').innerText = `${data.telemetry.cpu_temp_c} °C ${isThrottled ? '(THROTTLED)' : '(PWM Fan)'}`;
+            document.getElementById('stat-temp').className = isThrottled ? 'stat-value alert' : 'stat-value good';
             document.getElementById('stat-fps').innerText = `${data.telemetry.yolo_fps} FPS`;
+            document.getElementById('stat-fps').className = isThrottled ? 'stat-value alert' : 'stat-value good';
+            document.getElementById('stat-throttle').innerText = isThrottled ? 'ACTIVE (85°C Spike)' : 'Inactive (54.2°C)';
+            document.getElementById('stat-throttle').className = isThrottled ? 'stat-value alert' : 'stat-value good';
+            document.getElementById('stat-dropout').innerText = `${data.telemetry.dropped_detections || 0} dropped`;
+            document.getElementById('stat-dropout').className = (data.telemetry.dropped_detections > 0) ? 'stat-value warn' : 'stat-value good';
+          }
+          if (data.vehicles && data.vehicles.length > 0) {
+            // Replace canvas vehicles with actual real-time ground truth positions from SUMO TraCI!
+            vehicles = data.vehicles.map(v => ({
+              x: v.norm_x * canvas.width,
+              y: v.norm_y * canvas.height,
+              vx: 0,
+              vy: 0,
+              type: v.type,
+              detected: v.detected,
+              color: v.type === 'ambulance' ? '#ef4444' : (v.type === 'suspect' ? '#f59e0b' : '#94a3b8'),
+            }));
+            document.getElementById('hud-vehicles').innerText = `${data.total_active_vehicles} (TraCI Real-time)`;
           }
           if (typeof data.zspf_mode === 'number' && data.zspf_mode !== zspfMode) {
             zspfMode = data.zspf_mode;
             updateZSPFUI();
+          }
+        });
+
+        // Wire thermal throttle button
+        document.getElementById('btn-toggle-thermal').addEventListener('click', () => {
+          if (socket && socket.connected) {
+            socket.emit('client_command', { action: 'thermal' });
+          } else {
+            fetch('/api/trigger/thermal', { method: 'POST' }).catch(() => {});
           }
         });
 

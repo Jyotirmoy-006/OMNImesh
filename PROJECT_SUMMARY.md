@@ -11,6 +11,7 @@
 
 | Deliverable | Status | Files / Artifacts | Key Features |
 | :--- | :--- | :--- | :--- |
+| **Research Methodology Slide (PPT/Vector)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | Widescreen 16:9 methodology slide (1920×1080) in pure vector SVG detailing 5 pipeline stages, mathematical formulations, and scientific pillars; zero AI distortions, with 1-click 4K UHD PNG export. |
 | **System Architecture Slide (PPT/Vector)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG; razor-sharp engineering aesthetics, zero "AI slop" distortions, with 1-click 4K UHD PNG export for PowerPoint. |
 | **P2P Comms & Async MQTT Client** | Completed | [`omnimesh/comms/mqtt_client.py`](omnimesh/comms/mqtt_client.py) | Asynchronous `paho-mqtt` client with dual subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, binary payload dispatch, and graceful pure-software simulation bus fallback. |
 | **MessagePack Binary Serializer** | Completed | [`omnimesh/comms/serializer.py`](omnimesh/comms/serializer.py) | Compact binary `msgpack` serialization (~80 bytes/payload); strictly forbids JSON for inter-agent state sharing to adhere to edge bandwidth limits. |
@@ -48,7 +49,7 @@ To provide a presentation-grade, publication-ready architectural diagram for Pow
   3. **Tier 2 (Right Column)**: Regional Zone Orchestrator with Multi-Node Consensus ($\ge 2$ nodes in 30s), Active Watchlist (`SUSPECT-892`), Symbolic Containment Engine, and Human-in-the-Loop Ethical Authorization Gateway.
   4. **Simulation & Operations (Bottom Section)**: Eclipse SUMO Microscopic Physics Engine (4×4 grid, TraCI socket interface, composite reward function) alongside Flask-SocketIO Live Web Radar Dashboard.
 
-### 2.2 Interactive Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
+### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
 - Features:
   - **1-Click 4K UHD PNG Export**: High-resolution Canvas rasterizer exporting a 3840×2160 crisp PNG directly to downloads.
@@ -57,22 +58,47 @@ To provide a presentation-grade, publication-ready architectural diagram for Pow
 
 ---
 
-## 3. Phase 3: P2P Comms & ZSPF State Machine
+## 3. Research Methodology Presentation Deliverables
 
-### 3.1 MessagePack Binary Serializer (`serializer.py`)
+To represent the complete 5-stage research and engineering workflow with mathematical precision and zero generative "AI slop", we authored a dedicated 16:9 vector SVG diagram and 4K export viewer:
+
+### 3.1 Vector SVG Diagram ([`docs/methodology_diagram.svg`](docs/methodology_diagram.svg))
+- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Plugs directly into PowerPoint, Keynote, and Google Slides.
+- **5 Sequential Pipeline Stages**:
+  1. **Phase 1: Microscopic Co-Simulation & Hardware Thermal Model**: Eclipse SUMO 1.27+ physics, 4×4 network, `traci_env.py` Gymnasium environment (112-D continuous observation space), and `mock_perception.py` Gaussian noise ($\mu=0.98, \sigma=0.03$) with RPi 4B 80°C+ thermal throttling dropout (40%).
+  2. **Phase 2: Vision & Multi-Node Temporal Consensus**: YOLOv8n INT8 ANPR pipeline, candidate plate buffer, and temporal consensus filter enforcing $|\{n_k : \Delta t \le 30\text{s}}\}| \ge 2$ to eliminate false-positive lockdowns.
+  3. **Phase 3: Temporally Gated Dual-Objective MARL**: Stable-Baselines3 PPO Actor-Critic MLP `[64, 64]`, temporally gated composite reward $r_i(t) = (1-m(t))r^{\text{traffic}}_i + m(t)r^{\text{security}}_i$, and `TraCIFaultTolerantWrapper` crash protection.
+  4. **Phase 4: Decentralized Comms & ZSPF Active Failover**: MessagePack binary packing (~80B), `paho-mqtt` async client, and 3-mode active fail-safe with $\le 25\%$ performance loss floor:
+     $$\text{Mode 0 (Full Mesh)} \xrightarrow{\Delta t_{\text{hb}} > 3.0\text{s}} \text{Mode 1 (P2P MARL)} \xrightarrow{\text{Broker Crash}} \text{Mode 2 (Max-Pressure Island)}$$
+  5. **Phase 5: Ethics & Empirical Statistical Validation**: Human-in-the-loop ethical authorization gateway (`human_in_loop.py`) preventing automated false arrests, 10-episode deterministic evaluation (`evaluate_model.py`), and real TraCI edge halting queue extraction confirming **100% vs 0%** containment success.
+- **Scientific Contribution Pillars (Bottom Bar)**: Microscopic Co-Simulation Fidelity, Noise-Robust ANPR Consensus, Temporally Gated Dual-Objective MARL, and Zero Single Point of Failure (ZSPF).
+
+### 3.2 Interactive Methodology Slide Viewer ([`docs/methodology_slide.html`](docs/methodology_slide.html))
+- Hosted directly via the local backend at **`http://localhost:5000/methodology`**.
+- Features:
+  - **1-Click 4K UHD PNG Export**: Renders a crisp 3840×2160 PNG (`OmniMesh_Methodology_4K_PPT.png`) for PPT slides.
+  - **Copy SVG XML**: Copies clean vector XML to clipboard for direct pasting into presentation tools.
+  - **Direct SVG Download**: Downloads `OmniMesh_Methodology_Diagram.svg`.
+  - **Seamless Navigation**: Direct links between Dashboard (`/`), Architecture Slide (`/architecture`), and Methodology Slide (`/methodology`).
+
+---
+
+## 4. Phase 3: P2P Comms & ZSPF State Machine
+
+### 4.1 MessagePack Binary Serializer (`serializer.py`)
 - Strictly enforces binary MessagePack serialization via `msgpack.packb(..., use_bin_type=True)` and `msgpack.unpackb(..., raw=False)`.
 - Replaces verbose JSON strings (~350 bytes) with a compact binary state vector (~80 bytes):
   $$\text{Payload} = \{\text{"node\_id"}: \text{str}, \text{"phase"}: \text{int}, \text{"queues"}: \{\text{str}: \text{float}\}, \text{"timestamp"}: \text{float}, \text{"threat\_mode"}: \text{int}\}$$
 - Enforces strict prohibition against JSON payloads for inter-agent communication, throwing explicit exceptions upon non-binary inputs.
 
-### 3.2 Asynchronous MQTT Client (`mqtt_client.py`)
+### 4.2 Asynchronous MQTT Client (`mqtt_client.py`)
 - Implemented with `paho-mqtt` (`paho.mqtt.client.Client`).
 - Automatically establishes required subscriptions:
   1. `omnimesh/tier2/heartbeat`: Receives binary heartbeat broadcasts from Tier-2 Orchestrator.
   2. `omnimesh/tier1/+/state`: Receives binary peer-to-peer state frames from adjacent Tier-1 intersection nodes.
 - Built with an automatic pure-software simulation bus fallback if no physical Mosquitto broker daemon is active, ensuring complete local testability without external hardware dependencies.
 
-### 3.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
+### 4.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
 Deterministic 3-tier active failover state machine:
 - **Mode 0 (Full Mesh)**: Nominal state where Tier-2 Orchestrator heartbeats and MQTT broker are healthy.
 - **Mode 1 (Autonomous P2P MARL)**: Triggered when:
@@ -80,14 +106,14 @@ Deterministic 3-tier active failover state machine:
   Intersection agents transition from global coordination to localized peer-to-peer MARL using neighbor messages received on `omnimesh/tier1/+/state`.
 - **Mode 2 (Max-Pressure Island Mode)**: Triggered immediately if the MQTT client disconnects entirely (`is_broker_connected == False`) or broker timeout occurs. Edge agents execute localized Max-Pressure signal control independently, guaranteeing a provable $\le 25\%$ performance degradation floor.
 
-### 3.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
+### 4.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
 - Added REST endpoint `POST /api/trigger/kill_broker` and companion `POST /api/trigger/restore_broker`.
 - Added dashboard button `💥 Sever Broker (Kill to Mode 2)` in [`index.html`](index.html) allowing real-time interactive testing of the fail-safe transition.
 - Emits real-time WebSocket state updates, immediately switching the active badge to `MODE 2 Island Mode` and updating system telemetry.
 
 ---
 
-## 4. Hardened RL Pipeline & Empirical Benchmark Results
+## 5. Hardened RL Pipeline & Empirical Benchmark Results
 
 Deterministic 10-episode benchmark evaluation comparing trained PPO neural policy vs. Mode 2 Max-Pressure baseline:
 
@@ -109,14 +135,14 @@ Deterministic 10-episode benchmark evaluation comparing trained PPO neural polic
 
 ---
 
-## 5. Automated Test Suite Results
+## 6. Automated Test Suite Results
 
 All 16 unit and integration tests pass cleanly:
 ```bash
 .\.venv\Scripts\python.exe -m unittest discover tests
 ```
 ```text
-Ran 16 tests in 8.228s — OK
+Ran 16 tests in 8.191s — OK
 ```
 
 ### Verified Test Cases:
@@ -139,11 +165,15 @@ Ran 16 tests in 8.228s — OK
 
 ---
 
-## 6. Instructions to View Architecture & Run Platform
+## 7. Instructions to View Slides & Run Platform
 
-### 1. View & Export System Architecture Slide for PPT:
-- Direct Vector File: [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg) (insert directly into PowerPoint/Keynote).
-- Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
+### 1. View & Export Research Methodology & System Architecture Slides for PPT:
+- **Methodology Slide**:
+  - Vector SVG File: [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg)
+  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/methodology`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
+- **System Architecture Slide**:
+  - Vector SVG File: [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg)
+  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
 
 ### 2. Launch the Live Neural Web Dashboard:
 ```powershell

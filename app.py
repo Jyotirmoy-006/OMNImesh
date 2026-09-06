@@ -477,6 +477,10 @@ def index():
 def architecture():
     return send_from_directory("docs", "architecture_slide.html")
 
+@app.route("/methodology")
+def methodology():
+    return send_from_directory("docs", "methodology_slide.html")
+
 @app.route("/docs/<path:filename>")
 def docs_static(filename):
     return send_from_directory("docs", filename)

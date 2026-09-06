@@ -1,0 +1,460 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c14" />
+      <stop offset="50%" stop-color="#0d131f" />
+      <stop offset="100%" stop-color="#080c14" />
+    </linearGradient>
+
+    <linearGradient id="card-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111c2e" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#0a1220" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="card-orch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#17132e" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#0d0a1f" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="card-comms" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1e24" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#071418" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="card-sim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181512" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#0e0c0a" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <linearGradient id="purple-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#d946ef" />
+    </linearGradient>
+
+    <linearGradient id="amber-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+
+    <!-- Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#162238" stroke-width="0.75" opacity="0.3" />
+    </pattern>
+  </defs>
+
+  <style>
+    .font-title { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; }
+    .font-sub { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 500; }
+    .font-mono { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; }
+    .font-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
+    .font-reg { font-family: 'Inter', sans-serif; font-weight: 400; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1920" height="1080" fill="url(#bg-grad)" />
+  <rect width="1920" height="1080" fill="url(#grid)" />
+
+  <!-- Outer Presentation Frame -->
+  <rect x="20" y="20" width="1880" height="1040" rx="16" fill="none" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- ========================================================================= -->
+  <!-- HEADER BLOCK                                                              -->
+  <!-- ========================================================================= -->
+  <g transform="translate(60, 45)">
+    <!-- Brand Tag -->
+    <rect x="0" y="0" width="140" height="28" rx="6" fill="rgba(6, 182, 212, 0.12)" stroke="#06b6d4" stroke-width="1" />
+    <text x="70" y="19" fill="#22d3ee" font-size="12" class="font-mono" font-weight="700" text-anchor="middle" letter-spacing="1.5">SYSTEM ARCHITECTURE</text>
+
+    <!-- Main Title -->
+    <text x="0" y="65" fill="#f8fafc" font-size="34" class="font-title" letter-spacing="-0.5">
+      OMNI-MESH: TWO-TIERED DECENTRALIZED TRAFFIC &amp; EDGE SECURITY PLATFORM
+    </text>
+    <!-- Subtitle -->
+    <text x="0" y="94" fill="#94a3b8" font-size="16" class="font-sub">
+      Multi-Agent Reinforcement Learning (PPO) with High-Priority Security Gating and Zero Single Point of Failure (ZSPF)
+    </text>
+
+    <!-- Version Badges -->
+    <g transform="translate(1420, 15)">
+      <rect x="0" y="0" width="170" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <circle cx="16" cy="16" r="5" fill="#10b981" />
+      <text x="28" y="21" fill="#cbd5e1" font-size="13" class="font-mono">SUMO 1.27+ TraCI</text>
+
+      <rect x="185" y="0" width="195" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <circle cx="201" cy="16" r="5" fill="#06b6d4" />
+      <text x="213" y="21" fill="#cbd5e1" font-size="13" class="font-mono">PPO MultiDiscrete[4]</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- TIER 1: EDGE INTERSECTION NODES (LEFT COLUMN)                             -->
+  <!-- ========================================================================= -->
+  <g transform="translate(60, 160)">
+    <!-- Container Card -->
+    <rect x="0" y="0" width="560" height="620" rx="16" fill="url(#card-edge)" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="none" filter="drop-shadow(0 12px 24px rgba(0,0,0,0.5))" />
+    
+    <!-- Tier Header Bar -->
+    <path d="M 0 16 Q 0 0 16 0 L 544 0 Q 560 0 560 16 L 560 56 L 0 56 Z" fill="rgba(6, 182, 212, 0.08)" />
+    <rect x="20" y="16" width="32" height="24" rx="4" fill="#0284c7" />
+    <text x="36" y="33" fill="#ffffff" font-size="13" class="font-mono" font-weight="700" text-anchor="middle">T1</text>
+    <text x="64" y="34" fill="#f0fdf4" font-size="19" class="font-bold">TIER-1: EDGE INTERSECTION AGENT</text>
+    <text x="540" y="34" fill="#38bdf8" font-size="12" class="font-mono" text-anchor="end">Raspberry Pi 4B (16 Nodes)</text>
+
+    <!-- Sub-Block 1: Perception Pipeline -->
+    <g transform="translate(24, 72)">
+      <rect x="0" y="0" width="512" height="116" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#38bdf8" font-size="13" class="font-mono" font-weight="700">1. PERCEPTION &amp; THERMAL FAULT MODEL</text>
+      
+      <!-- Visual Flow Chips -->
+      <rect x="16" y="38" width="130" height="62" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="81" y="60" fill="#f8fafc" font-size="12" class="font-bold" text-anchor="middle">USB ANPR Cam</text>
+      <text x="81" y="80" fill="#94a3b8" font-size="10" class="font-mono" text-anchor="middle">1080p @ 30 FPS</text>
+
+      <path d="M 150 69 L 175 69" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+
+      <rect x="180" y="38" width="150" height="62" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <text x="255" y="60" fill="#f8fafc" font-size="12" class="font-bold" text-anchor="middle">YOLOv8n NCNN INT8</text>
+      <text x="255" y="80" fill="#34d399" font-size="10" class="font-mono" text-anchor="middle">16.4 FPS On-Device</text>
+
+      <path d="M 334 69 L 358 69" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+
+      <rect x="362" y="38" width="136" height="62" rx="6" fill="rgba(239, 68, 68, 0.08)" stroke="#dc2626" stroke-width="1" />
+      <text x="430" y="60" fill="#fca5a5" font-size="12" class="font-bold" text-anchor="middle">Thermal Throttle</text>
+      <text x="430" y="80" fill="#f87171" font-size="10" class="font-mono" text-anchor="middle">&gt;80°C (40% Dropout)</text>
+    </g>
+
+    <!-- Sub-Block 2: RL Decision Engine -->
+    <g transform="translate(24, 204)">
+      <rect x="0" y="0" width="512" height="152" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#38bdf8" font-size="13" class="font-mono" font-weight="700">2. NEURAL CONTROL ACTUATOR (STABLE-BASELINES3)</text>
+
+      <!-- Architecture specs -->
+      <g transform="translate(16, 38)">
+        <rect x="0" y="0" width="230" height="98" rx="8" fill="#111827" stroke="#1f2937" stroke-width="1" />
+        <text x="14" y="24" fill="#94a3b8" font-size="11" class="font-mono">OBSERVATION VECTOR (112-D)</text>
+        <text x="14" y="46" fill="#f8fafc" font-size="12" class="font-reg">• Approach Halting Queues (EW/NS)</text>
+        <text x="14" y="66" fill="#f8fafc" font-size="12" class="font-reg">• P2P Neighbor Message Vectors</text>
+        <text x="14" y="86" fill="#fbbf24" font-size="12" class="font-bold">• Binary Threat Flag m(t) ∈ {0,1}</text>
+      </g>
+
+      <path d="M 252 87 L 272 87" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+
+      <g transform="translate(276, 38)">
+        <rect x="0" y="0" width="220" height="98" rx="8" fill="#111827" stroke="#0284c7" stroke-width="1" />
+        <text x="14" y="24" fill="#38bdf8" font-size="11" class="font-mono">PPO ACTOR-CRITIC (MLP)</text>
+        <text x="14" y="46" fill="#e2e8f0" font-size="12" class="font-bold">Policy π: [64, 64] tanh</text>
+        <text x="14" y="66" fill="#94a3b8" font-size="11" class="font-reg">Inference: &lt; 1.2 ms (CPU)</text>
+        <text x="14" y="86" fill="#34d399" font-size="11" class="font-mono">Action: Phase {0,1,2,3}</text>
+      </g>
+    </g>
+
+    <!-- Sub-Block 3: ZSPF Active Fail-Safe Machine -->
+    <g transform="translate(24, 372)">
+      <rect x="0" y="0" width="512" height="124" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#a855f7" font-size="13" class="font-mono" font-weight="700">3. ZSPF ACTIVE FAILOVER ENGINE</text>
+
+      <!-- 3 State Badges -->
+      <g transform="translate(16, 38)">
+        <rect x="0" y="0" width="150" height="70" rx="8" fill="rgba(6, 182, 212, 0.1)" stroke="#06b6d4" stroke-width="1.5" />
+        <text x="75" y="26" fill="#22d3ee" font-size="12" class="font-bold" text-anchor="middle">MODE 0</text>
+        <text x="75" y="44" fill="#f8fafc" font-size="11" class="font-reg" text-anchor="middle">Full Global Mesh</text>
+        <text x="75" y="60" fill="#94a3b8" font-size="10" class="font-mono" text-anchor="middle">Heartbeat ≤ 3.0s</text>
+      </g>
+
+      <path d="M 172 73 L 188 73" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-emerald)" />
+
+      <g transform="translate(192, 38)">
+        <rect x="0" y="0" width="150" height="70" rx="8" fill="rgba(168, 85, 247, 0.1)" stroke="#a855f7" stroke-width="1" />
+        <text x="75" y="26" fill="#c084fc" font-size="12" class="font-bold" text-anchor="middle">MODE 1</text>
+        <text x="75" y="44" fill="#f8fafc" font-size="11" class="font-reg" text-anchor="middle">Autonomous P2P</text>
+        <text x="75" y="60" fill="#fca5a5" font-size="10" class="font-mono" text-anchor="middle">HB Lost (&gt; 3.0s)</text>
+      </g>
+
+      <path d="M 348 73 L 364 73" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-amber)" />
+
+      <g transform="translate(368, 38)">
+        <rect x="0" y="0" width="130" height="70" rx="8" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="1" />
+        <text x="65" y="26" fill="#f87171" font-size="12" class="font-bold" text-anchor="middle">MODE 2</text>
+        <text x="65" y="44" fill="#f8fafc" font-size="11" class="font-reg" text-anchor="middle">Max-Pressure</text>
+        <text x="65" y="60" fill="#fca5a5" font-size="10" class="font-mono" text-anchor="middle">Broker Severed</text>
+      </g>
+    </g>
+
+    <!-- Sub-Block 4: Edge Comms Client -->
+    <g transform="translate(24, 510)">
+      <rect x="0" y="0" width="512" height="92" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#34d399" font-size="13" class="font-mono" font-weight="700">4. LOCAL NETWORKING &amp; BINARY ENCODING</text>
+      <text x="16" y="50" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Async Paho-MQTT Client with non-blocking threading loop
+      </text>
+      <text x="16" y="70" fill="#cbd5e1" font-size="12" class="font-reg">
+        • MessagePack Serialization: <tspan fill="#34d399" font-weight="700">~82 Bytes</tspan> per frame (JSON strictly forbidden)
+      </text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- CENTER BLOCK: DECENTRALIZED COMMUNICATION BUS                             -->
+  <!-- ========================================================================= -->
+  <g transform="translate(650, 160)">
+    <!-- Container Card -->
+    <rect x="0" y="0" width="620" height="620" rx="16" fill="url(#card-comms)" stroke="#0d9488" stroke-width="1.5" filter="drop-shadow(0 12px 24px rgba(0,0,0,0.5))" />
+    
+    <!-- Header Bar -->
+    <path d="M 0 16 Q 0 0 16 0 L 604 0 Q 620 0 620 16 L 620 56 L 0 56 Z" fill="rgba(13, 148, 136, 0.12)" />
+    <rect x="20" y="16" width="32" height="24" rx="4" fill="#0d9488" />
+    <text x="36" y="33" fill="#ffffff" font-size="13" class="font-mono" font-weight="700" text-anchor="middle">BUS</text>
+    <text x="64" y="34" fill="#f0fdf4" font-size="19" class="font-bold">DECENTRALIZED COMMUNICATION BUS</text>
+    <text x="600" y="34" fill="#2dd4bf" font-size="12" class="font-mono" text-anchor="end">MQTT over TCP (Port 1883)</text>
+
+    <!-- Visual Topic Routing Canvas -->
+    <g transform="translate(24, 76)">
+      <!-- Topic Channel 1: State Broadcast -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="572" height="88" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <rect x="12" y="12" width="10" height="64" rx="3" fill="#06b6d4" />
+        <text x="34" y="32" fill="#38bdf8" font-size="14" class="font-mono" font-weight="700">omnimesh/tier1/+/state</text>
+        <text x="34" y="52" fill="#94a3b8" font-size="12" class="font-reg">Peer-to-Peer Inter-Intersection State Exchange (Halting Queues, Signal Phase)</text>
+        <text x="34" y="70" fill="#cbd5e1" font-size="11" class="font-mono">Payload: Binary MsgPack (~80B) | Frequency: 1.0 Hz | QoS 0 (Low Latency)</text>
+      </g>
+
+      <!-- Topic Channel 2: Heartbeat -->
+      <g transform="translate(0, 104)">
+        <rect x="0" y="0" width="572" height="88" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <rect x="12" y="12" width="10" height="64" rx="3" fill="#a855f7" />
+        <text x="34" y="32" fill="#c084fc" font-size="14" class="font-mono" font-weight="700">omnimesh/tier2/heartbeat</text>
+        <text x="34" y="52" fill="#94a3b8" font-size="12" class="font-reg">Tier-2 Orchestrator Liveness Signal &amp; Global Watchlist Synchronization</text>
+        <text x="34" y="70" fill="#cbd5e1" font-size="11" class="font-mono">Timeout Trigger: &gt; 3.0s forces instant failover from Mode 0 to Mode 1</text>
+      </g>
+
+      <!-- Topic Channel 3: Containment Lockdown -->
+      <g transform="translate(0, 208)">
+        <rect x="0" y="0" width="572" height="88" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <rect x="12" y="12" width="10" height="64" rx="3" fill="#f59e0b" />
+        <text x="34" y="32" fill="#fbbf24" font-size="14" class="font-mono" font-weight="700">omnimesh/tier2/containment</text>
+        <text x="34" y="52" fill="#94a3b8" font-size="12" class="font-reg">High-Priority Security Directives: Target Signal Locking (Target: Node C2 / 2_2)</text>
+        <text x="34" y="70" fill="#cbd5e1" font-size="11" class="font-mono">Temporal Gating: Injects Threat Flag m(t) = 1 (Temporally Overrides RL)</text>
+      </g>
+
+      <!-- Topic Channel 4: Emergency Green Wave -->
+      <g transform="translate(0, 312)">
+        <rect x="0" y="0" width="572" height="88" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <rect x="12" y="12" width="10" height="64" rx="3" fill="#ef4444" />
+        <text x="34" y="32" fill="#f87171" font-size="14" class="font-mono" font-weight="700">omnimesh/emergency/preempt</text>
+        <text x="34" y="52" fill="#94a3b8" font-size="12" class="font-reg">P2P Preemption for Emergency Responders (Ambulance AMB_01)</text>
+        <text x="34" y="70" fill="#cbd5e1" font-size="11" class="font-mono">Rolling Corridor Clearing: Instant arterial Green along Corridor Row</text>
+      </g>
+
+      <!-- Network Fault Injection Monitor -->
+      <g transform="translate(0, 416)">
+        <rect x="0" y="0" width="572" height="98" rx="8" fill="rgba(239, 68, 68, 0.06)" stroke="#b91c1c" stroke-width="1" stroke-dasharray="4 4" />
+        <text x="20" y="28" fill="#fca5a5" font-size="13" class="font-bold">FAULT-INJECTION &amp; BROKER DISCONNECTION TESTING</text>
+        <text x="20" y="52" fill="#cbd5e1" font-size="12" class="font-reg">
+          • <tspan font-family="JetBrains Mono" fill="#fca5a5">POST /api/trigger/kill_broker</tspan>: Severs MQTT TCP transport completely.
+        </text>
+        <text x="20" y="74" fill="#cbd5e1" font-size="12" class="font-reg">
+          • Verified Response: Instant transition to <tspan font-weight="700" fill="#f87171">Mode 2 (Max-Pressure Island)</tspan> with ≤25% loss floor.
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- TIER 2: ZONE ORCHESTRATOR & SECURITY (RIGHT COLUMN)                       -->
+  <!-- ========================================================================= -->
+  <g transform="translate(1300, 160)">
+    <!-- Container Card -->
+    <rect x="0" y="0" width="560" height="620" rx="16" fill="url(#card-orch)" stroke="#7c3aed" stroke-width="1.5" filter="drop-shadow(0 12px 24px rgba(0,0,0,0.5))" />
+    
+    <!-- Tier Header Bar -->
+    <path d="M 0 16 Q 0 0 16 0 L 544 0 Q 560 0 560 16 L 560 56 L 0 56 Z" fill="rgba(139, 92, 246, 0.12)" />
+    <rect x="20" y="16" width="32" height="24" rx="4" fill="#7c3aed" />
+    <text x="36" y="33" fill="#ffffff" font-size="13" class="font-mono" font-weight="700" text-anchor="middle">T2</text>
+    <text x="64" y="34" fill="#fdf4ff" font-size="19" class="font-bold">TIER-2: ZONE ORCHESTRATOR</text>
+    <text x="540" y="34" fill="#c084fc" font-size="12" class="font-mono" text-anchor="end">Regional Security Engine</text>
+
+    <!-- Sub-Block 1: ANPR Temporal Consensus -->
+    <g transform="translate(24, 72)">
+      <rect x="0" y="0" width="512" height="116" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#c084fc" font-size="13" class="font-mono" font-weight="700">1. MULTI-NODE TEMPORAL CONSENSUS</text>
+      <text x="16" y="48" fill="#cbd5e1" font-size="12" class="font-reg">
+        Prevents false-positive lockdowns from optical noise or thermal blur:
+      </text>
+      <rect x="16" y="60" width="480" height="42" rx="6" fill="#111827" stroke="#334155" stroke-width="1" />
+      <text x="256" y="85" fill="#a7f3d0" font-size="12" class="font-mono" text-anchor="middle">
+        Rule: ≥ 2 Adjacent Nodes must verify Plate within 30s Window
+      </text>
+    </g>
+
+    <!-- Sub-Block 2: Watchlist & Containment Engine -->
+    <g transform="translate(24, 204)">
+      <rect x="0" y="0" width="512" height="136" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#c084fc" font-size="13" class="font-mono" font-weight="700">2. SYMBOLIC CONTAINMENT RULE ENGINE</text>
+      <text x="16" y="48" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Active Target: <tspan font-family="JetBrains Mono" fill="#fbbf24">SUSPECT-892</tspan> (High Priority Containment)
+      </text>
+      <text x="16" y="68" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Designated Trap Node: <tspan font-family="JetBrains Mono" fill="#38bdf8">Intersection C2 (380m, 380m)</tspan>
+      </text>
+      <text x="16" y="88" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Directives: Lock target approach RED; divert cross traffic to escape routes
+      </text>
+      <text x="16" y="112" fill="#34d399" font-size="11" class="font-bold">
+        Verified Empirical Benchmark: 100.0% Containment Rate (vs 0% MaxPressure)
+      </text>
+    </g>
+
+    <!-- Sub-Block 3: Human in the Loop -->
+    <g transform="translate(24, 356)">
+      <rect x="0" y="0" width="512" height="110" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#f59e0b" font-size="13" class="font-mono" font-weight="700">3. ETHICAL GATEWAY: HUMAN-IN-THE-LOOP (HITL)</text>
+      <text x="16" y="48" fill="#cbd5e1" font-size="12" class="font-reg">
+        Physical containment is safety-critical. Automated MAS recommendations
+      </text>
+      <text x="16" y="68" fill="#cbd5e1" font-size="12" class="font-reg">
+        must be validated by law enforcement dispatcher before physical signal locking:
+      </text>
+      <text x="16" y="92" fill="#fcd34d" font-size="11" class="font-mono">
+        Authorization: Dual-key cryptographic signature or operator override
+      </text>
+    </g>
+
+    <!-- Sub-Block 4: Global Health & Heartbeat Broadcast -->
+    <g transform="translate(24, 482)">
+      <rect x="0" y="0" width="512" height="120" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" fill="#c084fc" font-size="13" class="font-mono" font-weight="700">4. REGIONAL HEARTBEAT EMITTER</text>
+      <text x="16" y="50" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Transmits 1 Hz keepalive frame on <tspan font-family="JetBrains Mono" fill="#c084fc">omnimesh/tier2/heartbeat</tspan>
+      </text>
+      <text x="16" y="72" fill="#cbd5e1" font-size="12" class="font-reg">
+        • Edge Nodes reset local timeout watchdog timers on receipt
+      </text>
+      <text x="16" y="94" fill="#38bdf8" font-size="11" class="font-mono">
+        • Heartbeat Payload: {source: "orchestrator", status: "HEALTHY", ts: float}
+      </text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- BOTTOM SECTION: SIMULATION HARNESS & LOCAL WEB DASHBOARD                  -->
+  <!-- ========================================================================= -->
+  <g transform="translate(60, 805)">
+    <!-- Container Card -->
+    <rect x="0" y="0" width="1800" height="235" rx="16" fill="url(#card-sim)" stroke="#334155" stroke-width="1.5" />
+
+    <!-- Left Half: SUMO Physics Harness -->
+    <g transform="translate(24, 20)">
+      <text x="0" y="20" fill="#f59e0b" font-size="16" class="font-bold">ECLIPSE SUMO MICROSCOPIC PHYSICS ENGINE &amp; TRACI HARNESS</text>
+      <text x="0" y="42" fill="#94a3b8" font-size="12" class="font-reg">
+        Generates ground-truth vehicle dynamics, car-following physics (Krauss model), and multi-directional traffic demand.
+      </text>
+
+      <g transform="translate(0, 60)">
+        <rect x="0" y="0" width="260" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#f59e0b" font-size="12" class="font-mono">4×4 MANHATTAN GRID</text>
+        <text x="14" y="50" fill="#e2e8f0" font-size="12" class="font-reg">• 16 Signalized Intersections</text>
+        <text x="14" y="70" fill="#e2e8f0" font-size="12" class="font-reg">• 80 Approach &amp; Exit Edges</text>
+        <text x="14" y="90" fill="#e2e8f0" font-size="12" class="font-reg">• Continuous Random Demand</text>
+      </g>
+
+      <g transform="translate(280, 60)">
+        <rect x="0" y="0" width="280" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#f59e0b" font-size="12" class="font-mono">GYMNASIUM ENV (TRACI)</text>
+        <text x="14" y="50" fill="#e2e8f0" font-size="12" class="font-reg">• traci.vehicle.getPosition()</text>
+        <text x="14" y="70" fill="#e2e8f0" font-size="12" class="font-reg">• traci.edge.getLastStepHaltingNumber</text>
+        <text x="14" y="90" fill="#38bdf8" font-size="12" class="font-reg">• TraCIFaultTolerantWrapper</text>
+      </g>
+
+      <g transform="translate(580, 60)">
+        <rect x="0" y="0" width="260" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#f59e0b" font-size="12" class="font-mono">COMPOSITE REWARD SHAPING</text>
+        <text x="14" y="50" fill="#e2e8f0" font-size="12" class="font-reg">r(t) = (1-m)·r_traffic + m·r_sec</text>
+        <text x="14" y="70" fill="#e2e8f0" font-size="12" class="font-reg">• Max-Pressure Density Minimization</text>
+        <text x="14" y="90" fill="#34d399" font-size="12" class="font-reg">• Containment (+100) / Breakout (-200)</text>
+      </g>
+    </g>
+
+    <!-- Divider -->
+    <line x1="900" y1="20" x2="900" y2="215" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="6 6" />
+
+    <!-- Right Half: Operations & Telemetry Dashboard -->
+    <g transform="translate(930, 20)">
+      <text x="0" y="20" fill="#38bdf8" font-size="16" class="font-bold">FLASK &amp; SOCKET-IO OPERATIONAL CONTROL DASHBOARD</text>
+      <text x="0" y="42" fill="#94a3b8" font-size="12" class="font-reg">
+        Local server (http://localhost:5000) streaming real-time microscopic radar telemetry to web dashboard.
+      </text>
+
+      <g transform="translate(0, 60)">
+        <rect x="0" y="0" width="250" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#38bdf8" font-size="12" class="font-mono">REAL-TIME RADAR CANVAS</text>
+        <text x="14" y="50" fill="#e2e8f0" font-size="12" class="font-reg">• Ground-Truth SUMO Vehicles</text>
+        <text x="14" y="70" fill="#e2e8f0" font-size="12" class="font-reg">• Multi-colored Class Tagging</text>
+        <text x="14" y="90" fill="#e2e8f0" font-size="12" class="font-reg">• Live Traffic Light Phases</text>
+      </g>
+
+      <g transform="translate(270, 60)">
+        <rect x="0" y="0" width="260" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#38bdf8" font-size="12" class="font-mono">HARDWARE TELEMETRY HUD</text>
+        <text x="14" y="50" fill="#e2e8f0" font-size="12" class="font-reg">• CPU Temp (54.2°C PWM Fan)</text>
+        <text x="14" y="70" fill="#e2e8f0" font-size="12" class="font-reg">• YOLO Inference FPS (16.4 FPS)</text>
+        <text x="14" y="90" fill="#e2e8f0" font-size="12" class="font-reg">• Active ZSPF Mode Badges</text>
+      </g>
+
+      <g transform="translate(550, 60)">
+        <rect x="0" y="0" width="270" height="110" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="14" y="26" fill="#38bdf8" font-size="12" class="font-mono">INTERACTIVE TRIGGER SUITE</text>
+        <text x="14" y="50" fill="#f87171" font-size="12" class="font-reg">• 🚑 P2P Green Wave Trigger</text>
+        <text x="14" y="70" fill="#fbbf24" font-size="12" class="font-reg">• 🚨 Watchlist Trap Lockdown</text>
+        <text x="14" y="90" fill="#fca5a5" font-size="12" class="font-reg">• 💥 Sever Broker (Kill to Mode 2)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- INTER-TIER DATAFLOW ARROWS                                                -->
+  <!-- ========================================================================= -->
+  <!-- Tier 1 to Comms Bus -->
+  <path d="M 620 420 L 646 420" stroke="#06b6d4" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+  <path d="M 646 460 L 620 460" stroke="#06b6d4" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+
+  <!-- Comms Bus to Tier 2 -->
+  <path d="M 1270 420 L 1296 420" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow-purple)" />
+  <path d="M 1296 460 L 1270 460" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrow-purple)" />
+
+  <!-- Tier 1 Actuation to Simulation Harness -->
+  <path d="M 340 780 L 340 805" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow-amber)" />
+
+  <!-- Simulation Harness Telemetry to Dashboard -->
+  <path d="M 880 910 L 925 910" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+
+</svg>

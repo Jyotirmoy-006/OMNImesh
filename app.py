@@ -473,6 +473,14 @@ def simulation_worker():
 def index():
     return send_from_directory(".", "index.html")
 
+@app.route("/architecture")
+def architecture():
+    return send_from_directory("docs", "architecture_slide.html")
+
+@app.route("/docs/<path:filename>")
+def docs_static(filename):
+    return send_from_directory("docs", filename)
+
 @app.route("/api/status", methods=["GET"])
 def get_status():
     return jsonify(controller.get_state())

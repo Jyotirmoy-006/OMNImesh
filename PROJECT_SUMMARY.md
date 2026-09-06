@@ -11,6 +11,7 @@
 
 | Deliverable | Status | Files / Artifacts | Key Features |
 | :--- | :--- | :--- | :--- |
+| **System Architecture Slide (PPT/Vector)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG; razor-sharp engineering aesthetics, zero "AI slop" distortions, with 1-click 4K UHD PNG export for PowerPoint. |
 | **P2P Comms & Async MQTT Client** | Completed | [`omnimesh/comms/mqtt_client.py`](omnimesh/comms/mqtt_client.py) | Asynchronous `paho-mqtt` client with dual subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, binary payload dispatch, and graceful pure-software simulation bus fallback. |
 | **MessagePack Binary Serializer** | Completed | [`omnimesh/comms/serializer.py`](omnimesh/comms/serializer.py) | Compact binary `msgpack` serialization (~80 bytes/payload); strictly forbids JSON for inter-agent state sharing to adhere to edge bandwidth limits. |
 | **ZSPF State Machine Liveness Monitor** | Completed | [`omnimesh/tier1_edge/zspf_state_machine.py`](omnimesh/tier1_edge/zspf_state_machine.py) | Liveness monitor evaluating heartbeat timestamps: transitions to Mode 1 (Autonomous P2P) if `time.time() - last_heartbeat > 3.0s`; instantly transitions to Mode 2 (Max-Pressure Island) if MQTT client disconnects entirely. |
@@ -34,22 +35,44 @@
 
 ---
 
-## 2. Phase 3: P2P Comms & ZSPF State Machine
+## 2. System Architecture Presentation Deliverables
 
-### 2.1 MessagePack Binary Serializer (`serializer.py`)
+To provide a presentation-grade, publication-ready architectural diagram for PowerPoint without the blurry text, warped geometry, or nonsensical labels typical of generative "AI slop", we authored a pure-vector SVG presentation diagram:
+
+### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
+- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Plugs directly into Microsoft PowerPoint, Apple Keynote, and Google Slides with infinite vector scalability.
+- **Dark Glassmorphic Engineering Aesthetics**: Styled with cohesive technical gradients, high-contrast typography (`Inter` and `JetBrains Mono`), and structured layout.
+- **Comprehensive Architectural Coverage**:
+  1. **Tier 1 (Left Column)**: Edge Intersection Agent (Raspberry Pi 4B) with YOLOv8n INT8 (16.4 FPS), Thermal Throttle Model (>80°C dropout), 112-D PPO Actor-Critic MLP `[64, 64]`, and 3-mode ZSPF state transitions.
+  2. **Coordination Bus (Center Column)**: MQTT pub/sub channels (`omnimesh/tier1/+/state`, `omnimesh/tier2/heartbeat`, `omnimesh/tier2/containment`), binary MessagePack frame formatting (~80 bytes), and fault-injection trigger mapping.
+  3. **Tier 2 (Right Column)**: Regional Zone Orchestrator with Multi-Node Consensus ($\ge 2$ nodes in 30s), Active Watchlist (`SUSPECT-892`), Symbolic Containment Engine, and Human-in-the-Loop Ethical Authorization Gateway.
+  4. **Simulation & Operations (Bottom Section)**: Eclipse SUMO Microscopic Physics Engine (4×4 grid, TraCI socket interface, composite reward function) alongside Flask-SocketIO Live Web Radar Dashboard.
+
+### 2.2 Interactive Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
+- Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
+- Features:
+  - **1-Click 4K UHD PNG Export**: High-resolution Canvas rasterizer exporting a 3840×2160 crisp PNG directly to downloads.
+  - **Copy SVG XML**: Instantly copies clean vector XML to clipboard for direct pasting into presentation tools.
+  - **Direct SVG Download**: Downloads `.svg` file for scalable slide imports.
+
+---
+
+## 3. Phase 3: P2P Comms & ZSPF State Machine
+
+### 3.1 MessagePack Binary Serializer (`serializer.py`)
 - Strictly enforces binary MessagePack serialization via `msgpack.packb(..., use_bin_type=True)` and `msgpack.unpackb(..., raw=False)`.
 - Replaces verbose JSON strings (~350 bytes) with a compact binary state vector (~80 bytes):
   $$\text{Payload} = \{\text{"node\_id"}: \text{str}, \text{"phase"}: \text{int}, \text{"queues"}: \{\text{str}: \text{float}\}, \text{"timestamp"}: \text{float}, \text{"threat\_mode"}: \text{int}\}$$
 - Enforces strict prohibition against JSON payloads for inter-agent communication, throwing explicit exceptions upon non-binary inputs.
 
-### 2.2 Asynchronous MQTT Client (`mqtt_client.py`)
+### 3.2 Asynchronous MQTT Client (`mqtt_client.py`)
 - Implemented with `paho-mqtt` (`paho.mqtt.client.Client`).
 - Automatically establishes required subscriptions:
   1. `omnimesh/tier2/heartbeat`: Receives binary heartbeat broadcasts from Tier-2 Orchestrator.
   2. `omnimesh/tier1/+/state`: Receives binary peer-to-peer state frames from adjacent Tier-1 intersection nodes.
 - Built with an automatic pure-software simulation bus fallback if no physical Mosquitto broker daemon is active, ensuring complete local testability without external hardware dependencies.
 
-### 2.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
+### 3.3 ZSPF Liveness Monitor (`zspf_state_machine.py`)
 Deterministic 3-tier active failover state machine:
 - **Mode 0 (Full Mesh)**: Nominal state where Tier-2 Orchestrator heartbeats and MQTT broker are healthy.
 - **Mode 1 (Autonomous P2P MARL)**: Triggered when:
@@ -57,14 +80,14 @@ Deterministic 3-tier active failover state machine:
   Intersection agents transition from global coordination to localized peer-to-peer MARL using neighbor messages received on `omnimesh/tier1/+/state`.
 - **Mode 2 (Max-Pressure Island Mode)**: Triggered immediately if the MQTT client disconnects entirely (`is_broker_connected == False`) or broker timeout occurs. Edge agents execute localized Max-Pressure signal control independently, guaranteeing a provable $\le 25\%$ performance degradation floor.
 
-### 2.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
+### 3.4 Live Broker Severing & Web Dashboard Verification (`app.py`, `index.html`)
 - Added REST endpoint `POST /api/trigger/kill_broker` and companion `POST /api/trigger/restore_broker`.
 - Added dashboard button `💥 Sever Broker (Kill to Mode 2)` in [`index.html`](index.html) allowing real-time interactive testing of the fail-safe transition.
 - Emits real-time WebSocket state updates, immediately switching the active badge to `MODE 2 Island Mode` and updating system telemetry.
 
 ---
 
-## 3. Hardened RL Pipeline & Empirical Benchmark Results
+## 4. Hardened RL Pipeline & Empirical Benchmark Results
 
 Deterministic 10-episode benchmark evaluation comparing trained PPO neural policy vs. Mode 2 Max-Pressure baseline:
 
@@ -86,7 +109,7 @@ Deterministic 10-episode benchmark evaluation comparing trained PPO neural polic
 
 ---
 
-## 4. Automated Test Suite Results
+## 5. Automated Test Suite Results
 
 All 16 unit and integration tests pass cleanly:
 ```bash
@@ -116,16 +139,20 @@ Ran 16 tests in 8.228s — OK
 
 ---
 
-## 5. Instructions to Run What Has Been Built
+## 6. Instructions to View Architecture & Run Platform
 
-### 1. Launch the Live Neural Web Dashboard:
+### 1. View & Export System Architecture Slide for PPT:
+- Direct Vector File: [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg) (insert directly into PowerPoint/Keynote).
+- Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
+
+### 2. Launch the Live Neural Web Dashboard:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python app.py
 ```
-Visit **`http://localhost:5000`** in your browser. Use the new `💥 Sever Broker (Kill to Mode 2)` button to visually inspect real-time ZSPF degradation.
+Visit **`http://localhost:5000`** in your browser. Use the `💥 Sever Broker (Kill to Mode 2)` button to visually inspect real-time ZSPF degradation.
 
-### 2. Test Severing the Broker via REST API:
+### 3. Test Severing the Broker via REST API:
 ```powershell
 curl -X POST http://localhost:5000/api/trigger/kill_broker
 ```
@@ -134,14 +161,8 @@ Returns:
 {"message":"MQTT broker connection severed. ZSPF transitioned to Mode 2.","mode":2,"mode_name":"MODE_2_ISLAND","status":"success"}
 ```
 
-### 3. Run Benchmark Model Evaluation (10 Episodes):
+### 4. Run Benchmark Model Evaluation (10 Episodes):
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python scripts/evaluate_model.py --episodes 10 --steps 35
-```
-
-### 4. Run Headless 1M+ Step PPO Training with TensorBoard:
-```powershell
-.\.venv\Scripts\Activate.ps1
-python omnimesh/tier1_edge/rl_trainer.py --timesteps 1000000 --save-freq 10000 --tb-dir tensorboard_logs
 ```

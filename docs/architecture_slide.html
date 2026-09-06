@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omni-Mesh System Architecture | Presentation Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #06090e;
+      color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .toolbar {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid #1e293b;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+    }
+
+    .toolbar-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+
+    .btn-primary {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+
+    .slide-wrapper {
+      width: 100%;
+      max-width: 1400px;
+      aspect-ratio: 16 / 9;
+      background: #080c14;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-wrapper img,
+    .slide-wrapper object {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tip {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: #64748b;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-title">
+      <span>📐</span> OMNI-MESH SYSTEM ARCHITECTURE (16:9 PRESENTATION SLIDE)
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn" id="btn-copy-svg">📋 Copy SVG Code</button>
+      <button class="btn" id="btn-download-svg">💾 Download SVG</button>
+      <button class="btn btn-primary" id="btn-download-png">🖼️ Export High-Res PNG for PPT (4K UHD)</button>
+    </div>
+  </div>
+
+  <div class="slide-wrapper" id="slide-container">
+    <object id="svg-object" data="architecture_diagram.svg" type="image/svg+xml"></object>
+  </div>
+
+  <div class="tip">
+    💡 Pro-Tip for PowerPoint: Drag &amp; drop either the SVG file (for infinite vector zoom) or the Exported 4K PNG directly onto your slide.
+  </div>
+
+  <script>
+    const svgPath = 'architecture_diagram.svg';
+
+    document.getElementById('btn-download-svg').addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = svgPath;
+      a.download = 'OmniMesh_System_Architecture.svg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    document.getElementById('btn-copy-svg').addEventListener('click', async () => {
+      try {
+        const resp = await fetch(svgPath);
+        const text = await resp.text();
+        await navigator.clipboard.writeText(text);
+        alert('SVG XML code copied to clipboard! You can paste it directly into PowerPoint, Keynote, or Illustrator.');
+      } catch (e) {
+        alert('Could not copy directly: ' + e);
+      }
+    });
+
+    document.getElementById('btn-download-png').addEventListener('click', async () => {
+      const btn = document.getElementById('btn-download-png');
+      btn.innerText = 'Rendering 4K PNG...';
+      try {
+        const resp = await fetch(svgPath);
+        const svgText = await resp.text();
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 3840;
+        canvas.height = 2160;
+        const ctx = canvas.getContext('2d');
+
+        const img = new Image();
+        const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, 3840, 2160);
+          URL.revokeObjectURL(url);
+
+          const pngUrl = canvas.toDataURL('image/png');
+          const a = document.createElement('a');
+          a.href = pngUrl;
+          a.download = 'OmniMesh_Architecture_4K_PPT.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          btn.innerText = '🖼️ Export High-Res PNG for PPT (4K UHD)';
+        };
+        img.src = url;
+      } catch (err) {
+        alert('Error exporting PNG: ' + err);
+        btn.innerText = '🖼️ Export High-Res PNG for PPT (4K UHD)';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -14,8 +14,8 @@
 | **Human-in-the-Loop Ethical Authorization Gateway** | Completed & Active | [`omnimesh/tier2_orchestrator/human_in_loop.py`](omnimesh/tier2_orchestrator/human_in_loop.py), [`app.py`](app.py), [`index.html`](index.html) | State machine with internal lock (`PENDING_AUTHORIZATION`). When 2-node consensus is verified, blocks signal override until explicit human dispatcher authorization (`POST /api/trigger/authorize_containment`). Features flashing UI modal/button in dashboard and automatic benchmark bypass. |
 | **Decoupled Multiprocessing Vision Pipeline** | Completed & Active | [`omnimesh/vision/pipeline_manager.py`](omnimesh/vision/pipeline_manager.py), [`omnimesh/vision/detector.py`](omnimesh/vision/detector.py) | Eliminates Python GIL contention using OS-level `multiprocessing.Process` (`daemon=True`) and `multiprocessing.Queue`. MockPerception runs in Process A at 15 Hz with oldest-frame eviction on full queue to prevent IPC memory bloat. |
 | **Non-Blocking IPC Edge Agent Reads** | Completed & Active | [`omnimesh/tier1_edge/agent.py`](omnimesh/tier1_edge/agent.py) | RL Control loop fetches latest perception state non-blockingly via `ipc_queue.get_nowait()`, handling `queue.Empty` cleanly and smoothly falling back to last known state if perception lags. |
-| **Research Methodology Slide (Ultra-Minimalist PPT)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG. Ultra-minimalist 4-block left-to-right chevron pipeline ("Micro-Simulation" ➔ "Dual-Objective AI" ➔ "ZSPF Failover" ➔ "HITL Validation"), zero mathematical formulas, massive projector-ready fonts (≥32pt body, ≥56pt headers), and 1-click 4K PNG export. |
-| **System Architecture Slide (Ultra-Minimalist PPT)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG. Abstracted into exactly 3 massive visual blocks ("Edge Mesh (RPi 4B Agents)", "MQTT Comm Bus", "Global Orchestrator"), thick bold strokes, deep corporate colors (navy blue, emerald green, royal indigo), projector-scale typography (≥32pt body, ≥56pt headers), and 1-click 4K PNG export. |
+| **Research Methodology Slide (Academic Light Theme)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | High-contrast Academic Whitepaper light theme (pure white background `#FFFFFF`, dark charcoal text `#1A1A1A`, deep corporate blue `#004080` & emerald green `#006633` solid 2px borders). 4 widened column containers (+30%, 415px width), single-line 26px headers, 5px thick directional chevrons, zero drop-shadows/glow, and 1-click 4K PNG export. |
+| **System Architecture Slide (Academic Light Theme)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | High-contrast Academic Whitepaper light theme (pure white background `#FFFFFF`, dark charcoal text `#1A1A1A`, deep corporate blue `#004080` & emerald green `#006633` solid 2px borders). 3 widened column containers (+30%, 500px width), single-line 26px headers, 4px thick directional arrows with 150px gaps, zero drop-shadows/glow, and 1-click 4K PNG export. |
 | **P2P Comms & Async MQTT Client** | Completed | [`omnimesh/comms/mqtt_client.py`](omnimesh/comms/mqtt_client.py) | Asynchronous `paho-mqtt` client with dual subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, binary payload dispatch, and graceful pure-software simulation bus fallback. |
 | **MessagePack Binary Serializer** | Completed | [`omnimesh/comms/serializer.py`](omnimesh/comms/serializer.py) | Compact binary `msgpack` serialization (~80 bytes/payload); strictly forbids JSON for inter-agent state sharing to adhere to edge bandwidth limits. |
 | **ZSPF State Machine Liveness Monitor** | Completed | [`omnimesh/tier1_edge/zspf_state_machine.py`](omnimesh/tier1_edge/zspf_state_machine.py) | Liveness monitor evaluating heartbeat timestamps: transitions to Mode 1 (Autonomous P2P) if `time.time() - last_heartbeat > 3.0s`; instantly transitions to Mode 2 (Max-Pressure Island) if MQTT client disconnects entirely. |
@@ -39,24 +39,26 @@
 
 ---
 
-## 2. Ultra-Minimalist Corporate System Architecture Slide Deliverables
+## 2. Academic Whitepaper System Architecture Slide Deliverables
 
-To provide a presentation-grade, projector-ready architectural diagram for physical slide decks with clean corporate aesthetics and zero visual clutter, we refined the vector SVG presentation diagram:
+To provide a presentation-grade, high-contrast visual for bright classroom projectors and academic whitepapers, we overhauled the system architecture SVG into an Academic Light Theme:
 
 ### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Infinite vector scalability for Microsoft PowerPoint, Apple Keynote, and Google Slides.
-- **Ultra-Minimalist 3-Block Architecture**:
-  1. **Block 1: Edge Mesh (RPi 4B Agents)**: Tier-1 distributed intersection control, real-time vision/ANPR, autonomous P2P collaboration, and sub-100ms local execution. (480px width, 750px height).
-  2. **Block 2: MQTT Comm Bus**: Communication middleware, lightweight pub/sub topology, compact sub-100 byte binary MessagePack payloads, and active ZSPF heartbeats with zero data loss. (480px width, 750px height).
-  3. **Block 3: Global Orchestrator**: Tier-2 regional supervision, multi-node consensus filtering, area security overrides, and dispatcher Human-in-the-Loop ethical authorization gate. (480px width, 750px height).
-- **Refined Corporate UI & Typography Hierarchy**:
-  - Headers: **24pt bold on a single line** with generous side margins (>75px per side).
-  - Main Title: **44pt bold**, Subtitle: **22pt**.
-  - Solid dark navy corporate canvas background (`#0B0F19`) with flat, clean dark-mode glassmorphic cards (`#0F172A`) and subtle 1px structural borders (`stroke-width="1"`). Heavy neon glowing shadows removed.
-  - High-contrast crisp white (`#FFFFFF`, `#F8FAFC`) and cyan (`#38BDF8`) text.
-- **Enlarged 170px Column Gaps & Breathing Room**:
-  - Wide 170px inter-column spacing ensuring bidirectional data-flow arrows (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Override`) have >45px clearance and never overlap card borders.
-- **Generous Container Height (750px)**: Ensures text never touches top or bottom borders.
+- **Academic Whitepaper Light Theme Aesthetic**:
+  - **Background**: Pure white (`#FFFFFF`) with subtle outer academic framing (`#CBD5E1`).
+  - **Primary Typography**: High-contrast dark charcoal / almost black (`#1A1A1A`) and deep corporate blue (`#004080`).
+  - **Borders & Accents**: Crisp, solid 2px borders in Deep Corporate Blue (`#004080`) and Emerald Green (`#006633`). Flat 2D vector style with zero glowing drop-shadows.
+- **Three Widened Column Containers (+30% Width, 500px Each)**:
+  1. **Tier 1: Edge Mesh (RPi 4B Agents)**: 500px width, 745px height, solid 2px corporate blue border. Single-line 26px header, sub-100ms inference KPI card, and RPi 4B hardware specification pill.
+  2. **Middleware: MQTT Comm Bus**: 500px width, 745px height, solid 2px emerald green border. Single-line 26px header, zero data loss KPI card, and MessagePack binary protocol pill.
+  3. **Tier 2: Global Orchestrator**: 500px width, 745px height, solid 2px corporate blue border. Single-line 26px header, dispatcher authorization gate KPI card, and Flask/SocketIO REST pill.
+- **Thick 4px Directional Data-Flow Arrows**:
+  - 150px wide inter-column gaps with thick 4px directional arrows (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Override`). High contrast against white canvas with zero border overlap.
+- **Typography Hierarchy (Max 28px Headers)**:
+  - Slide Header: **38pt**, Subtitle: **19pt**.
+  - Card Titles: **26pt bold on a single line** with generous internal margins.
+  - Body Text & Features: **18pt/15pt** dark charcoal (`#1A1A1A`).
 
 ### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
@@ -67,23 +69,27 @@ To provide a presentation-grade, projector-ready architectural diagram for physi
 
 ---
 
-## 3. Ultra-Minimalist Corporate Research Methodology Slide Deliverables
+## 3. Academic Whitepaper Research Methodology Slide Deliverables
 
-To represent the complete research and engineering methodology with maximum clarity and high-level readability on a physical projector, we refined the research pipeline SVG:
+To represent the complete research and engineering methodology with maximum readability in bright academic presentation environments, we overhauled the research pipeline SVG into an Academic Light Theme:
 
 ### 3.1 Vector SVG Diagram ([`docs/methodology_diagram.svg`](docs/methodology_diagram.svg))
-- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Ready for slide decks and widescreen displays.
-- **4 Core Bold Left-to-Right Chevrons/Blocks (410px Width Each, +25% Wider)**:
-  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, and dynamic demand.
-  2. **Stage 02: Dual-Objective AI**: Single-line header (`Dual-Objective AI`), multi-agent PPO policies, traffic flow optimization, security wave priority, and zero reward collapse.
-  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and autonomous island fallback.
-  4. **Stage 04: HITL Validation**: Ethical gate, 2-node ANPR consensus, mandatory human authorization, and 100% target trap success rate.
-- **Zero Mathematical Formulas**: All mathematical equations abstracted into punchy, high-level engineering takeaways.
-- **Refined Corporate UI & Typography Hierarchy**:
-  - Single-line card titles: **24pt bold** with >100px margins on both sides.
-  - Clean 60px inter-stage gaps with crisp 2.5px chevron arrows.
-  - Solid dark navy corporate canvas (`#0B0F19`), subtle 1px glassmorphic strokes, and 750px card height preventing vertical text clipping.
-- **Bottom Summary Flow Bar**: Continuous high-level takeaway: `Microscopic Physics ➔ Multi-Agent RL AI ➔ ZSPF Fail-Safe Resilience ➔ Human-in-the-Loop Gateway`.
+- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Ready for lecture halls, conference projectors, and slide decks.
+- **Academic Whitepaper Light Theme Aesthetic**:
+  - Pure white background (`#FFFFFF`), dark charcoal primary text (`#1A1A1A`), and crisp 2px solid borders (`#004080`, `#006633`).
+  - Zero glowing drop-shadows or neon filters. Flat, clean academic vector styling.
+- **4 Widened Column Containers (+30% Width, 415px Each)**:
+  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, dynamic demand, and 112-D observations.
+  2. **Stage 02: Dual-Objective AI**: Single-line 26px header, PPO reinforcement learning, dual reward composition, and zero reward collapse design.
+  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and island fallback.
+  4. **Stage 04: HITL Validation**: Ethical gate, 2-node temporal ANPR consensus, mandatory human authorization, and 100% target trap rate.
+- **Thick 5px Directional Chevrons**:
+  - Clean 55px inter-stage gaps with bold 5px-thick directional chevrons connecting each sequential phase left-to-right.
+- **Typography Hierarchy (Max 28px Headers)**:
+  - Slide Header: **38pt**, Subtitle: **19pt**.
+  - Single-line card titles: **26pt bold** with abundant side padding.
+  - Body Text & Features: **17pt/14pt** dark charcoal (`#1A1A1A`).
+- **Bottom Summary Flow Bar**: High-contrast summary: `Microscopic Physics Co-Simulation ➔ Dual-Objective MARL Policy ➔ ZSPF Fail-Safe Resilience ➔ Human-in-the-Loop Ethical Gateway`.
 
 ### 3.2 Interactive Methodology Slide Viewer ([`docs/methodology_slide.html`](docs/methodology_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/methodology`**.

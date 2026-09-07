@@ -39,21 +39,24 @@
 
 ---
 
-## 2. Ultra-Minimalist System Architecture Slide Deliverables
+## 2. Ultra-Minimalist Corporate System Architecture Slide Deliverables
 
-To provide a presentation-grade, projector-ready architectural diagram for physical slide decks without visual clutter, dense file trees, or generative "AI slop", we refactored the vector SVG presentation diagram:
+To provide a presentation-grade, projector-ready architectural diagram for physical slide decks with clean corporate aesthetics and zero visual clutter, we refined the vector SVG presentation diagram:
 
 ### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Infinite vector scalability for Microsoft PowerPoint, Apple Keynote, and Google Slides.
 - **Ultra-Minimalist 3-Block Architecture**:
-  1. **Block 1: Edge Mesh (RPi 4B Agents)**: Tier-1 distributed intersection control, real-time vision/ANPR, autonomous P2P collaboration, and sub-100ms local execution. Styled in deep navy blue (`#0E1E38`, `#3B82F6`).
-  2. **Block 2: MQTT Comm Bus**: Communication middleware, lightweight pub/sub topology, compact sub-100 byte binary MessagePack payloads, and active ZSPF heartbeats with zero data loss. Styled in deep emerald green (`#082822`, `#10B981`).
-  3. **Block 3: Global Orchestrator**: Tier-2 regional supervision, multi-node consensus filtering, area security overrides, and dispatcher Human-in-the-Loop ethical authorization gate. Styled in royal indigo/violet (`#1E1438`, `#8B5CF6`).
-- **Massive Projector-Scale Typography**:
-  - Headers: **56pt to 60pt** (`OMNI-MESH SYSTEM ARCHITECTURE`, block titles).
-  - Body text, bullet points, chips, and labels: **≥ 32pt** (32pt to 36pt). Strictly verified zero text below 32pt.
-- **Directional Data Flow Pipes**: 6px-thick bidirectional pipes with glowing arrowheads for node states, heartbeats, ANPR alerts, and containment overrides.
-- **Aesthetic Distinction**: Thick 5px structural strokes, generous negative space, and dark corporate palette.
+  1. **Block 1: Edge Mesh (RPi 4B Agents)**: Tier-1 distributed intersection control, real-time vision/ANPR, autonomous P2P collaboration, and sub-100ms local execution. (480px width, 750px height).
+  2. **Block 2: MQTT Comm Bus**: Communication middleware, lightweight pub/sub topology, compact sub-100 byte binary MessagePack payloads, and active ZSPF heartbeats with zero data loss. (480px width, 750px height).
+  3. **Block 3: Global Orchestrator**: Tier-2 regional supervision, multi-node consensus filtering, area security overrides, and dispatcher Human-in-the-Loop ethical authorization gate. (480px width, 750px height).
+- **Refined Corporate UI & Typography Hierarchy**:
+  - Headers: **24pt bold on a single line** with generous side margins (>75px per side).
+  - Main Title: **44pt bold**, Subtitle: **22pt**.
+  - Solid dark navy corporate canvas background (`#0B0F19`) with flat, clean dark-mode glassmorphic cards (`#0F172A`) and subtle 1px structural borders (`stroke-width="1"`). Heavy neon glowing shadows removed.
+  - High-contrast crisp white (`#FFFFFF`, `#F8FAFC`) and cyan (`#38BDF8`) text.
+- **Enlarged 170px Column Gaps & Breathing Room**:
+  - Wide 170px inter-column spacing ensuring bidirectional data-flow arrows (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Override`) have >45px clearance and never overlap card borders.
+- **Generous Container Height (750px)**: Ensures text never touches top or bottom borders.
 
 ### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
@@ -64,23 +67,23 @@ To provide a presentation-grade, projector-ready architectural diagram for physi
 
 ---
 
-## 3. Ultra-Minimalist Research Methodology Slide Deliverables
+## 3. Ultra-Minimalist Corporate Research Methodology Slide Deliverables
 
-To represent the complete research and engineering methodology with maximum clarity and high-level readability on a physical projector, we refactored the research pipeline SVG:
+To represent the complete research and engineering methodology with maximum clarity and high-level readability on a physical projector, we refined the research pipeline SVG:
 
 ### 3.1 Vector SVG Diagram ([`docs/methodology_diagram.svg`](docs/methodology_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Ready for slide decks and widescreen displays.
-- **4 Core Bold Left-to-Right Chevrons/Blocks**:
-  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, and dynamic demand. (Deep navy/cobalt).
-  2. **Stage 02: Dual-Objective AI**: Multi-agent PPO policies, traffic flow optimization, security wave priority, and zero reward collapse. (Deep indigo).
-  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and autonomous island fallback. (Deep emerald green).
-  4. **Stage 04: HITL Validation**: Ethical gate, 2-node ANPR consensus, mandatory human authorization, and 100% target trap success rate. (Deep royal violet).
+- **4 Core Bold Left-to-Right Chevrons/Blocks (410px Width Each, +25% Wider)**:
+  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, and dynamic demand.
+  2. **Stage 02: Dual-Objective AI**: Single-line header (`Dual-Objective AI`), multi-agent PPO policies, traffic flow optimization, security wave priority, and zero reward collapse.
+  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and autonomous island fallback.
+  4. **Stage 04: HITL Validation**: Ethical gate, 2-node ANPR consensus, mandatory human authorization, and 100% target trap success rate.
 - **Zero Mathematical Formulas**: All mathematical equations abstracted into punchy, high-level engineering takeaways.
-- **Massive Projector-Scale Typography**:
-  - Headers: **56pt to 60pt**.
-  - Body text, takeaways, and chips: **≥ 32pt** (32pt to 34pt).
-- **Directional Chevrons**: Bold 8px-thick glowing forward chevrons connecting each sequential stage left-to-right.
-- **Bottom Summary Flow Bar**: High-level continuous takeaway: `Micro-Simulation ➔ Dual-Objective AI ➔ ZSPF Failover ➔ HITL Validation`.
+- **Refined Corporate UI & Typography Hierarchy**:
+  - Single-line card titles: **24pt bold** with >100px margins on both sides.
+  - Clean 60px inter-stage gaps with crisp 2.5px chevron arrows.
+  - Solid dark navy corporate canvas (`#0B0F19`), subtle 1px glassmorphic strokes, and 750px card height preventing vertical text clipping.
+- **Bottom Summary Flow Bar**: Continuous high-level takeaway: `Microscopic Physics ➔ Multi-Agent RL AI ➔ ZSPF Fail-Safe Resilience ➔ Human-in-the-Loop Gateway`.
 
 ### 3.2 Interactive Methodology Slide Viewer ([`docs/methodology_slide.html`](docs/methodology_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/methodology`**.

@@ -1,67 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#080C15" />
-      <stop offset="50%" stop-color="#0D1322" />
-      <stop offset="100%" stop-color="#080C15" />
-    </linearGradient>
+  <!-- Solid Dark Navy Corporate Background -->
+  <rect width="1920" height="1080" fill="#0B0F19" />
 
-    <!-- Block 1: Edge Mesh Gradient -->
-    <linearGradient id="grad-edge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0E1E38" />
-      <stop offset="100%" stop-color="#081326" />
-    </linearGradient>
-
-    <!-- Block 2: MQTT Bus Gradient -->
-    <linearGradient id="grad-mqtt" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#082822" />
-      <stop offset="100%" stop-color="#051714" />
-    </linearGradient>
-
-    <!-- Block 3: Global Orchestrator Gradient -->
-    <linearGradient id="grad-orch" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1438" />
-      <stop offset="100%" stop-color="#100A22" />
-    </linearGradient>
-
-    <!-- Glow Filters -->
-    <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-    <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-
-    <!-- Arrow Markers -->
-    <marker id="arrow-blue-right" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
-      <path d="M 0 1 L 11 6 L 0 11 z" fill="#38BDF8" />
-    </marker>
-    <marker id="arrow-blue-left" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="10" markerHeight="10" orient="auto">
-      <path d="M 12 1 L 1 6 L 12 11 z" fill="#38BDF8" />
-    </marker>
-    <marker id="arrow-green-right" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
-      <path d="M 0 1 L 11 6 L 0 11 z" fill="#34D399" />
-    </marker>
-    <marker id="arrow-purple-right" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto">
-      <path d="M 0 1 L 11 6 L 0 11 z" fill="#C084FC" />
-    </marker>
-    <marker id="arrow-purple-left" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="10" markerHeight="10" orient="auto">
-      <path d="M 12 1 L 1 6 L 12 11 z" fill="#C084FC" />
-    </marker>
-  </defs>
-
-  <!-- Canvas Background -->
-  <rect width="1920" height="1080" fill="url(#bg-grad)" />
-
-  <!-- Subtle Blueprint Grid Pattern -->
-  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+  <!-- Crisp, Subtle Architectural Grid -->
+  <g opacity="0.08" stroke="#334155" stroke-width="1">
     <line x1="0" y1="120" x2="1920" y2="120" />
     <line x1="0" y1="240" x2="1920" y2="240" />
     <line x1="0" y1="360" x2="1920" y2="360" />
@@ -79,193 +21,249 @@
     <line x1="1680" y1="0" x2="1680" y2="1080" />
   </g>
 
-  <!-- ==================== TOP HEADER SECTION ==================== -->
-  <g id="header-section">
-    <!-- Main Title (Massive >= 56pt) -->
-    <text x="960" y="95" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="60" font-weight="800" fill="#F8FAFC" letter-spacing="-0.5">
+  <!-- Markers for Clean Data Flow Arrows -->
+  <defs>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 1 2 L 8 5 L 1 8 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 1 2 L 8 5 L 1 8 z" fill="#10B981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 1 2 L 8 5 L 1 8 z" fill="#F43F5E" />
+    </marker>
+    <marker id="arrow-cyan-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 9 2 L 2 5 L 9 8 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrow-emerald-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 9 2 L 2 5 L 9 8 z" fill="#10B981" />
+    </marker>
+    <marker id="arrow-rose-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 9 2 L 2 5 L 9 8 z" fill="#F43F5E" />
+    </marker>
+  </defs>
+
+  <!-- ==================== TOP HEADER ==================== -->
+  <g id="slide-header">
+    <text x="960" y="85" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="44" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5">
       OMNI-MESH SYSTEM ARCHITECTURE
     </text>
-    <!-- Subtitle (>= 32pt) -->
-    <text x="960" y="155" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="34" font-weight="500" fill="#94A3B8">
-      Three-Tier Decentralized Edge Architecture &amp; Data Flow
+    <text x="960" y="130" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94A3B8">
+      Three-Tier Decentralized Edge Architecture &amp; Data Flow Overview
     </text>
   </g>
 
-  <!-- ==================== CONNECTORS & DATA FLOW PIPES ==================== -->
-  <!-- Connector 1: Edge Mesh <-> MQTT Comm Bus (x=550 to x=730, width=180) -->
-  <g id="connector-edge-mqtt">
-    <!-- Top Flow: P2P States / Telemetry (Edge -> Bus) -->
-    <path d="M 550 490 L 715 490" stroke="#38BDF8" stroke-width="6" marker-end="url(#arrow-blue-right)" />
-    <rect x="565" y="435" width="150" height="42" rx="10" fill="#0C213D" stroke="#38BDF8" stroke-width="2" />
-    <text x="640" y="466" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="700" fill="#38BDF8">
+  <!-- ==================== DATA FLOW CONNECTORS (WIDE 170px GAPS) ==================== -->
+  <!-- Gap 1: Edge Mesh <-> MQTT Comm Bus (X=550 to X=720, Width=170) -->
+  <g id="connector-edge-bus">
+    <!-- Top Flow: States (Edge -> Bus) -->
+    <path d="M 565 470 L 705 470" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+    <rect x="585" y="425" width="100" height="32" rx="6" fill="#111C2E" stroke="#1E293B" stroke-width="1" />
+    <text x="635" y="447" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" font-weight="600" fill="#38BDF8">
       States ▶
     </text>
 
-    <!-- Bottom Flow: Heartbeats / Directives (Bus -> Edge) -->
-    <path d="M 730 670 L 565 670" stroke="#34D399" stroke-width="6" marker-end="url(#arrow-blue-left)" />
-    <rect x="565" y="695" width="150" height="42" rx="10" fill="#082A22" stroke="#34D399" stroke-width="2" />
-    <text x="640" y="726" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="700" fill="#34D399">
+    <!-- Bottom Flow: Sync / Directives (Bus -> Edge) -->
+    <path d="M 705 670 L 565 670" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrow-emerald-rev)" />
+    <rect x="585" y="685" width="100" height="32" rx="6" fill="#111C2E" stroke="#1E293B" stroke-width="1" />
+    <text x="635" y="707" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" font-weight="600" fill="#10B981">
       ◀ Sync
     </text>
   </g>
 
-  <!-- Connector 2: MQTT Comm Bus <-> Global Orchestrator (x=1190 to x=1370, width=180) -->
-  <g id="connector-mqtt-orch">
-    <!-- Top Flow: Alert Frames (Bus -> Orchestrator) -->
-    <path d="M 1190 490 L 1355 490" stroke="#C084FC" stroke-width="6" marker-end="url(#arrow-purple-right)" />
-    <rect x="1205" y="435" width="150" height="42" rx="10" fill="#251345" stroke="#C084FC" stroke-width="2" />
-    <text x="1280" y="466" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="700" fill="#C084FC">
+  <!-- Gap 2: MQTT Comm Bus <-> Global Orchestrator (X=1200 to X=1370, Width=170) -->
+  <g id="connector-bus-orch">
+    <!-- Top Flow: Alerts (Bus -> Orchestrator) -->
+    <path d="M 1215 470 L 1355 470" stroke="#38BDF8" stroke-width="2.5" marker-end="url(#arrow-cyan)" />
+    <rect x="1235" y="425" width="100" height="32" rx="6" fill="#111C2E" stroke="#1E293B" stroke-width="1" />
+    <text x="1285" y="447" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" font-weight="600" fill="#38BDF8">
       Alerts ▶
     </text>
 
-    <!-- Bottom Flow: Containment Overrides (Orchestrator -> Bus) -->
-    <path d="M 1370 670 L 1205 670" stroke="#F43F5E" stroke-width="6" marker-end="url(#arrow-purple-left)" />
-    <rect x="1205" y="695" width="150" height="42" rx="10" fill="#35101E" stroke="#F43F5E" stroke-width="2" />
-    <text x="1280" y="726" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="700" fill="#FB7185">
-      ◀ Gates
+    <!-- Bottom Flow: Overrides (Orchestrator -> Bus) -->
+    <path d="M 1355 670 L 1215 670" stroke="#F43F5E" stroke-width="2.5" marker-end="url(#arrow-rose-rev)" />
+    <rect x="1230" y="685" width="110" height="32" rx="6" fill="#111C2E" stroke="#1E293B" stroke-width="1" />
+    <text x="1285" y="707" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" font-weight="600" fill="#FB7185">
+      ◀ Override
     </text>
   </g>
 
-  <!-- ==================== BLOCK 1: EDGE MESH (RPI 4B AGENTS) ==================== -->
-  <g id="block-edge-mesh">
-    <!-- Main Outer Card -->
-    <rect x="90" y="225" width="460" height="685" rx="28" fill="url(#grad-edge)" stroke="#3B82F6" stroke-width="5" />
+  <!-- ==================== CARD 1: EDGE MESH ==================== -->
+  <g id="card-edge-mesh">
+    <!-- Clean Dark-Mode Glassmorphic Card (Subtle 1px border, generous height) -->
+    <rect x="70" y="180" width="480" height="750" rx="16" fill="#0F172A" stroke="#25354C" stroke-width="1" />
 
-    <!-- Header Category Badge (>= 32pt) -->
-    <rect x="135" y="260" width="370" height="56" rx="16" fill="#1E3A8A" stroke="#60A5FA" stroke-width="3" />
-    <text x="320" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#93C5FD">
-      TIER 1 : EDGE
-    </text>
-
-    <!-- Block Title (>= 56pt) & Sub-title (>= 32pt) -->
-    <text x="320" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      Edge Mesh
-    </text>
-    <text x="320" y="430" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#60A5FA">
-      (RPi 4B Agents)
+    <!-- Top Badge -->
+    <rect x="105" y="215" width="200" height="32" rx="6" fill="#17253D" stroke="#2563EB" stroke-width="1" />
+    <text x="205" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#60A5FA" letter-spacing="1">
+      TIER 1 : EDGE MESH
     </text>
 
-    <!-- Decorative Accent Divider -->
-    <line x1="135" y1="465" x2="505" y2="465" stroke="#1D4ED8" stroke-width="4" />
-
-    <!-- Core High-Level Pillars (Body Text >= 32pt) -->
-    <text x="140" y="535" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Distributed Signal Control
+    <!-- Single-Line Card Header (Font 24px) -->
+    <text x="105" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      Edge Mesh (RPi 4B Agents)
     </text>
-    <text x="140" y="605" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Real-Time Vision &amp; ANPR
-    </text>
-    <text x="140" y="675" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Autonomous P2P Mesh
+    <text x="105" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Autonomous Intersection Controller
     </text>
 
-    <!-- Bottom Status / Metric Card (>= 32pt) -->
-    <rect x="130" y="745" width="380" height="125" rx="20" fill="#0C1D38" stroke="#38BDF8" stroke-width="3" />
-    <text x="320" y="798" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#38BDF8">
-      Sub-100ms Control
+    <!-- Subtle 1px Divider -->
+    <line x1="105" y1="350" x2="515" y2="350" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Core Pillars (Clean, Spacious) -->
+    <g transform="translate(105, 390)">
+      <circle cx="6" cy="6" r="4" fill="#38BDF8" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Decentralized Signal Phase Optimization
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#38BDF8" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Real-Time Vision &amp; ANPR Perception Loop
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#38BDF8" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Multi-Agent P2P State Sharing Protocol
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#38BDF8" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Mode 2 Island Fail-Safe Execution
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="105" y="690" width="410" height="90" rx="12" fill="#132034" stroke="#1E3352" stroke-width="1" />
+    <text x="310" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#38BDF8">
+      Sub-100ms Inference Latency
     </text>
-    <text x="320" y="845" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#93C5FD">
-      Independent Local Policy
+    <text x="310" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      Deterministic Local RL Control Loop
     </text>
   </g>
 
-  <!-- ==================== BLOCK 2: MQTT COMM BUS ==================== -->
-  <g id="block-mqtt-bus">
-    <!-- Main Outer Card -->
-    <rect x="730" y="225" width="460" height="685" rx="28" fill="url(#grad-mqtt)" stroke="#10B981" stroke-width="5" />
+  <!-- ==================== CARD 2: MQTT COMM BUS ==================== -->
+  <g id="card-mqtt-bus">
+    <!-- Clean Dark-Mode Glassmorphic Card -->
+    <rect x="720" y="180" width="480" height="750" rx="16" fill="#0F172A" stroke="#1F3A34" stroke-width="1" />
 
-    <!-- Header Category Badge (>= 32pt) -->
-    <rect x="775" y="260" width="370" height="56" rx="16" fill="#064E3B" stroke="#34D399" stroke-width="3" />
-    <text x="960" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#A7F3D0">
-      MIDDLEWARE
-    </text>
-
-    <!-- Block Title (>= 56pt) & Sub-title (>= 32pt) -->
-    <text x="960" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      MQTT Comm Bus
-    </text>
-    <text x="960" y="430" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#34D399">
-      (MessagePack Protocol)
+    <!-- Top Badge -->
+    <rect x="755" y="215" width="220" height="32" rx="6" fill="#0B2620" stroke="#059669" stroke-width="1" />
+    <text x="865" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#34D399" letter-spacing="1">
+      COMMS MIDDLEWARE
     </text>
 
-    <!-- Decorative Accent Divider -->
-    <line x1="775" y1="465" x2="1145" y2="465" stroke="#059669" stroke-width="4" />
-
-    <!-- Core High-Level Pillars (Body Text >= 32pt) -->
-    <text x="780" y="535" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Lightweight Pub/Sub Mesh
+    <!-- Single-Line Card Header (Font 24px) -->
+    <text x="755" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      MQTT Communication Bus
     </text>
-    <text x="780" y="605" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Sub-100B Binary Packets
-    </text>
-    <text x="780" y="675" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Active ZSPF Heartbeats
+    <text x="755" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Low-Latency Pub/Sub Topology
     </text>
 
-    <!-- Bottom Status / Metric Card (>= 32pt) -->
-    <rect x="770" y="745" width="380" height="125" rx="20" fill="#072A24" stroke="#10B981" stroke-width="3" />
-    <text x="960" y="798" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#34D399">
-      Zero Data Loss
+    <!-- Subtle 1px Divider -->
+    <line x1="755" y1="350" x2="1165" y2="350" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Core Pillars (Clean, Spacious) -->
+    <g transform="translate(755, 390)">
+      <circle cx="6" cy="6" r="4" fill="#34D399" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Lightweight Asynchronous MQTT Broker
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#34D399" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        MessagePack Binary State Serialization
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#34D399" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Active ZSPF Liveness Heartbeat Monitor
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#34D399" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Sub-100 Byte Minimal Packet Footprint
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="755" y="690" width="410" height="90" rx="12" fill="#0E2721" stroke="#144C3F" stroke-width="1" />
+    <text x="960" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#34D399">
+      Zero Single Point of Failure
     </text>
-    <text x="960" y="845" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#A7F3D0">
-      Instant Broker Failover
+    <text x="960" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      Instant Autonomous Island Degradation
     </text>
   </g>
 
-  <!-- ==================== BLOCK 3: GLOBAL ORCHESTRATOR ==================== -->
-  <g id="block-global-orchestrator">
-    <!-- Main Outer Card -->
-    <rect x="1370" y="225" width="460" height="685" rx="28" fill="url(#grad-orch)" stroke="#8B5CF6" stroke-width="5" />
+  <!-- ==================== CARD 3: GLOBAL ORCHESTRATOR ==================== -->
+  <g id="card-global-orchestrator">
+    <!-- Clean Dark-Mode Glassmorphic Card -->
+    <rect x="1370" y="180" width="480" height="750" rx="16" fill="#0F172A" stroke="#362952" stroke-width="1" />
 
-    <!-- Header Category Badge (>= 32pt) -->
-    <rect x="1415" y="260" width="370" height="56" rx="16" fill="#4C1D95" stroke="#C084FC" stroke-width="3" />
-    <text x="1600" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#DDD6FE">
+    <!-- Top Badge -->
+    <rect x="1405" y="215" width="220" height="32" rx="6" fill="#251642" stroke="#7C3AED" stroke-width="1" />
+    <text x="1515" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#C084FC" letter-spacing="1">
       TIER 2 : SUPERVISION
     </text>
 
-    <!-- Block Title (>= 56pt) & Sub-title (>= 32pt) -->
-    <text x="1600" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      Global Orchestrator
+    <!-- Single-Line Card Header (Font 24px) -->
+    <text x="1405" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      Global Zone Orchestrator
     </text>
-    <text x="1600" y="430" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#C084FC">
-      (Cloud / Traffic Center)
-    </text>
-
-    <!-- Decorative Accent Divider -->
-    <line x1="1415" y1="465" x2="1785" y2="465" stroke="#7C3AED" stroke-width="4" />
-
-    <!-- Core High-Level Pillars (Body Text >= 32pt) -->
-    <text x="1420" y="535" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Multi-Node Consensus
-    </text>
-    <text x="1420" y="605" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Area Security Overrides
-    </text>
-    <text x="1420" y="675" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">
-      • Human-in-the-Loop Gate
+    <text x="1405" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Centralized Policy &amp; Watchlist Oversight
     </text>
 
-    <!-- Bottom Status / Metric Card (>= 32pt) -->
-    <rect x="1410" y="745" width="380" height="125" rx="20" fill="#261545" stroke="#8B5CF6" stroke-width="3" />
-    <text x="1600" y="798" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#C084FC">
-      Ethical Verification
+    <!-- Subtle 1px Divider -->
+    <line x1="1405" y1="350" x2="1815" y2="350" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Core Pillars (Clean, Spacious) -->
+    <g transform="translate(1405, 390)">
+      <circle cx="6" cy="6" r="4" fill="#C084FC" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Multi-Node Temporal Consensus Filter
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#C084FC" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Priority Security Corridor Preemption
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#C084FC" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Ethical Authorization State Lock
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#C084FC" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        REST &amp; WebSocket Dispatcher Interface
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="1405" y="690" width="410" height="90" rx="12" fill="#24163E" stroke="#44256E" stroke-width="1" />
+    <text x="1610" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#C084FC">
+      Human-in-the-Loop Gateway
     </text>
-    <text x="1600" y="845" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E9D5FF">
-      Dispatcher Authorization
+    <text x="1610" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      Mandatory Dispatcher Verification
     </text>
   </g>
 
-  <!-- ==================== BOTTOM ARCHITECTURE BAR ==================== -->
-  <g id="bottom-summary-bar">
-    <rect x="90" y="945" width="1740" height="90" rx="24" fill="#0F172A" stroke="#334155" stroke-width="3" />
-    <text x="360" y="1003" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#38BDF8">
-      ✦ Edge Autonomy (RPi 4B)
+  <!-- ==================== BOTTOM SUMMARY BAR ==================== -->
+  <g id="bottom-bar">
+    <rect x="70" y="960" width="1780" height="75" rx="12" fill="#0E1626" stroke="#1E293B" stroke-width="1" />
+    <text x="350" y="1006" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" font-weight="600" fill="#38BDF8">
+      ✦ Edge Autonomy (RPi 4B Cluster)
     </text>
-    <text x="960" y="1003" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#34D399">
-      ✦ Zero Single Point Failure (ZSPF)
+    <text x="960" y="1006" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" font-weight="600" fill="#34D399">
+      ✦ Zero Single Point of Failure (ZSPF)
     </text>
-    <text x="1560" y="1003" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#C084FC">
-      ✦ Dispatcher HITL Gate
+    <text x="1570" y="1006" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" font-weight="600" fill="#C084FC">
+      ✦ Human-in-the-Loop Ethical Authorization
     </text>
   </g>
 </svg>

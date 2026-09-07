@@ -1,42 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#080C15" />
-      <stop offset="50%" stop-color="#0D1322" />
-      <stop offset="100%" stop-color="#080C15" />
-    </linearGradient>
+  <!-- Solid Dark Navy Corporate Background -->
+  <rect width="1920" height="1080" fill="#0B0F19" />
 
-    <!-- Block 1: Micro-Simulation Gradient -->
-    <linearGradient id="grad-p1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0E1E38" />
-      <stop offset="100%" stop-color="#081326" />
-    </linearGradient>
-
-    <!-- Block 2: Dual-Objective AI Gradient -->
-    <linearGradient id="grad-p2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#14183E" />
-      <stop offset="100%" stop-color="#0A0D26" />
-    </linearGradient>
-
-    <!-- Block 3: ZSPF Failover Gradient -->
-    <linearGradient id="grad-p3" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#082822" />
-      <stop offset="100%" stop-color="#051714" />
-    </linearGradient>
-
-    <!-- Block 4: HITL Validation Gradient -->
-    <linearGradient id="grad-p4" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1438" />
-      <stop offset="100%" stop-color="#100A22" />
-    </linearGradient>
-  </defs>
-
-  <!-- Canvas Background -->
-  <rect width="1920" height="1080" fill="url(#bg-grad)" />
-
-  <!-- Subtle Blueprint Grid Pattern -->
-  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+  <!-- Crisp, Subtle Architectural Grid -->
+  <g opacity="0.08" stroke="#334155" stroke-width="1">
     <line x1="0" y1="120" x2="1920" y2="120" />
     <line x1="0" y1="240" x2="1920" y2="240" />
     <line x1="0" y1="360" x2="1920" y2="360" />
@@ -54,218 +21,257 @@
     <line x1="1680" y1="0" x2="1680" y2="1080" />
   </g>
 
-  <!-- ==================== TOP HEADER SECTION ==================== -->
-  <g id="header-section">
-    <!-- Main Title (Massive >= 56pt) -->
-    <text x="960" y="95" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="60" font-weight="800" fill="#F8FAFC" letter-spacing="-0.5">
+  <!-- ==================== TOP HEADER ==================== -->
+  <g id="slide-header">
+    <text x="960" y="85" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="44" font-weight="700" fill="#F8FAFC" letter-spacing="-0.5">
       OMNI-MESH RESEARCH METHODOLOGY
     </text>
-    <!-- Subtitle (>= 32pt) -->
-    <text x="960" y="155" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="34" font-weight="500" fill="#94A3B8">
-      Four-Stage Scientific Pipeline &amp; Experimental Validation
+    <text x="960" y="130" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94A3B8">
+      Four-Stage Scientific Pipeline &amp; Experimental Validation Framework
     </text>
   </g>
 
-  <!-- ==================== DIRECTIONAL CHEVRONS ==================== -->
-  <!-- Chevron 1: Block 1 -> Block 2 (Centered at x=490, y=565) -->
+  <!-- ==================== DIRECTIONAL CHEVRONS (CLEAN 60px GAPS) ==================== -->
+  <!-- Chevron 1: Stage 1 -> Stage 2 (Centered at X=490, Y=540) -->
   <g id="chevron-1">
-    <path d="M 470 525 L 510 565 L 470 605" fill="none" stroke="#60A5FA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 490 525 L 530 565 L 490 605" fill="none" stroke="#60A5FA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+    <path d="M 483 525 L 498 540 L 483 555" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- Chevron 2: Block 2 -> Block 3 (Centered at x=960, y=565) -->
+  <!-- Chevron 2: Stage 2 -> Stage 3 (Centered at X=960, Y=540) -->
   <g id="chevron-2">
-    <path d="M 940 525 L 980 565 L 940 605" fill="none" stroke="#818CF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 960 525 L 1000 565 L 960 605" fill="none" stroke="#818CF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+    <path d="M 953 525 L 968 540 L 953 555" fill="none" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- Chevron 3: Block 3 -> Block 4 (Centered at x=1430, y=565) -->
+  <!-- Chevron 3: Stage 3 -> Stage 4 (Centered at X=1430, Y=540) -->
   <g id="chevron-3">
-    <path d="M 1410 525 L 1450 565 L 1410 605" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 1430 525 L 1470 565 L 1430 605" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+    <path d="M 1423 525 L 1438 540 L 1423 555" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- ==================== BLOCK 1: MICRO-SIMULATION ==================== -->
-  <g id="block-micro-simulation">
-    <rect x="70" y="225" width="370" height="685" rx="28" fill="url(#grad-p1)" stroke="#2563EB" stroke-width="5" />
+  <!-- ==================== CARD 1: MICRO-SIMULATION ==================== -->
+  <g id="card-micro-sim">
+    <!-- Clean Glassmorphic Card (Subtle 1px border, generous height) -->
+    <rect x="50" y="180" width="410" height="750" rx="16" fill="#0F172A" stroke="#25354C" stroke-width="1" />
 
-    <!-- Phase Badge (>= 32pt) -->
-    <rect x="105" y="260" width="300" height="56" rx="16" fill="#1E3A8A" stroke="#60A5FA" stroke-width="3" />
-    <text x="255" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#93C5FD">
+    <!-- Top Badge -->
+    <rect x="80" y="215" width="130" height="32" rx="6" fill="#17253D" stroke="#2563EB" stroke-width="1" />
+    <text x="145" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#60A5FA" letter-spacing="1">
       STAGE 01
     </text>
 
-    <!-- Block Title (>= 56pt) -->
-    <text x="255" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      Micro-
+    <!-- Single-Line Header (24px bold) -->
+    <text x="80" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      Micro-Simulation
     </text>
-    <text x="255" y="435" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#60A5FA">
-      Simulation
-    </text>
-
-    <!-- Accent Divider -->
-    <line x1="105" y1="465" x2="405" y2="465" stroke="#1D4ED8" stroke-width="4" />
-
-    <!-- Subtitle (>= 32pt) -->
-    <text x="255" y="515" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#93C5FD">
-      Realistic Physics
+    <text x="80" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Realistic Traffic Physics Baseline
     </text>
 
-    <!-- Core Takeaways (>= 32pt) -->
-    <text x="105" y="595" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • 4×4 SUMO Grid
-    </text>
-    <text x="105" y="665" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Sensor Noise Model
-    </text>
-    <text x="105" y="735" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Dynamic Demand
-    </text>
+    <!-- Subtle 1px Divider -->
+    <line x1="80" y1="350" x2="430" y2="350" stroke="#1E293B" stroke-width="1" />
 
-    <!-- Bottom Status Chip (>= 32pt) -->
-    <rect x="95" y="795" width="320" height="90" rx="20" fill="#0C1D38" stroke="#38BDF8" stroke-width="3" />
-    <text x="255" y="852" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#38BDF8">
-      Physical Baseline
+    <!-- Core Takeaways (Spacious, Clean) -->
+    <g transform="translate(80, 390)">
+      <circle cx="6" cy="6" r="4" fill="#38BDF8" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        4×4 Realistic SUMO Grid Topology
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#38BDF8" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Sensor Gaussian Noise Model
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#38BDF8" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Microscopic Dynamic Demand
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#38BDF8" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        TraCI Real-Time Socket Protocol
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="80" y="690" width="350" height="90" rx="12" fill="#132034" stroke="#1E3352" stroke-width="1" />
+    <text x="255" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#38BDF8">
+      Physical Ground Truth
+    </text>
+    <text x="255" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      High-Fidelity Edge Observations
     </text>
   </g>
 
-  <!-- ==================== BLOCK 2: DUAL-OBJECTIVE AI ==================== -->
-  <g id="block-dual-objective-ai">
-    <rect x="540" y="225" width="370" height="685" rx="28" fill="url(#grad-p2)" stroke="#4F46E5" stroke-width="5" />
+  <!-- ==================== CARD 2: DUAL-OBJECTIVE AI ==================== -->
+  <g id="card-dual-objective-ai">
+    <!-- Clean Glassmorphic Card -->
+    <rect x="520" y="180" width="410" height="750" rx="16" fill="#0F172A" stroke="#2D2852" stroke-width="1" />
 
-    <!-- Phase Badge (>= 32pt) -->
-    <rect x="575" y="260" width="300" height="56" rx="16" fill="#312E81" stroke="#818CF8" stroke-width="3" />
-    <text x="725" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#C7D2FE">
+    <!-- Top Badge -->
+    <rect x="550" y="215" width="130" height="32" rx="6" fill="#201C48" stroke="#6366F1" stroke-width="1" />
+    <text x="615" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#A5B4FC" letter-spacing="1">
       STAGE 02
     </text>
 
-    <!-- Block Title (>= 56pt) -->
-    <text x="725" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      Dual-
+    <!-- Single-Line Header (24px bold) -->
+    <text x="550" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      Dual-Objective AI
     </text>
-    <text x="725" y="435" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#818CF8">
-      Objective AI
-    </text>
-
-    <!-- Accent Divider -->
-    <line x1="575" y1="465" x2="875" y2="465" stroke="#4338CA" stroke-width="4" />
-
-    <!-- Subtitle (>= 32pt) -->
-    <text x="725" y="515" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#C7D2FE">
-      PPO Multi-Agent
+    <text x="550" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Temporally Gated MARL Architecture
     </text>
 
-    <!-- Core Takeaways (>= 32pt) -->
-    <text x="575" y="595" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Flow Optimization
-    </text>
-    <text x="575" y="665" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Security Corridor
-    </text>
-    <text x="575" y="735" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Zero Collapse Risk
-    </text>
+    <!-- Subtle 1px Divider -->
+    <line x1="550" y1="350" x2="900" y2="350" stroke="#1E293B" stroke-width="1" />
 
-    <!-- Bottom Status Chip (>= 32pt) -->
-    <rect x="565" y="795" width="320" height="90" rx="20" fill="#1C1848" stroke="#6366F1" stroke-width="3" />
-    <text x="725" y="852" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#A5B4FC">
-      Learned Policy
+    <!-- Core Takeaways (Spacious, Clean) -->
+    <g transform="translate(550, 390)">
+      <circle cx="6" cy="6" r="4" fill="#818CF8" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Proximal Policy Optimization (PPO)
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#818CF8" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Temporally Gated Composite Reward
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#818CF8" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Max-Pressure Flow Optimization
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#818CF8" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Priority Corridor Green Wave
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="550" y="690" width="350" height="90" rx="12" fill="#1C1844" stroke="#37307A" stroke-width="1" />
+    <text x="725" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#A5B4FC">
+      Trained PPO Policy
+    </text>
+    <text x="725" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      100% Perimeter Containment Rate
     </text>
   </g>
 
-  <!-- ==================== BLOCK 3: ZSPF FAILOVER ==================== -->
-  <g id="block-zspf-failover">
-    <rect x="1010" y="225" width="370" height="685" rx="28" fill="url(#grad-p3)" stroke="#10B981" stroke-width="5" />
+  <!-- ==================== CARD 3: ZSPF FAILOVER ==================== -->
+  <g id="card-zspf-failover">
+    <!-- Clean Glassmorphic Card -->
+    <rect x="990" y="180" width="410" height="750" rx="16" fill="#0F172A" stroke="#1F3A34" stroke-width="1" />
 
-    <!-- Phase Badge (>= 32pt) -->
-    <rect x="1045" y="260" width="300" height="56" rx="16" fill="#064E3B" stroke="#34D399" stroke-width="3" />
-    <text x="1195" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#A7F3D0">
+    <!-- Top Badge -->
+    <rect x="1020" y="215" width="130" height="32" rx="6" fill="#0B2620" stroke="#059669" stroke-width="1" />
+    <text x="1085" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#34D399" letter-spacing="1">
       STAGE 03
     </text>
 
-    <!-- Block Title (>= 56pt) -->
-    <text x="1195" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      ZSPF
+    <!-- Single-Line Header (24px bold) -->
+    <text x="1020" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      ZSPF Failover
     </text>
-    <text x="1195" y="435" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#34D399">
-      Failover
-    </text>
-
-    <!-- Accent Divider -->
-    <line x1="1045" y1="465" x2="1345" y2="465" stroke="#059669" stroke-width="4" />
-
-    <!-- Subtitle (>= 32pt) -->
-    <text x="1195" y="515" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#A7F3D0">
-      Active Resilience
+    <text x="1020" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Active 3-Tier Network Resilience
     </text>
 
-    <!-- Core Takeaways (>= 32pt) -->
-    <text x="1045" y="595" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • 3-Tier Transitions
-    </text>
-    <text x="1045" y="665" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • 3.0s Heartbeat Check
-    </text>
-    <text x="1045" y="735" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Autonomous Island
-    </text>
+    <!-- Subtle 1px Divider -->
+    <line x1="1020" y1="350" x2="1370" y2="350" stroke="#1E293B" stroke-width="1" />
 
-    <!-- Bottom Status Chip (>= 32pt) -->
-    <rect x="1035" y="795" width="320" height="90" rx="20" fill="#072A24" stroke="#10B981" stroke-width="3" />
-    <text x="1195" y="852" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#34D399">
+    <!-- Core Takeaways (Spacious, Clean) -->
+    <g transform="translate(1020, 390)">
+      <circle cx="6" cy="6" r="4" fill="#34D399" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Mode 0 Full Mesh Nominal State
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#34D399" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        3.0s Heartbeat Loss Detection
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#34D399" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Mode 1 Autonomous P2P MARL
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#34D399" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Mode 2 Island Max-Pressure Floor
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="1020" y="690" width="350" height="90" rx="12" fill="#0E2721" stroke="#144C3F" stroke-width="1" />
+    <text x="1195" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#34D399">
       Zero Failure Point
+    </text>
+    <text x="1195" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      ≤25% Performance Floor
     </text>
   </g>
 
-  <!-- ==================== BLOCK 4: HITL VALIDATION ==================== -->
-  <g id="block-hitl-validation">
-    <rect x="1480" y="225" width="370" height="685" rx="28" fill="url(#grad-p4)" stroke="#8B5CF6" stroke-width="5" />
+  <!-- ==================== CARD 4: HITL VALIDATION ==================== -->
+  <g id="card-hitl-validation">
+    <!-- Clean Glassmorphic Card -->
+    <rect x="1460" y="180" width="410" height="750" rx="16" fill="#0F172A" stroke="#362952" stroke-width="1" />
 
-    <!-- Phase Badge (>= 32pt) -->
-    <rect x="1515" y="260" width="300" height="56" rx="16" fill="#4C1D95" stroke="#C084FC" stroke-width="3" />
-    <text x="1665" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#DDD6FE">
+    <!-- Top Badge -->
+    <rect x="1490" y="215" width="130" height="32" rx="6" fill="#251642" stroke="#7C3AED" stroke-width="1" />
+    <text x="1555" y="237" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#C084FC" letter-spacing="1">
       STAGE 04
     </text>
 
-    <!-- Block Title (>= 56pt) -->
-    <text x="1665" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#FFFFFF">
-      HITL
+    <!-- Single-Line Header (24px bold) -->
+    <text x="1490" y="290" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+      HITL Validation
     </text>
-    <text x="1665" y="435" text-anchor="middle" font-family="'Inter', sans-serif" font-size="56" font-weight="800" fill="#C084FC">
-      Validation
-    </text>
-
-    <!-- Accent Divider -->
-    <line x1="1515" y1="465" x2="1815" y2="465" stroke="#7C3AED" stroke-width="4" />
-
-    <!-- Subtitle (>= 32pt) -->
-    <text x="1665" y="515" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#DDD6FE">
-      Ethical Gate
+    <text x="1490" y="322" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+      Ethical Dispatcher Oversight
     </text>
 
-    <!-- Core Takeaways (>= 32pt) -->
-    <text x="1515" y="595" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • 2-Node Consensus
-    </text>
-    <text x="1515" y="665" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • Human Authorization
-    </text>
-    <text x="1515" y="735" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#E2E8F0">
-      • 100% Trap Success
-    </text>
+    <!-- Subtle 1px Divider -->
+    <line x1="1490" y1="350" x2="1840" y2="350" stroke="#1E293B" stroke-width="1" />
 
-    <!-- Bottom Status Chip (>= 32pt) -->
-    <rect x="1505" y="795" width="320" height="90" rx="20" fill="#261545" stroke="#8B5CF6" stroke-width="3" />
-    <text x="1665" y="852" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="800" fill="#C084FC">
-      Proven Oversight
+    <!-- Core Takeaways (Spacious, Clean) -->
+    <g transform="translate(1490, 390)">
+      <circle cx="6" cy="6" r="4" fill="#C084FC" />
+      <text x="24" y="12" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        2-Node Temporal ANPR Consensus
+      </text>
+
+      <circle cx="6" cy="66" r="4" fill="#C084FC" />
+      <text x="24" y="72" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        False-Positive Lockdown Shield
+      </text>
+
+      <circle cx="6" cy="126" r="4" fill="#C084FC" />
+      <text x="24" y="132" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Ethical State Machine Gate Lock
+      </text>
+
+      <circle cx="6" cy="186" r="4" fill="#C084FC" />
+      <text x="24" y="192" font-family="'Inter', sans-serif" font-size="19" font-weight="500" fill="#E2E8F0">
+        Mandatory Dispatcher Approval
+      </text>
+    </g>
+
+    <!-- Bottom Status / KPI Chip -->
+    <rect x="1490" y="690" width="350" height="90" rx="12" fill="#24163E" stroke="#44256E" stroke-width="1" />
+    <text x="1665" y="730" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#C084FC">
+      Empirical Verification
+    </text>
+    <text x="1665" y="758" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      Zero False Autonomous Lockdowns
     </text>
   </g>
 
-  <!-- ==================== BOTTOM METHODOLOGY BAR ==================== -->
-  <g id="bottom-summary-bar">
-    <rect x="70" y="945" width="1780" height="90" rx="24" fill="#0F172A" stroke="#334155" stroke-width="3" />
-    <text x="960" y="1003" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#F1F5F9">
-      Micro-Simulation  ➔  Dual-Objective AI  ➔  ZSPF Failover  ➔  HITL Validation
+  <!-- ==================== BOTTOM SUMMARY BAR ==================== -->
+  <g id="bottom-bar">
+    <rect x="50" y="960" width="1820" height="75" rx="12" fill="#0E1626" stroke="#1E293B" stroke-width="1" />
+    <text x="960" y="1006" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" font-weight="600" fill="#F8FAFC">
+      Microscopic Physics  ➔  Multi-Agent RL AI  ➔  ZSPF Fail-Safe Resilience  ➔  Human-in-the-Loop Gateway
     </text>
   </g>
 </svg>

@@ -14,8 +14,8 @@
 | **Human-in-the-Loop Ethical Authorization Gateway** | Completed & Active | [`omnimesh/tier2_orchestrator/human_in_loop.py`](omnimesh/tier2_orchestrator/human_in_loop.py), [`app.py`](app.py), [`index.html`](index.html) | State machine with internal lock (`PENDING_AUTHORIZATION`). When 2-node consensus is verified, blocks signal override until explicit human dispatcher authorization (`POST /api/trigger/authorize_containment`). Features flashing UI modal/button in dashboard and automatic benchmark bypass. |
 | **Decoupled Multiprocessing Vision Pipeline** | Completed & Active | [`omnimesh/vision/pipeline_manager.py`](omnimesh/vision/pipeline_manager.py), [`omnimesh/vision/detector.py`](omnimesh/vision/detector.py) | Eliminates Python GIL contention using OS-level `multiprocessing.Process` (`daemon=True`) and `multiprocessing.Queue`. MockPerception runs in Process A at 15 Hz with oldest-frame eviction on full queue to prevent IPC memory bloat. |
 | **Non-Blocking IPC Edge Agent Reads** | Completed & Active | [`omnimesh/tier1_edge/agent.py`](omnimesh/tier1_edge/agent.py) | RL Control loop fetches latest perception state non-blockingly via `ipc_queue.get_nowait()`, handling `queue.Empty` cleanly and smoothly falling back to last known state if perception lags. |
-| **Research Methodology Slide (PPT/Vector)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | Widescreen 16:9 methodology slide (1920×1080) in pure vector SVG detailing 5 pipeline stages, mathematical formulations, and scientific pillars; zero AI distortions, with 1-click 4K UHD PNG export. |
-| **System Architecture Slide (PPT/Vector)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG; razor-sharp engineering aesthetics, zero "AI slop" distortions, with 1-click 4K UHD PNG export for PowerPoint. |
+| **Research Methodology Slide (Ultra-Minimalist PPT)** | Completed & Active | [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg), [`docs/methodology_slide.html`](docs/methodology_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG. Ultra-minimalist 4-block left-to-right chevron pipeline ("Micro-Simulation" ➔ "Dual-Objective AI" ➔ "ZSPF Failover" ➔ "HITL Validation"), zero mathematical formulas, massive projector-ready fonts (≥32pt body, ≥56pt headers), and 1-click 4K PNG export. |
+| **System Architecture Slide (Ultra-Minimalist PPT)** | Completed & Active | [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg), [`docs/architecture_slide.html`](docs/architecture_slide.html) | Widescreen 16:9 presentation slide (1920×1080) in pure vector SVG. Abstracted into exactly 3 massive visual blocks ("Edge Mesh (RPi 4B Agents)", "MQTT Comm Bus", "Global Orchestrator"), thick bold strokes, deep corporate colors (navy blue, emerald green, royal indigo), projector-scale typography (≥32pt body, ≥56pt headers), and 1-click 4K PNG export. |
 | **P2P Comms & Async MQTT Client** | Completed | [`omnimesh/comms/mqtt_client.py`](omnimesh/comms/mqtt_client.py) | Asynchronous `paho-mqtt` client with dual subscriptions to `omnimesh/tier2/heartbeat` and `omnimesh/tier1/+/state`, binary payload dispatch, and graceful pure-software simulation bus fallback. |
 | **MessagePack Binary Serializer** | Completed | [`omnimesh/comms/serializer.py`](omnimesh/comms/serializer.py) | Compact binary `msgpack` serialization (~80 bytes/payload); strictly forbids JSON for inter-agent state sharing to adhere to edge bandwidth limits. |
 | **ZSPF State Machine Liveness Monitor** | Completed | [`omnimesh/tier1_edge/zspf_state_machine.py`](omnimesh/tier1_edge/zspf_state_machine.py) | Liveness monitor evaluating heartbeat timestamps: transitions to Mode 1 (Autonomous P2P) if `time.time() - last_heartbeat > 3.0s`; instantly transitions to Mode 2 (Max-Pressure Island) if MQTT client disconnects entirely. |
@@ -39,49 +39,55 @@
 
 ---
 
-## 2. System Architecture Presentation Deliverables
+## 2. Ultra-Minimalist System Architecture Slide Deliverables
 
-To provide a presentation-grade, publication-ready architectural diagram for PowerPoint without the blurry text, warped geometry, or nonsensical labels typical of generative "AI slop", we authored a pure-vector SVG presentation diagram:
+To provide a presentation-grade, projector-ready architectural diagram for physical slide decks without visual clutter, dense file trees, or generative "AI slop", we refactored the vector SVG presentation diagram:
 
 ### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
-- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Plugs directly into Microsoft PowerPoint, Apple Keynote, and Google Slides with infinite vector scalability.
-- **Dark Glassmorphic Engineering Aesthetics**: Styled with cohesive technical gradients, high-contrast typography (`Inter` and `JetBrains Mono`), and structured layout.
-- **Comprehensive Architectural Coverage**:
-  1. **Tier 1 (Left Column)**: Edge Intersection Agent (Raspberry Pi 4B) with YOLOv8n INT8 (16.4 FPS), Thermal Throttle Model (>80°C dropout), 112-D PPO Actor-Critic MLP `[64, 64]`, and 3-mode ZSPF state transitions.
-  2. **Coordination Bus (Center Column)**: MQTT pub/sub channels (`omnimesh/tier1/+/state`, `omnimesh/tier2/heartbeat`, `omnimesh/tier2/containment`), binary MessagePack frame formatting (~80 bytes), and fault-injection trigger mapping.
-  3. **Tier 2 (Right Column)**: Regional Zone Orchestrator with Multi-Node Consensus ($\ge 2$ nodes in 30s), Active Watchlist (`SUSPECT-892`), Symbolic Containment Engine, and Human-in-the-Loop Ethical Authorization Gateway.
-  4. **Simulation & Operations (Bottom Section)**: Eclipse SUMO Microscopic Physics Engine (4×4 grid, TraCI socket interface, composite reward function) alongside Flask-SocketIO Live Web Radar Dashboard.
+- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Infinite vector scalability for Microsoft PowerPoint, Apple Keynote, and Google Slides.
+- **Ultra-Minimalist 3-Block Architecture**:
+  1. **Block 1: Edge Mesh (RPi 4B Agents)**: Tier-1 distributed intersection control, real-time vision/ANPR, autonomous P2P collaboration, and sub-100ms local execution. Styled in deep navy blue (`#0E1E38`, `#3B82F6`).
+  2. **Block 2: MQTT Comm Bus**: Communication middleware, lightweight pub/sub topology, compact sub-100 byte binary MessagePack payloads, and active ZSPF heartbeats with zero data loss. Styled in deep emerald green (`#082822`, `#10B981`).
+  3. **Block 3: Global Orchestrator**: Tier-2 regional supervision, multi-node consensus filtering, area security overrides, and dispatcher Human-in-the-Loop ethical authorization gate. Styled in royal indigo/violet (`#1E1438`, `#8B5CF6`).
+- **Massive Projector-Scale Typography**:
+  - Headers: **56pt to 60pt** (`OMNI-MESH SYSTEM ARCHITECTURE`, block titles).
+  - Body text, bullet points, chips, and labels: **≥ 32pt** (32pt to 36pt). Strictly verified zero text below 32pt.
+- **Directional Data Flow Pipes**: 6px-thick bidirectional pipes with glowing arrowheads for node states, heartbeats, ANPR alerts, and containment overrides.
+- **Aesthetic Distinction**: Thick 5px structural strokes, generous negative space, and dark corporate palette.
 
 ### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
 - Features:
-  - **1-Click 4K UHD PNG Export**: High-resolution Canvas rasterizer exporting a 3840×2160 crisp PNG directly to downloads.
+  - **1-Click 4K UHD PNG Export**: High-resolution Canvas rasterizer exporting a 3840×2160 crisp PNG (`OmniMesh_System_Architecture.svg` / PNG) directly to downloads.
   - **Copy SVG XML**: Instantly copies clean vector XML to clipboard for direct pasting into presentation tools.
   - **Direct SVG Download**: Downloads `.svg` file for scalable slide imports.
 
 ---
 
-## 3. Research Methodology Presentation Deliverables
+## 3. Ultra-Minimalist Research Methodology Slide Deliverables
 
-To represent the complete 5-stage research and engineering workflow with mathematical precision and zero generative "AI slop", we authored a dedicated 16:9 vector SVG diagram and 4K export viewer:
+To represent the complete research and engineering methodology with maximum clarity and high-level readability on a physical projector, we refactored the research pipeline SVG:
 
 ### 3.1 Vector SVG Diagram ([`docs/methodology_diagram.svg`](docs/methodology_diagram.svg))
-- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Plugs directly into PowerPoint, Keynote, and Google Slides.
-- **5 Sequential Pipeline Stages**:
-  1. **Phase 1: Microscopic Co-Simulation & Hardware Thermal Model**: Eclipse SUMO 1.27+ physics, 4×4 network, `traci_env.py` Gymnasium environment (112-D continuous observation space), and `mock_perception.py` Gaussian noise ($\mu=0.98, \sigma=0.03$) with RPi 4B 80°C+ thermal throttling dropout (40%).
-  2. **Phase 2: Vision & Multi-Node Temporal Consensus**: YOLOv8n INT8 ANPR pipeline, candidate plate buffer, and temporal consensus filter enforcing $|\{n_k : \Delta t \le 30\text{s}}\}| \ge 2$ to eliminate false-positive lockdowns.
-  3. **Phase 3: Temporally Gated Dual-Objective MARL**: Stable-Baselines3 PPO Actor-Critic MLP `[64, 64]`, temporally gated composite reward $r_i(t) = (1-m(t))r^{\text{traffic}}_i + m(t)r^{\text{security}}_i$, and `TraCIFaultTolerantWrapper` crash protection.
-  4. **Phase 4: Decentralized Comms & ZSPF Active Failover**: MessagePack binary packing (~80B), `paho-mqtt` async client, and 3-mode active fail-safe with $\le 25\%$ performance loss floor:
-     $$\text{Mode 0 (Full Mesh)} \xrightarrow{\Delta t_{\text{hb}} > 3.0\text{s}} \text{Mode 1 (P2P MARL)} \xrightarrow{\text{Broker Crash}} \text{Mode 2 (Max-Pressure Island)}$$
-  5. **Phase 5: Ethics & Empirical Statistical Validation**: Human-in-the-loop ethical authorization gateway (`human_in_loop.py`) preventing automated false arrests, 10-episode deterministic evaluation (`evaluate_model.py`), and real TraCI edge halting queue extraction confirming **100% vs 0%** containment success.
-- **Scientific Contribution Pillars (Bottom Bar)**: Microscopic Co-Simulation Fidelity, Noise-Robust ANPR Consensus, Temporally Gated Dual-Objective MARL, and Zero Single Point of Failure (ZSPF).
+- **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Ready for slide decks and widescreen displays.
+- **4 Core Bold Left-to-Right Chevrons/Blocks**:
+  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, and dynamic demand. (Deep navy/cobalt).
+  2. **Stage 02: Dual-Objective AI**: Multi-agent PPO policies, traffic flow optimization, security wave priority, and zero reward collapse. (Deep indigo).
+  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and autonomous island fallback. (Deep emerald green).
+  4. **Stage 04: HITL Validation**: Ethical gate, 2-node ANPR consensus, mandatory human authorization, and 100% target trap success rate. (Deep royal violet).
+- **Zero Mathematical Formulas**: All mathematical equations abstracted into punchy, high-level engineering takeaways.
+- **Massive Projector-Scale Typography**:
+  - Headers: **56pt to 60pt**.
+  - Body text, takeaways, and chips: **≥ 32pt** (32pt to 34pt).
+- **Directional Chevrons**: Bold 8px-thick glowing forward chevrons connecting each sequential stage left-to-right.
+- **Bottom Summary Flow Bar**: High-level continuous takeaway: `Micro-Simulation ➔ Dual-Objective AI ➔ ZSPF Failover ➔ HITL Validation`.
 
 ### 3.2 Interactive Methodology Slide Viewer ([`docs/methodology_slide.html`](docs/methodology_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/methodology`**.
 - Features:
-  - **1-Click 4K UHD PNG Export**: Renders a crisp 3840×2160 PNG (`OmniMesh_Methodology_4K_PPT.png`) for PPT slides.
+  - **1-Click 4K UHD PNG Export**: Renders a crisp 3840×2160 PNG for PPT slides.
   - **Copy SVG XML**: Copies clean vector XML to clipboard for direct pasting into presentation tools.
-  - **Direct SVG Download**: Downloads `OmniMesh_Methodology_Diagram.svg`.
+  - **Direct SVG Download**: Downloads `methodology_diagram.svg`.
   - **Seamless Navigation**: Direct links between Dashboard (`/`), Architecture Slide (`/architecture`), and Methodology Slide (`/methodology`).
 
 ---

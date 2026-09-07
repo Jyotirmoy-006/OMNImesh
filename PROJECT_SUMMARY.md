@@ -282,10 +282,10 @@ A dedicated, ultra-minimalist 12-slide presentation deck designed specifically f
 - **Direct SVG Files**: Access directly in `docs/slides/slide_01.svg` through `docs/slides/slide_12.svg` or via browser at `http://localhost:5000/slides/slide_01.svg`.
 
 ### 2. View & Export Research Methodology & System Architecture Slides:
-- **Methodology Slide** (Simulation-focused plain-English 4-stage pipeline: Micro-Simulation, Dual-Objective AI, ZSPF Failover, HITL Validation):
+- **Methodology Slide** (High-visibility single-line presentation format, 4-stage pipeline: Micro-Simulation, Dual-Objective AI, ZSPF Failover, HITL Validation):
   - Vector SVG File: [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg)
   - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/methodology`** and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
-- **System Architecture Slide** (Simulation-focused plain-English 3-tier architecture: Edge-Ready Software, MQTT Comm Bus, Global Orchestrator):
+- **System Architecture Slide** (High-visibility single-line presentation format, 3-tier architecture: Edge-Ready Software, MQTT Comm Bus, Global Orchestrator):
   - Vector SVG File: [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg)
   - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
 

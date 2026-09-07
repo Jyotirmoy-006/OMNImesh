@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omni-Mesh | Faculty Evaluation Presentation Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0f172a;
+      color: #1a1a1a;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+    }
+
+    /* Top Navigation Toolbar */
+    .toolbar {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toolbar-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .slide-indicator {
+      background: #0f172a;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      border: 1px solid #334155;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      background: #334155;
+      color: #ffffff;
+      border: 1px solid #475569;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #475569;
+      border-color: #64748b;
+    }
+
+    .btn-primary {
+      background: #0284c7;
+      border-color: #38bdf8;
+    }
+
+    .btn-primary:hover {
+      background: #0369a1;
+    }
+
+    select.slide-select {
+      background: #0f172a;
+      color: #ffffff;
+      border: 1px solid #334155;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Presentation Slide Stage */
+    .presentation-container {
+      width: 100%;
+      max-width: 1400px;
+      aspect-ratio: 16 / 9;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-view {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    /* Floating Navigation Controls */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.7);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(2, 132, 199, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .nav-prev {
+      left: 20px;
+    }
+
+    .nav-next {
+      right: 20px;
+    }
+
+    /* Bottom Navigation Links */
+    .footer-links {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .footer-links a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 1.25rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .keyboard-hint {
+      font-family: monospace;
+      background: #1e293b;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    /* Print View for PDF Handouts */
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .toolbar, .nav-arrow, .footer-links {
+        display: none !important;
+      }
+      .presentation-container {
+        max-width: 100%;
+        border: none;
+        box-shadow: none;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Control Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="toolbar-title">
+        <span>🎓</span> OMNI-MESH FACULTY EVALUATION DECK
+      </div>
+      <div class="slide-indicator" id="slide-label">Slide 1 of 12</div>
+      <select class="slide-select" id="slide-dropdown">
+        <option value="1">1. Title: Project Overview</option>
+        <option value="2">2. The Problem</option>
+        <option value="3">3. Current Solutions</option>
+        <option value="4">4. The Missing Link</option>
+        <option value="5">5. Our Solution: Omni-Mesh</option>
+        <option value="6">6. How It Works</option>
+        <option value="7">7. The Smart Intersections</option>
+        <option value="8">8. The Global Watchdog</option>
+        <option value="9">9. The Failsafe System</option>
+        <option value="10">10. Training the AI</option>
+        <option value="11">11. Next Steps &amp; Testing</option>
+        <option value="12">12. Conclusion</option>
+      </select>
+    </div>
+
+    <div class="toolbar-right">
+      <button class="btn" id="btn-prev">◀ Prev</button>
+      <button class="btn btn-primary" id="btn-next">Next ▶</button>
+      <button class="btn" id="btn-fullscreen">⛶ Fullscreen</button>
+      <button class="btn" id="btn-print">🖨️ Export PDF Handout</button>
+      <button class="btn" id="btn-download-svg">💾 Save SVG</button>
+    </div>
+  </div>
+
+  <!-- Main Presentation Slide Stage -->
+  <div class="presentation-container" id="slide-stage">
+    <div class="nav-arrow nav-prev" id="arrow-prev" title="Previous Slide (Left Arrow)">❮</div>
+    <object id="slide-object" class="slide-view" data="slides/slide_01.svg" type="image/svg+xml"></object>
+    <div class="nav-arrow nav-next" id="arrow-next" title="Next Slide (Right Arrow or Space)">❯</div>
+  </div>
+
+  <!-- Bottom Navigation & Shortcuts -->
+  <div class="footer-links">
+    <div>
+      <a href="/">🖥️ Live Simulator Dashboard</a>
+      <a href="/architecture">📐 Technical Architecture Slide</a>
+      <a href="/methodology">📊 Scientific Methodology Slide</a>
+    </div>
+    <div>
+      Keyboard Shortcuts: <span class="keyboard-hint">← / →</span> Navigate Slides &nbsp;|&nbsp; <span class="keyboard-hint">Space</span> Advance &nbsp;|&nbsp; <span class="keyboard-hint">F</span> Fullscreen
+    </div>
+  </div>
+
+  <script>
+    const totalSlides = 12;
+    let currentSlide = 1;
+
+    const slideObject = document.getElementById('slide-object');
+    const slideLabel = document.getElementById('slide-label');
+    const slideDropdown = document.getElementById('slide-dropdown');
+
+    function updateSlide(num) {
+      if (num < 1) num = 1;
+      if (num > totalSlides) num = totalSlides;
+      currentSlide = num;
+
+      const padded = String(num).padStart(2, '0');
+      const filename = `slides/slide_${padded}.svg`;
+      slideObject.data = filename;
+
+      slideLabel.innerText = `Slide ${num} of ${totalSlides}`;
+      slideDropdown.value = num;
+    }
+
+    // Navigation triggers
+    document.getElementById('btn-prev').addEventListener('click', () => updateSlide(currentSlide - 1));
+    document.getElementById('arrow-prev').addEventListener('click', () => updateSlide(currentSlide - 1));
+
+    document.getElementById('btn-next').addEventListener('click', () => updateSlide(currentSlide + 1));
+    document.getElementById('arrow-next').addEventListener('click', () => updateSlide(currentSlide + 1));
+
+    slideDropdown.addEventListener('change', (e) => {
+      updateSlide(parseInt(e.target.value));
+    });
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        updateSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
+        e.preventDefault();
+        updateSlide(currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlide(totalSlides);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+
+    // Fullscreen Mode
+    function toggleFullscreen() {
+      const stage = document.getElementById('slide-stage');
+      if (!document.fullscreenElement) {
+        stage.requestFullscreen().catch(err => {
+          alert(`Error attempting fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+
+    // Print to PDF
+    document.getElementById('btn-print').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Save current SVG
+    document.getElementById('btn-download-svg').addEventListener('click', () => {
+      const padded = String(currentSlide).padStart(2, '0');
+      const a = document.createElement('a');
+      a.href = `slides/slide_${padded}.svg`;
+      a.download = `OmniMesh_Faculty_Slide_${padded}.svg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>

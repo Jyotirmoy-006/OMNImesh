@@ -236,24 +236,67 @@ Ran 24 tests in 8.599s — OK
 
 ---
 
-## 9. Instructions to View Slides & Run Platform
+## 9. 12-Slide Faculty Evaluation Presentation Deck (Academic Whitepaper Theme)
 
-### 1. View & Export Research Methodology & System Architecture Slides for PPT:
+A dedicated, ultra-minimalist 12-slide presentation deck designed specifically for a **university faculty evaluation panel**. The presentation uses plain, clear English without complex technical jargon, acronyms (no "PPO", "YOLO", or "TraCI"), or dense mathematical formulas.
+
+### 9.1 Visual & Aesthetic Standards
+- **Theme**: Ultra-minimalist "Academic Whitepaper" light theme.
+- **Background**: Pure, flat white (`#FFFFFF`) with zero gradients and zero dark backgrounds.
+- **Text**: Dark Charcoal (`#1A1A1A`) for high optical contrast on bright physical classroom projectors.
+- **Accents**: Deep Corporate Blue (`#004080`) for primary headers and borders; Emerald Green (`#006633`) for highlights and security pillars.
+- **Aesthetics**: Clean, corporate, flat 2D layout. No glowing neon, no drop shadows, no 3D effects, and no sci-fi visuals.
+- **Massive Typography**: Slide titles $\ge 56\text{pt}$ (60–64px bold), bullet points $\ge 32\text{pt}$ (34–36px bold), and generous breathing room.
+- **7x7 Rule Strictness**: Every slide strictly satisfies $\le 7$ bullets and $\le 7$ words per bullet.
+
+### 9.2 Slide Overview (12 Slides)
+1. **Slide 1**: *OMNI-MESH: Smart Traffic & Security* (Title, Subtitle, University of Engineering & Management, Newtown, Presented by: Jyotirmoy Santra & Team)
+2. **Slide 2**: *The Problem* (Central servers, cloud failures, expensive installation, emergency delays, slow security, unlinked traffic & security)
+3. **Slide 3**: *Current Solutions* (Legacy costs, single-focus AI, manual cameras, lack of automatic emergency paths, cloud dependency)
+4. **Slide 4**: *The Missing Link* (No local intersection processing, urgent emergency clearing, physical roadblock needs, unified dual system, affordable hardware)
+5. **Slide 5**: *Our Solution: Omni-Mesh* (Instant green lights, automatic vehicle containment, on-device AI, decentralized architecture, built-in failsafe)
+6. **Slide 6**: *How It Works* (Two main tiers, Tier 2 city brain, Tier 1 smart intersections, direct inter-node communication, lightweight messages, offline safety)
+7. **Slide 7**: *The Smart Intersections* (Real-time camera detection, fast AI light timing, affordable hardware, zero freezing, neighbor updates, sub-second reaction)
+8. **Slide 8**: *The Global Watchdog* (City-wide alerts, dual-camera verification, false alarm prevention, trap trajectory planning, human safety check, dispatcher authorization)
+9. **Slide 9**: *The Failsafe System* (Mode 0 connected mesh, Mode 1 peer-to-peer neighbor fallback, Mode 2 standalone island mode, crash resilience, uninterrupted traffic)
+10. **Slide 10**: *Training the AI* (Dual goals: traffic flow vs. suspect containment, dynamic priority switching, confusion prevention, safety & efficiency)
+11. **Slide 11**: *Next Steps & Testing* (100% containment target, superior traffic throughput, realistic city simulator, fault injection testing, physical hardware deployment)
+12. **Slide 12**: *Conclusion* (Unified traffic & security, affordable & reliable, gratitude & Q&A invitation)
+
+### 9.3 Slide Deliverables & Exporters
+- **Slide Generator Script**: [`scripts/generate_slide_deck.py`](scripts/generate_slide_deck.py)
+- **12 Standalone Vector SVGs**: [`docs/slides/slide_01.svg`](docs/slides/slide_01.svg) through [`docs/slides/slide_12.svg`](docs/slides/slide_12.svg)
+- **Interactive Slide Viewer & Handout Generator**: [`docs/presentation_deck.html`](docs/presentation_deck.html)
+
+---
+
+## 10. Instructions to View Slides & Run Platform
+
+### 1. View & Present the 12-Slide Faculty Presentation Deck:
+- **Interactive Browser Presentation**: Open **`http://localhost:5000/presentation`** (or **`http://localhost:5000/slides`**).
+  - Navigate with **Arrow Left (`←`)**, **Arrow Right (`→`)**, or **Spacebar**.
+  - Dropdown selector to jump directly to any slide.
+  - **Fullscreen Button (`⛶`)** for projection display.
+  - **Download SVG Button (`📥`)** to download current vector slide for PowerPoint.
+  - **Print / Save as PDF Handout Button (`🖨️`)** to generate professional physical meeting handouts.
+- **Direct SVG Files**: Access directly in `docs/slides/slide_01.svg` through `docs/slides/slide_12.svg` or via browser at `http://localhost:5000/slides/slide_01.svg`.
+
+### 2. View & Export Research Methodology & System Architecture Slides:
 - **Methodology Slide**:
   - Vector SVG File: [`docs/methodology_diagram.svg`](docs/methodology_diagram.svg)
-  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/methodology`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
+  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/methodology`** and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
 - **System Architecture Slide**:
   - Vector SVG File: [`docs/architecture_diagram.svg`](docs/architecture_diagram.svg)
-  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** in your browser and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
+  - Browser Viewer & 4K PNG Exporter: Open **`http://localhost:5000/architecture`** and click `🖼️ Export High-Res PNG for PPT (4K UHD)`.
 
-### 2. Launch the Live Neural Web Dashboard:
+### 3. Launch the Live Neural Web Dashboard:
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python app.py
 ```
 Visit **`http://localhost:5000`** in your browser. Use the `💥 Sever Broker (Kill to Mode 2)` button to visually inspect real-time ZSPF degradation.
 
-### 3. Test Severing the Broker via REST API:
+### 4. Test Severing the Broker via REST API:
 ```powershell
 curl -X POST http://localhost:5000/api/trigger/kill_broker
 ```
@@ -262,7 +305,7 @@ Returns:
 {"message":"MQTT broker connection severed. ZSPF transitioned to Mode 2.","mode":2,"mode_name":"MODE_2_ISLAND","status":"success"}
 ```
 
-### 4. Run Benchmark Model Evaluation (10 Episodes):
+### 5. Run Benchmark Model Evaluation (10 Episodes):
 ```powershell
 .\.venv\Scripts\Activate.ps1
 python scripts/evaluate_model.py --episodes 10 --steps 35

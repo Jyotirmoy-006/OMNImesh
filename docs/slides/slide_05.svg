@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Pure White Background -->
+  <rect width="1920" height="1080" fill="#FFFFFF" />
+
+  <!-- Outer Academic Frame -->
+  <rect x="30" y="30" width="1860" height="1020" fill="none" stroke="#CBD5E1" stroke-width="2" rx="10" />
+
+  <!-- Top Category Badge & Slide Index -->
+  <g id="slide-top-bar">
+    <rect x="80" y="65" width="280" height="38" rx="6" fill="#006633" />
+    <text x="220" y="89" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">
+      PROJECT OVERVIEW
+    </text>
+
+    <rect x="1660" y="65" width="180" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="1750" y="89" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#006633">
+      SLIDE 05 / 12
+    </text>
+  </g>
+
+  <!-- Header Section (Min 56pt = 60px) -->
+  <g id="slide-header">
+    <text x="80" y="180" font-family="'Inter', sans-serif" font-size="60" font-weight="800" fill="#006633" letter-spacing="-0.5">
+      Our Solution: Omni-Mesh
+    </text>
+    <text x="80" y="230" font-family="'Inter', sans-serif" font-size="28" font-weight="600" fill="#4A5568">
+      A Decentralized, Dual-Objective Traffic Management Platform
+    </text>
+    <line x1="80" y1="265" x2="1840" y2="265" stroke="#CBD5E1" stroke-width="2" />
+  </g>
+
+  <!-- Content Container Card -->
+  <g id="slide-content" transform="translate(80, 310)">
+    <rect x="0" y="0" width="1760" height="580" rx="16" fill="#F8FAFC" stroke="#006633" stroke-width="2" />
+
+    <!-- Bullet 1 -->
+    <g transform="translate(70, 65)">
+      <circle cx="12" cy="0" r="9" fill="#006633" />
+      <text x="40" y="11" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#1A1A1A">
+        Creates instant green lights for emergency vehicles.
+      </text>
+    </g>
+
+    <!-- Bullet 2 -->
+    <g transform="translate(70, 165)">
+      <circle cx="12" cy="0" r="9" fill="#006633" />
+      <text x="40" y="11" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#1A1A1A">
+        Automatically traps flagged security threat vehicles.
+      </text>
+    </g>
+
+    <!-- Bullet 3 -->
+    <g transform="translate(70, 265)">
+      <circle cx="12" cy="0" r="9" fill="#006633" />
+      <text x="40" y="11" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#1A1A1A">
+        Smart AI runs directly at the intersection.
+      </text>
+    </g>
+
+    <!-- Bullet 4 -->
+    <g transform="translate(70, 365)">
+      <circle cx="12" cy="0" r="9" fill="#006633" />
+      <text x="40" y="11" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#1A1A1A">
+        Never relies on a single central server.
+      </text>
+    </g>
+
+    <!-- Bullet 5 -->
+    <g transform="translate(70, 465)">
+      <circle cx="12" cy="0" r="9" fill="#006633" />
+      <text x="40" y="11" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#1A1A1A">
+        Built-in failsafe prevents total network crashes.
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Academic Footer Bar -->
+  <g id="slide-footer">
+    <line x1="80" y1="995" x2="1840" y2="995" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="80" y="1025" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#006633">
+      OMNI-MESH: Smart Traffic &amp; Security
+    </text>
+    <text x="960" y="1025" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#64748B">
+      B.Tech CSE AI Term I Evaluation • University of Engineering &amp; Management, Newtown
+    </text>
+    <text x="1840" y="1025" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#006633">
+      Academic Whitepaper Light Theme
+    </text>
+  </g>
+</svg>

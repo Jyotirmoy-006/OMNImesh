@@ -550,6 +550,15 @@ def architecture():
 def methodology():
     return send_from_directory("docs", "methodology_slide.html")
 
+@app.route("/presentation")
+@app.route("/slides")
+def presentation():
+    return send_from_directory("docs", "presentation_deck.html")
+
+@app.route("/slides/<path:filename>")
+def slides_static(filename):
+    return send_from_directory(os.path.join("docs", "slides"), filename)
+
 @app.route("/methodology_diagram.svg")
 def methodology_svg():
     return send_from_directory("docs", "methodology_diagram.svg")

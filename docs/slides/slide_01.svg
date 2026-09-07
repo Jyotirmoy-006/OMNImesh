@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Pure White Background -->
+  <rect width="1920" height="1080" fill="#FFFFFF" />
+
+  <!-- Outer Academic Frame -->
+  <rect x="30" y="30" width="1860" height="1020" fill="none" stroke="#CBD5E1" stroke-width="2" rx="10" />
+
+  <!-- Top Category Badge & Slide Index -->
+  <g id="slide-top-bar">
+    <rect x="80" y="65" width="280" height="38" rx="6" fill="#004080" />
+    <text x="220" y="89" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">
+      PROJECT INTRODUCTION
+    </text>
+
+    <rect x="1660" y="65" width="180" height="38" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="1750" y="89" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#004080">
+      SLIDE 01 / 12
+    </text>
+  </g>
+
+  <!-- Cover Title Section (Massive Fonts) -->
+  <g id="cover-header">
+    <text x="960" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="64" font-weight="800" fill="#004080" letter-spacing="-1">
+      OMNI-MESH: Smart Traffic &amp; Security
+    </text>
+    <text x="960" y="375" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#006633">
+      B.Tech CSE AI, Term I Project
+    </text>
+    <line x1="260" y1="430" x2="1660" y2="430" stroke="#CBD5E1" stroke-width="2.5" />
+  </g>
+
+  <!-- Presentation Metadata Card -->
+  <g id="cover-metadata" transform="translate(360, 480)">
+    <rect x="0" y="0" width="1200" height="340" rx="16" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
+    
+    <circle cx="100" cy="110" r="10" fill="#004080" />
+    <text x="130" y="120" font-family="'Inter', sans-serif" font-size="36" font-weight="700" fill="#1A1A1A">
+      University of Engineering &amp; Management, Newtown
+    </text>
+
+    <circle cx="100" cy="220" r="10" fill="#006633" />
+    <text x="130" y="230" font-family="'Inter', sans-serif" font-size="36" font-weight="700" fill="#1A1A1A">
+      Presented by: Jyotirmoy Santra &amp; Team
+    </text>
+  </g>
+
+  <!-- Bottom Academic Footer Bar -->
+  <g id="slide-footer">
+    <line x1="80" y1="995" x2="1840" y2="995" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="80" y="1025" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#004080">
+      OMNI-MESH: Smart Traffic &amp; Security
+    </text>
+    <text x="960" y="1025" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#64748B">
+      B.Tech CSE AI Term I Evaluation • University of Engineering &amp; Management, Newtown
+    </text>
+    <text x="1840" y="1025" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" font-weight="700" fill="#006633">
+      Academic Whitepaper Light Theme
+    </text>
+  </g>
+</svg>

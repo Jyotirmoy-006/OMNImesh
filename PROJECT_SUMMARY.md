@@ -41,26 +41,24 @@
 
 ## 2. Academic Whitepaper System Architecture Slide Deliverables
 
-To provide a presentation-grade, high-contrast visual for bright classroom projectors and academic slide decks, we scaled the system architecture SVG to fill the presentation canvas:
+To provide a presentation-grade, high-contrast visual for bright classroom projectors with zero text overflow and mathematically exact alignment, we refined the system architecture SVG:
 
 ### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Infinite vector scalability for Microsoft PowerPoint, Apple Keynote, and Google Slides.
 - **Academic Whitepaper Light Theme Aesthetic**:
   - **Background**: Pure white (`#FFFFFF`) with subtle outer academic framing (`#CBD5E1`).
   - **Primary Typography**: High-contrast dark charcoal (`#1A1A1A`) and deep corporate blue (`#004080`).
-  - **Borders & Accents**: Crisp, solid 2.5px borders in Deep Corporate Blue (`#004080`) and Emerald Green (`#006633`). Flat 2D vector style with zero glowing drop-shadows.
-- **Widescreen 85% Total Canvas Coverage (544px Width per Column)**:
-  - The three main containers collectively consume **85.0% of the canvas width** ($3 \times 544\text{px} = 1632\text{px}$).
-  1. **Tier 1: Edge Mesh (RPi 4B Agents)**: 544px width, 755px height, solid 2.5px corporate blue border. 50px bold header, 32px bullets, 24px subtext, sub-100ms inference KPI card, and RPi 4B hardware specification pill.
-  2. **Middleware: MQTT Comm Bus**: 544px width, 755px height, solid 2.5px emerald green border. 50px bold header, 32px bullets, 24px subtext, zero data loss KPI card, and MessagePack binary protocol pill.
-  3. **Tier 2: Global Orchestrator**: 544px width, 755px height, solid 2.5px corporate blue border. 50px bold header, 32px bullets, 24px subtext, dispatcher authorization gate KPI card, and Flask/SocketIO REST pill.
-- **Proportionally Scaled 6px Directional Data-Flow Arrows**:
-  - Inter-column gaps shrunk to **94px**, with scaled **6px-thick directional arrows** and enlarged state badges (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Gate`). High contrast and zero border overlap.
-- **Massive Projector Typography Scaling (≥50% Larger)**:
-  - Slide Header: **64px bold** (`OMNI-MESH SYSTEM ARCHITECTURE`), Subtitle: **26px**.
-  - Column Headers: **50px bold** (`Edge Mesh`, `MQTT Comm Bus`, `Global Orchestrator`).
-  - Bullet Points: **32px bold**, Sub-text: **24px**.
-  - Single-line horizontal stretch across wider 544px containers minimizing vertical clutter.
+  - **Borders & Accents**: Crisp, solid 2px borders in Deep Corporate Blue (`#004080`) and Emerald Green (`#006633`). Flat 2D vector style with zero glowing drop-shadows.
+- **Widescreen 85% Total Canvas Coverage (544px Width per Column, 790px Height)**:
+  - The three main containers collectively consume **85.0% of the canvas width** ($3 \times 544\text{px} = 1632\text{px}$) with an expanded **790px container height**.
+  1. **Tier 1: Edge Mesh (RPi 4B Agents)**: 544px width, 790px height, solid 2px corporate blue border. Centered 36px header (`text-anchor="middle"` at X=322), 24px/17px features, sub-100ms inference KPI card, and RPi 4B specification pill.
+  2. **Middleware: MQTT Comm Bus**: 544px width, 790px height, solid 2px emerald green border. Centered 36px header (`text-anchor="middle"` at X=960), 24px/17px features, zero data loss KPI card, and MessagePack binary protocol pill.
+  3. **Tier 2: Global Orchestrator**: 544px width, 790px height, solid 2px corporate blue border. Centered 36px header (`text-anchor="middle"` at X=1598) with strict bounding box containment (92px side margins, zero overflow), dispatcher authorization gate KPI card, and Flask/SocketIO REST pill.
+- **Mathematically Unified Feature Alignment & Even Vertical Spacing**:
+  - All feature groups share the exact same relative starting X coordinate ($\Delta x = 38\text{px}$ from container edge: X = 88, 726, 1364).
+  - Evenly spaced items with **95px vertical spacing**, eliminating top crowding.
+- **Proportionally Scaled 5px Directional Data-Flow Arrows**:
+  - Inter-column gaps (94px) with scaled **5px-thick directional arrows** and enlarged state badges (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Gate`). High contrast and zero border collisions.
 
 ### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.
@@ -73,24 +71,23 @@ To provide a presentation-grade, high-contrast visual for bright classroom proje
 
 ## 3. Academic Whitepaper Research Methodology Slide Deliverables
 
-To represent the complete research and engineering methodology with maximum readability in bright academic presentation environments, we overhauled the research pipeline SVG into an Academic Light Theme:
+To represent the complete research and engineering methodology with optimal vertical space utilization and clean `<tspan>` formatting, we refined the research pipeline SVG:
 
 ### 3.1 Vector SVG Diagram ([`docs/methodology_diagram.svg`](docs/methodology_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Ready for lecture halls, conference projectors, and slide decks.
 - **Academic Whitepaper Light Theme Aesthetic**:
   - Pure white background (`#FFFFFF`), dark charcoal primary text (`#1A1A1A`), and crisp 2px solid borders (`#004080`, `#006633`).
   - Zero glowing drop-shadows or neon filters. Flat, clean academic vector styling.
-- **4 Widened Column Containers (+30% Width, 415px Each)**:
-  1. **Stage 01: Micro-Simulation**: Realistic physics, 4×4 SUMO grid, sensor noise model, dynamic demand, and 112-D observations.
-  2. **Stage 02: Dual-Objective AI**: Single-line 26px header, PPO reinforcement learning, dual reward composition, and zero reward collapse design.
-  3. **Stage 03: ZSPF Failover**: Active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and island fallback.
-  4. **Stage 04: HITL Validation**: Ethical gate, 2-node temporal ANPR consensus, mandatory human authorization, and 100% target trap rate.
+- **4 Widened Column Containers (415px Width Each, 790px Height)**:
+  1. **Stage 01: Micro-Simulation**: Centered 28px header (`text-anchor="middle"` at X=258), 4×4 SUMO grid, sensor noise model, dynamic demand, and 112-D observations.
+  2. **Stage 02: Dual-Objective AI**: Centered 28px header (`text-anchor="middle"` at X=728), PPO reinforcement learning, dual reward composition, and zero reward collapse design.
+  3. **Stage 03: ZSPF Failover**: Centered 28px header (`text-anchor="middle"` at X=1198), active resilience, 3-tier state machine (Mode 0 -> Mode 1 -> Mode 2), 3.0s heartbeat monitor, and island fallback.
+  4. **Stage 04: HITL Validation**: Centered 28px header (`text-anchor="middle"` at X=1668), ethical gate, 2-node temporal ANPR consensus, mandatory human authorization, and 100% target trap rate.
+- **Mathematically Unified Feature Alignment & Even Vertical Spacing**:
+  - All feature groups share the exact same relative starting X coordinate ($\Delta x = 30\text{px}$ from container edge: X = 80, 550, 1020, 1490).
+  - Evenly spaced items with **95px vertical spacing** spanning the 390px content area, eliminating vertical crowding.
 - **Thick 5px Directional Chevrons**:
   - Clean 55px inter-stage gaps with bold 5px-thick directional chevrons connecting each sequential phase left-to-right.
-- **Typography Hierarchy (Max 28px Headers)**:
-  - Slide Header: **38pt**, Subtitle: **19pt**.
-  - Single-line card titles: **26pt bold** with abundant side padding.
-  - Body Text & Features: **17pt/14pt** dark charcoal (`#1A1A1A`).
 - **Bottom Summary Flow Bar**: High-contrast summary: `Microscopic Physics Co-Simulation ➔ Dual-Objective MARL Policy ➔ ZSPF Fail-Safe Resilience ➔ Human-in-the-Loop Ethical Gateway`.
 
 ### 3.2 Interactive Methodology Slide Viewer ([`docs/methodology_slide.html`](docs/methodology_slide.html))

@@ -24,7 +24,7 @@
       OMNI-MESH SYSTEM ARCHITECTURE
     </text>
     <text x="960" y="118" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="24" font-weight="600" fill="#4A5568">
-      Three-Tier Decentralized Edge Architecture &amp; Real-Time Data Flow
+      Three-Tier Decentralized Software Architecture &amp; Simulation Data Flow
     </text>
     <line x1="50" y1="145" x2="1870" y2="145" stroke="#CBD5E1" stroke-width="2" />
   </g>
@@ -75,68 +75,59 @@
       TIER 1 : DISTRIBUTED EDGE MESH
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits (Font size 36px, text-anchor="middle") -->
+    <!-- Centered Header with Strict Bounding Limits -->
     <text x="322" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
-      Edge Mesh
+      Edge-Ready Software
     </text>
     <text x="322" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#004080">
-      Raspberry Pi 4B Intersection Cluster
+      Local Intersection Processing
     </text>
 
     <line x1="85" y1="332" x2="559" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
 
     <!-- Feature List (Shared relative starting X = 50 + 38 = 88) -->
-    <g transform="translate(88, 365)">
-      <!-- Item 1 -->
-      <circle cx="8" cy="12" r="6" fill="#004080" />
-      <text x="26" y="18" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Decentralized RL Control
+    <g transform="translate(88, 360)">
+      <!-- Item 1: Edge Vision Pipeline -->
+      <circle cx="8" cy="20" r="7" fill="#004080" />
+      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Edge Vision Pipeline
       </text>
-      <text x="26" y="44" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        112-D PPO Actor-Critic edge policy
-      </text>
-
-      <!-- Item 2 (+95px dy spacing) -->
-      <circle cx="8" cy="107" r="6" fill="#004080" />
-      <text x="26" y="113" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Edge Vision &amp; ANPR
-      </text>
-      <text x="26" y="139" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        YOLOv8n INT8 model with thermal model
+      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Simulated camera processing independent of the cloud
       </text>
 
-      <!-- Item 3 (+95px dy spacing) -->
-      <circle cx="8" cy="202" r="6" fill="#004080" />
-      <text x="26" y="208" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        P2P Mesh Protocol
+      <!-- Item 2: Peer-to-Peer Networking (+120px dy) -->
+      <circle cx="8" cy="140" r="7" fill="#004080" />
+      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Peer-to-Peer Networking
       </text>
-      <text x="26" y="234" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Decentralized state exchange with neighbors
+      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Nodes share live traffic data with immediate neighbors
       </text>
 
-      <!-- Item 4 (+95px dy spacing) -->
-      <circle cx="8" cy="297" r="6" fill="#004080" />
-      <text x="26" y="303" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        ZSPF Island Fallback
+      <!-- Item 3: Local AI Execution (+120px dy) -->
+      <circle cx="8" cy="260" r="7" fill="#004080" />
+      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Local AI Execution
       </text>
-      <text x="26" y="329" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Independent Mode 2 Max-Pressure safety floor
+      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Sub-second decision making without central server wait times
       </text>
     </g>
 
     <!-- Bottom KPI Card (Centered at X=322) -->
-    <rect x="85" y="760" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="322" y="800" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
-      Sub-100ms Inference Latency
+    <rect x="85" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="322" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
+      Independent Edge Inference
     </text>
-    <text x="322" y="832" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
-      Deterministic Real-Time Execution
+    <text x="322" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
+      Deterministic Real-Time Simulation Execution
     </text>
 
     <!-- Technical Specification Pill -->
-    <rect x="85" y="872" width="474" height="42" rx="6" fill="#EDF2F7" />
-    <text x="322" y="899" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
-      RPi 4B (4GB) • INT8 NCNN • Mode 0/1/2 Support
+    <rect x="85" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
+    <text x="322" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
+      Decoupled Multiprocessing • Non-Blocking IPC • Mode 0/1/2
     </text>
   </g>
 
@@ -151,68 +142,59 @@
       COMMUNICATION MIDDLEWARE BUS
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits (Font size 36px, text-anchor="middle") -->
+    <!-- Centered Header with Strict Bounding Limits -->
     <text x="960" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
       MQTT Comm Bus
     </text>
     <text x="960" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#006633">
-      Low-Latency Pub/Sub Mesh Topology
+      Low-Latency Mesh Topology
     </text>
 
     <line x1="723" y1="332" x2="1197" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
 
     <!-- Feature List (Shared relative starting X = 688 + 38 = 726) -->
-    <g transform="translate(726, 365)">
-      <!-- Item 1 -->
-      <circle cx="8" cy="12" r="6" fill="#006633" />
-      <text x="26" y="18" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Async MQTT Broker
+    <g transform="translate(726, 360)">
+      <!-- Item 1: Lightweight Messaging -->
+      <circle cx="8" cy="20" r="7" fill="#006633" />
+      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Lightweight Messaging
       </text>
-      <text x="26" y="44" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Dual subscription to heartbeat &amp; peer state
-      </text>
-
-      <!-- Item 2 (+95px dy spacing) -->
-      <circle cx="8" cy="107" r="6" fill="#006633" />
-      <text x="26" y="113" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        MessagePack Protocol
-      </text>
-      <text x="26" y="139" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Compact sub-100 byte binary payloads
+      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Highly efficient pub/sub network for intersection data
       </text>
 
-      <!-- Item 3 (+95px dy spacing) -->
-      <circle cx="8" cy="202" r="6" fill="#006633" />
-      <text x="26" y="208" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Active ZSPF Liveness
+      <!-- Item 2: Failsafe Routing (+120px dy) -->
+      <circle cx="8" cy="140" r="7" fill="#006633" />
+      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Failsafe Routing
       </text>
-      <text x="26" y="234" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Strict 3.0s heartbeat expiration monitor
+      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Instantly reroutes messages to prevent security data loss
       </text>
 
-      <!-- Item 4 (+95px dy spacing) -->
-      <circle cx="8" cy="297" r="6" fill="#006633" />
-      <text x="26" y="303" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Simulation Fallback
+      <!-- Item 3: Crash Detection (+120px dy) -->
+      <circle cx="8" cy="260" r="7" fill="#006633" />
+      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Crash Detection
       </text>
-      <text x="26" y="329" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Zero external broker dependencies
+      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Actively monitors connections and triggers backup plans
       </text>
     </g>
 
     <!-- Bottom KPI Card (Centered at X=960) -->
-    <rect x="723" y="760" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
-    <text x="960" y="800" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#006633">
+    <rect x="723" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
+    <text x="960" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#006633">
       Zero Data Loss Failover
     </text>
-    <text x="960" y="832" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
+    <text x="960" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
       Instant Broker Degradation to Mode 2
     </text>
 
     <!-- Technical Specification Pill -->
-    <rect x="723" y="872" width="474" height="42" rx="6" fill="#EDF2F7" />
-    <text x="960" y="899" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
-      paho-mqtt • MessagePack Bin • 1883/TCP
+    <rect x="723" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
+    <text x="960" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
+      paho-mqtt • MessagePack Bin • Low-Latency Pub/Sub
     </text>
   </g>
 
@@ -227,7 +209,7 @@
       TIER 2 : REGIONAL SUPERVISION
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits (Font size 36px, text-anchor="middle" strictly inside 544px) -->
+    <!-- Centered Header with Strict Bounding Limits -->
     <text x="1598" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
       Global Orchestrator
     </text>
@@ -238,56 +220,47 @@
     <line x1="1361" y1="332" x2="1835" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
 
     <!-- Feature List (Shared relative starting X = 1326 + 38 = 1364) -->
-    <g transform="translate(1364, 365)">
-      <!-- Item 1 -->
-      <circle cx="8" cy="12" r="6" fill="#004080" />
-      <text x="26" y="18" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Multi-Node Consensus
+    <g transform="translate(1364, 360)">
+      <!-- Item 1: Threat Verification -->
+      <circle cx="8" cy="20" r="7" fill="#004080" />
+      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Threat Verification
       </text>
-      <text x="26" y="44" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        ≥2 edge camera detections required in 30s
-      </text>
-
-      <!-- Item 2 (+95px dy spacing) -->
-      <circle cx="8" cy="107" r="6" fill="#004080" />
-      <text x="26" y="113" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Security Corridor Overrides
-      </text>
-      <text x="26" y="139" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Perimeter trap barrier actuation at Node C2
+      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Cross-checks alerts across multiple simulated nodes
       </text>
 
-      <!-- Item 3 (+95px dy spacing) -->
-      <circle cx="8" cy="202" r="6" fill="#004080" />
-      <text x="26" y="208" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Ethical HITL Gateway
+      <!-- Item 2: Tactical Planning (+120px dy) -->
+      <circle cx="8" cy="140" r="7" fill="#004080" />
+      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Tactical Planning
       </text>
-      <text x="26" y="234" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        State lock PENDING_AUTHORIZATION
+      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        Calculates optimal traffic light changes for containment
       </text>
 
-      <!-- Item 4 (+95px dy spacing) -->
-      <circle cx="8" cy="297" r="6" fill="#004080" />
-      <text x="26" y="303" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Dispatcher REST API
+      <!-- Item 3: Ethical HITL Gate (+120px dy) -->
+      <circle cx="8" cy="260" r="7" fill="#004080" />
+      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
+        Ethical HITL Gate
       </text>
-      <text x="26" y="329" font-family="'Inter', sans-serif" font-size="17" font-weight="500" fill="#4A5568">
-        Mandatory human confirmation trigger
+      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
+        System waits for human dispatcher approval
       </text>
     </g>
 
     <!-- Bottom KPI Card (Centered at X=1598) -->
-    <rect x="1361" y="760" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="1598" y="800" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
+    <rect x="1361" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="1598" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
       Ethical Gate Lock
     </text>
-    <text x="1598" y="832" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
+    <text x="1598" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
       Mandatory Dispatcher Approval
     </text>
 
     <!-- Technical Specification Pill -->
-    <rect x="1361" y="872" width="474" height="42" rx="6" fill="#EDF2F7" />
-    <text x="1598" y="899" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
+    <rect x="1361" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
+    <text x="1598" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
       Flask • Flask-SocketIO • REST Gateway
     </text>
   </g>
@@ -296,7 +269,7 @@
   <g id="bottom-bar">
     <rect x="50" y="975" width="1820" height="75" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
     <text x="322" y="1022" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#004080">
-      ✦ Tier 1: Local Edge Autonomy (RPi 4B)
+      ✦ Tier 1: Local Edge Autonomy (Simulation)
     </text>
     <text x="960" y="1022" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#006633">
       ✦ Zero Single Point of Failure (ZSPF)

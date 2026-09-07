@@ -41,24 +41,26 @@
 
 ## 2. Academic Whitepaper System Architecture Slide Deliverables
 
-To provide a presentation-grade, high-contrast visual for bright classroom projectors and academic whitepapers, we overhauled the system architecture SVG into an Academic Light Theme:
+To provide a presentation-grade, high-contrast visual for bright classroom projectors and academic slide decks, we scaled the system architecture SVG to fill the presentation canvas:
 
 ### 2.1 Vector SVG Diagram ([`docs/architecture_diagram.svg`](docs/architecture_diagram.svg))
 - **Standard 16:9 Slide Ratio (1920 × 1080 px)**: Infinite vector scalability for Microsoft PowerPoint, Apple Keynote, and Google Slides.
 - **Academic Whitepaper Light Theme Aesthetic**:
   - **Background**: Pure white (`#FFFFFF`) with subtle outer academic framing (`#CBD5E1`).
-  - **Primary Typography**: High-contrast dark charcoal / almost black (`#1A1A1A`) and deep corporate blue (`#004080`).
-  - **Borders & Accents**: Crisp, solid 2px borders in Deep Corporate Blue (`#004080`) and Emerald Green (`#006633`). Flat 2D vector style with zero glowing drop-shadows.
-- **Three Widened Column Containers (+30% Width, 500px Each)**:
-  1. **Tier 1: Edge Mesh (RPi 4B Agents)**: 500px width, 745px height, solid 2px corporate blue border. Single-line 26px header, sub-100ms inference KPI card, and RPi 4B hardware specification pill.
-  2. **Middleware: MQTT Comm Bus**: 500px width, 745px height, solid 2px emerald green border. Single-line 26px header, zero data loss KPI card, and MessagePack binary protocol pill.
-  3. **Tier 2: Global Orchestrator**: 500px width, 745px height, solid 2px corporate blue border. Single-line 26px header, dispatcher authorization gate KPI card, and Flask/SocketIO REST pill.
-- **Thick 4px Directional Data-Flow Arrows**:
-  - 150px wide inter-column gaps with thick 4px directional arrows (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Override`). High contrast against white canvas with zero border overlap.
-- **Typography Hierarchy (Max 28px Headers)**:
-  - Slide Header: **38pt**, Subtitle: **19pt**.
-  - Card Titles: **26pt bold on a single line** with generous internal margins.
-  - Body Text & Features: **18pt/15pt** dark charcoal (`#1A1A1A`).
+  - **Primary Typography**: High-contrast dark charcoal (`#1A1A1A`) and deep corporate blue (`#004080`).
+  - **Borders & Accents**: Crisp, solid 2.5px borders in Deep Corporate Blue (`#004080`) and Emerald Green (`#006633`). Flat 2D vector style with zero glowing drop-shadows.
+- **Widescreen 85% Total Canvas Coverage (544px Width per Column)**:
+  - The three main containers collectively consume **85.0% of the canvas width** ($3 \times 544\text{px} = 1632\text{px}$).
+  1. **Tier 1: Edge Mesh (RPi 4B Agents)**: 544px width, 755px height, solid 2.5px corporate blue border. 50px bold header, 32px bullets, 24px subtext, sub-100ms inference KPI card, and RPi 4B hardware specification pill.
+  2. **Middleware: MQTT Comm Bus**: 544px width, 755px height, solid 2.5px emerald green border. 50px bold header, 32px bullets, 24px subtext, zero data loss KPI card, and MessagePack binary protocol pill.
+  3. **Tier 2: Global Orchestrator**: 544px width, 755px height, solid 2.5px corporate blue border. 50px bold header, 32px bullets, 24px subtext, dispatcher authorization gate KPI card, and Flask/SocketIO REST pill.
+- **Proportionally Scaled 6px Directional Data-Flow Arrows**:
+  - Inter-column gaps shrunk to **94px**, with scaled **6px-thick directional arrows** and enlarged state badges (`States ▶`, `◀ Sync`, `Alerts ▶`, `◀ Gate`). High contrast and zero border overlap.
+- **Massive Projector Typography Scaling (≥50% Larger)**:
+  - Slide Header: **64px bold** (`OMNI-MESH SYSTEM ARCHITECTURE`), Subtitle: **26px**.
+  - Column Headers: **50px bold** (`Edge Mesh`, `MQTT Comm Bus`, `Global Orchestrator`).
+  - Bullet Points: **32px bold**, Sub-text: **24px**.
+  - Single-line horizontal stretch across wider 544px containers minimizing vertical clutter.
 
 ### 2.2 Interactive Architecture Slide Viewer ([`docs/architecture_slide.html`](docs/architecture_slide.html))
 - Hosted directly via the local backend at **`http://localhost:5000/architecture`**.

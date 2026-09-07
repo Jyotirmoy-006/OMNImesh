@@ -5,7 +5,7 @@
   <!-- Outer Academic Framing -->
   <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#CBD5E1" stroke-width="2" rx="8" />
 
-  <!-- Marker Definitions for Enlarged Directional Arrows -->
+  <!-- Marker Definitions for Directional Arrows -->
   <defs>
     <marker id="arrow-blue-large" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 1 2 L 10 6 L 1 10 z" fill="#004080" />
@@ -29,17 +29,15 @@
     <line x1="50" y1="145" x2="1870" y2="145" stroke="#CBD5E1" stroke-width="2" />
   </g>
 
-  <!-- ==================== DATA-FLOW ARROWS (SCALED 5px STROKES) ==================== -->
+  <!-- ==================== DATA-FLOW ARROWS ==================== -->
   <!-- Gap 1: Edge Mesh <-> MQTT Comm Bus (X=594 to X=688, Center X=641) -->
   <g id="connector-edge-bus">
-    <!-- Top Flow: States (Edge -> Bus) -->
     <path d="M 598 475 L 682 475" stroke="#004080" stroke-width="5" marker-end="url(#arrow-blue-large)" />
     <rect x="599" y="420" width="84" height="42" rx="6" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
     <text x="641" y="447" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#004080">
       States ▶
     </text>
 
-    <!-- Bottom Flow: Sync / Directives (Bus -> Edge) -->
     <path d="M 684 665 L 600 665" stroke="#006633" stroke-width="5" marker-end="url(#arrow-green-large-rev)" />
     <rect x="599" y="680" width="84" height="42" rx="6" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
     <text x="641" y="707" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#006633">
@@ -49,14 +47,12 @@
 
   <!-- Gap 2: MQTT Comm Bus <-> Global Orchestrator (X=1232 to X=1326, Center X=1279) -->
   <g id="connector-bus-orch">
-    <!-- Top Flow: Alerts (Bus -> Orchestrator) -->
     <path d="M 1236 475 L 1320 475" stroke="#004080" stroke-width="5" marker-end="url(#arrow-blue-large)" />
     <rect x="1237" y="420" width="84" height="42" rx="6" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
     <text x="1279" y="447" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#004080">
       Alerts ▶
     </text>
 
-    <!-- Bottom Flow: Overrides (Orchestrator -> Bus) -->
     <path d="M 1322 665 L 1238 665" stroke="#990000" stroke-width="5" marker-end="url(#arrow-crimson-large-rev)" />
     <rect x="1236" y="680" width="86" height="42" rx="6" fill="#FFFFFF" stroke="#990000" stroke-width="2" />
     <text x="1279" y="707" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#990000">
@@ -66,7 +62,6 @@
 
   <!-- ==================== CARD 1: TIER 1 EDGE MESH (X=50, Width=544, Center X=322) ==================== -->
   <g id="card-edge-mesh">
-    <!-- Solid Crisp 2px Border, 544px Wide Container (Height = 790px) -->
     <rect x="50" y="165" width="544" height="790" rx="12" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
 
     <!-- Top Category Banner -->
@@ -75,65 +70,43 @@
       TIER 1 : DISTRIBUTED EDGE MESH
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="322" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="322" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" font-weight="800" fill="#1A1A1A">
       Edge-Ready Software
     </text>
-    <text x="322" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#004080">
-      Local Intersection Processing
-    </text>
 
-    <line x1="85" y1="332" x2="559" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="85" y1="325" x2="559" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 50 + 38 = 88) -->
-    <g transform="translate(88, 360)">
-      <!-- Item 1: Edge Vision Pipeline -->
-      <circle cx="8" cy="20" r="7" fill="#004080" />
-      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Edge Vision Pipeline
-      </text>
-      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Simulated camera processing independent of the cloud
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(85, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="14" cy="415" r="9" fill="#004080" />
+      <text x="38" y="425" font-family="'Inter', sans-serif" font-size="26" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Simulated edge vision processing.
       </text>
 
-      <!-- Item 2: Peer-to-Peer Networking (+120px dy) -->
-      <circle cx="8" cy="140" r="7" fill="#004080" />
-      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Peer-to-Peer Networking
-      </text>
-      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Nodes share live traffic data with immediate neighbors
+      <!-- Bullet 2 -->
+      <circle cx="14" cy="535" r="9" fill="#004080" />
+      <text x="38" y="545" font-family="'Inter', sans-serif" font-size="26" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Peer-to-Peer traffic data sharing.
       </text>
 
-      <!-- Item 3: Local AI Execution (+120px dy) -->
-      <circle cx="8" cy="260" r="7" fill="#004080" />
-      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Local AI Execution
-      </text>
-      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Sub-second decision making without central server wait times
+      <!-- Bullet 3 -->
+      <circle cx="14" cy="655" r="9" fill="#004080" />
+      <text x="38" y="665" font-family="'Inter', sans-serif" font-size="26" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Sub-second local AI decisions.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=322) -->
-    <rect x="85" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="322" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
+    <!-- Bottom KPI Card -->
+    <rect x="85" y="760" width="474" height="135" rx="10" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="322" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="30" font-weight="800" fill="#004080">
       Independent Edge Inference
-    </text>
-    <text x="322" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
-      Deterministic Real-Time Simulation Execution
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="85" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
-    <text x="322" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
-      Decoupled Multiprocessing • Non-Blocking IPC • Mode 0/1/2
     </text>
   </g>
 
   <!-- ==================== CARD 2: MIDDLEWARE MQTT COMM BUS (X=688, Width=544, Center X=960) ==================== -->
   <g id="card-mqtt-bus">
-    <!-- Solid Crisp 2px Border in Emerald Green, 544px Wide Container (Height = 790px) -->
     <rect x="688" y="165" width="544" height="790" rx="12" fill="#F8FAFC" stroke="#006633" stroke-width="2" />
 
     <!-- Top Category Banner -->
@@ -142,65 +115,43 @@
       COMMUNICATION MIDDLEWARE BUS
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="960" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="960" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" font-weight="800" fill="#1A1A1A">
       MQTT Comm Bus
     </text>
-    <text x="960" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#006633">
-      Low-Latency Mesh Topology
-    </text>
 
-    <line x1="723" y1="332" x2="1197" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="723" y1="325" x2="1197" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 688 + 38 = 726) -->
-    <g transform="translate(726, 360)">
-      <!-- Item 1: Lightweight Messaging -->
-      <circle cx="8" cy="20" r="7" fill="#006633" />
-      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Lightweight Messaging
-      </text>
-      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Highly efficient pub/sub network for intersection data
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(723, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="14" cy="415" r="9" fill="#006633" />
+      <text x="38" y="425" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Fast, lightweight messaging network.
       </text>
 
-      <!-- Item 2: Failsafe Routing (+120px dy) -->
-      <circle cx="8" cy="140" r="7" fill="#006633" />
-      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Failsafe Routing
-      </text>
-      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Instantly reroutes messages to prevent security data loss
+      <!-- Bullet 2 -->
+      <circle cx="14" cy="535" r="9" fill="#006633" />
+      <text x="38" y="545" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Failsafe message rerouting.
       </text>
 
-      <!-- Item 3: Crash Detection (+120px dy) -->
-      <circle cx="8" cy="260" r="7" fill="#006633" />
-      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Crash Detection
-      </text>
-      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Actively monitors connections and triggers backup plans
+      <!-- Bullet 3 -->
+      <circle cx="14" cy="655" r="9" fill="#006633" />
+      <text x="38" y="665" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Active connection crash detection.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=960) -->
-    <rect x="723" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
-    <text x="960" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#006633">
+    <!-- Bottom KPI Card -->
+    <rect x="723" y="760" width="474" height="135" rx="10" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
+    <text x="960" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="30" font-weight="800" fill="#006633">
       Zero Data Loss Failover
-    </text>
-    <text x="960" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
-      Instant Broker Degradation to Mode 2
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="723" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
-    <text x="960" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
-      paho-mqtt • MessagePack Bin • Low-Latency Pub/Sub
     </text>
   </g>
 
   <!-- ==================== CARD 3: TIER 2 GLOBAL ORCHESTRATOR (X=1326, Width=544, Center X=1598) ==================== -->
   <g id="card-global-orchestrator">
-    <!-- Solid Crisp 2px Border in Corporate Blue, 544px Wide Container (Height = 790px) -->
     <rect x="1326" y="165" width="544" height="790" rx="12" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
 
     <!-- Top Category Banner -->
@@ -209,59 +160,38 @@
       TIER 2 : REGIONAL SUPERVISION
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="1598" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="36" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="1598" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" font-weight="800" fill="#1A1A1A">
       Global Orchestrator
     </text>
-    <text x="1598" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#004080">
-      Regional Traffic Supervision &amp; Policy
-    </text>
 
-    <line x1="1361" y1="332" x2="1835" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="1361" y1="325" x2="1835" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 1326 + 38 = 1364) -->
-    <g transform="translate(1364, 360)">
-      <!-- Item 1: Threat Verification -->
-      <circle cx="8" cy="20" r="7" fill="#004080" />
-      <text x="28" y="27" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Threat Verification
-      </text>
-      <text x="28" y="57" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Cross-checks alerts across multiple simulated nodes
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(1361, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="14" cy="415" r="9" fill="#004080" />
+      <text x="38" y="425" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Multi-camera threat verification.
       </text>
 
-      <!-- Item 2: Tactical Planning (+120px dy) -->
-      <circle cx="8" cy="140" r="7" fill="#004080" />
-      <text x="28" y="147" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Tactical Planning
-      </text>
-      <text x="28" y="177" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        Calculates optimal traffic light changes for containment
+      <!-- Bullet 2 -->
+      <circle cx="14" cy="535" r="9" fill="#004080" />
+      <text x="38" y="545" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Automated tactical trap planning.
       </text>
 
-      <!-- Item 3: Ethical HITL Gate (+120px dy) -->
-      <circle cx="8" cy="260" r="7" fill="#004080" />
-      <text x="28" y="267" font-family="'Inter', sans-serif" font-size="24" font-weight="700" fill="#1A1A1A">
-        Ethical HITL Gate
-      </text>
-      <text x="28" y="297" font-family="'Inter', sans-serif" font-size="16.5" font-weight="500" fill="#4A5568">
-        System waits for human dispatcher approval
+      <!-- Bullet 3 -->
+      <circle cx="14" cy="655" r="9" fill="#004080" />
+      <text x="38" y="665" font-family="'Inter', sans-serif" font-size="25" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Strict Human-in-the-Loop gateway.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=1598) -->
-    <rect x="1361" y="755" width="474" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="1598" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
+    <!-- Bottom KPI Card -->
+    <rect x="1361" y="760" width="474" height="135" rx="10" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="1598" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="30" font-weight="800" fill="#004080">
       Ethical Gate Lock
-    </text>
-    <text x="1598" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" font-weight="600" fill="#1A1A1A">
-      Mandatory Dispatcher Approval
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="1361" y="868" width="474" height="44" rx="6" fill="#EDF2F7" />
-    <text x="1598" y="896" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#2D3748">
-      Flask • Flask-SocketIO • REST Gateway
     </text>
   </g>
 

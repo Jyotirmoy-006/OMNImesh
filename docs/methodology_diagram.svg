@@ -16,25 +16,21 @@
     <line x1="50" y1="145" x2="1870" y2="145" stroke="#CBD5E1" stroke-width="2" />
   </g>
 
-  <!-- ==================== DIRECTIONAL CHEVRONS (THICK 5px STROKES) ==================== -->
-  <!-- Chevron 1: Stage 1 -> Stage 2 (Centered at X=492, Y=540) -->
+  <!-- ==================== DIRECTIONAL CHEVRONS ==================== -->
   <g id="chevron-1">
     <path d="M 482 520 L 502 540 L 482 560" fill="none" stroke="#004080" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- Chevron 2: Stage 2 -> Stage 3 (Centered at X=962, Y=540) -->
   <g id="chevron-2">
     <path d="M 952 520 L 972 540 L 952 560" fill="none" stroke="#006633" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- Chevron 3: Stage 3 -> Stage 4 (Centered at X=1432, Y=540) -->
   <g id="chevron-3">
     <path d="M 1422 520 L 1442 540 L 1422 560" fill="none" stroke="#004080" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
   <!-- ==================== CARD 1: MICRO-SIMULATION (X=50, Width=415, Center X=258) ==================== -->
   <g id="card-stage-1">
-    <!-- Solid Crisp 2px Border in Corporate Blue (Height = 790px) -->
     <rect x="50" y="165" width="415" height="790" rx="12" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
 
     <!-- Top Stage Banner -->
@@ -43,65 +39,43 @@
       STAGE 01 : PHYSICS ENVIRONMENT
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="258" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="258" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="800" fill="#1A1A1A">
       Micro-Simulation
     </text>
-    <text x="258" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#004080">
-      Virtual City Testing Ground
-    </text>
 
-    <line x1="75" y1="332" x2="440" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="75" y1="325" x2="440" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 50 + 30 = 80) -->
-    <g transform="translate(80, 360)">
-      <!-- Item 1: Virtual City Grid -->
-      <circle cx="8" cy="20" r="6" fill="#004080" />
-      <text x="26" y="26" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Virtual City Grid
-      </text>
-      <text x="26" y="54" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Multi-intersection SUMO environment
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(68, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="12" cy="415" r="8" fill="#004080" />
+      <text x="32" y="424" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        4x4 virtual SUMO city grid.
       </text>
 
-      <!-- Item 2: Traffic Monitoring (+120px dy) -->
-      <circle cx="8" cy="140" r="6" fill="#004080" />
-      <text x="26" y="146" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Traffic Monitoring
-      </text>
-      <text x="26" y="174" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Measures simulated vehicle queues at red lights
+      <!-- Bullet 2 -->
+      <circle cx="12" cy="535" r="8" fill="#004080" />
+      <text x="32" y="544" font-family="'Inter', sans-serif" font-size="20.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Measures red-light vehicle queues.
       </text>
 
-      <!-- Item 3: Error Injection (+120px dy) -->
-      <circle cx="8" cy="260" r="6" fill="#004080" />
-      <text x="26" y="266" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Error Injection
-      </text>
-      <text x="26" y="294" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Introduces simulated hardware glitches and lag
+      <!-- Bullet 3 -->
+      <circle cx="12" cy="655" r="8" fill="#004080" />
+      <text x="32" y="664" font-family="'Inter', sans-serif" font-size="20.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Injects simulated hardware glitches.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=258) -->
-    <rect x="75" y="755" width="365" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="258" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#004080">
+    <!-- Bottom KPI Card -->
+    <rect x="75" y="760" width="365" height="135" rx="10" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="258" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
       Virtual Ground Truth
-    </text>
-    <text x="258" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#1A1A1A">
-      Microscopic Simulation State Space
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="75" y="868" width="365" height="44" rx="6" fill="#EDF2F7" />
-    <text x="258" y="895" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#2D3748">
-      Eclipse SUMO • TraCI API • Gymnasium Env
     </text>
   </g>
 
   <!-- ==================== CARD 2: DUAL-OBJECTIVE AI (X=520, Width=415, Center X=728) ==================== -->
   <g id="card-stage-2">
-    <!-- Solid Crisp 2px Border in Corporate Blue (Height = 790px) -->
     <rect x="520" y="165" width="415" height="790" rx="12" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
 
     <!-- Top Stage Banner -->
@@ -110,65 +84,43 @@
       STAGE 02 : MULTI-AGENT RL
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="728" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="728" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="800" fill="#1A1A1A">
       Dual-Objective AI
     </text>
-    <text x="728" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#004080">
-      Active Simulation Training
-    </text>
 
-    <line x1="545" y1="332" x2="910" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="545" y1="325" x2="910" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 520 + 30 = 550) -->
-    <g transform="translate(550, 360)">
-      <!-- Item 1: AI Training Setup -->
-      <circle cx="8" cy="20" r="6" fill="#004080" />
-      <text x="26" y="26" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        AI Training Setup
-      </text>
-      <text x="26" y="54" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Agents learn efficient queue clearing tactics
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(538, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="12" cy="415" r="8" fill="#004080" />
+      <text x="32" y="424" font-family="'Inter', sans-serif" font-size="21" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        AI learns queue clearing tactics.
       </text>
 
-      <!-- Item 2: Balancing Two Goals (+120px dy) -->
-      <circle cx="8" cy="140" r="6" fill="#004080" />
-      <text x="26" y="146" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Balancing Two Goals
-      </text>
-      <text x="26" y="174" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Evaluates smooth traffic vs. security priorities
+      <!-- Bullet 2 -->
+      <circle cx="12" cy="535" r="8" fill="#004080" />
+      <text x="32" y="544" font-family="'Inter', sans-serif" font-size="21" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Balances traffic &amp; security goals.
       </text>
 
-      <!-- Item 3: Priority Switching (+120px dy) -->
-      <circle cx="8" cy="260" r="6" fill="#004080" />
-      <text x="26" y="266" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Priority Switching
-      </text>
-      <text x="26" y="294" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Instantly drops normal rules during threat detection
+      <!-- Bullet 3 -->
+      <circle cx="12" cy="655" r="8" fill="#004080" />
+      <text x="32" y="664" font-family="'Inter', sans-serif" font-size="21" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Instantly switches to threat mode.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=728) -->
-    <rect x="545" y="755" width="365" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="728" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#004080">
+    <!-- Bottom KPI Card -->
+    <rect x="545" y="760" width="365" height="135" rx="10" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="728" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
       In-Development Policy
-    </text>
-    <text x="728" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#1A1A1A">
-      100% Security Target Containment
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="545" y="868" width="365" height="44" rx="6" fill="#EDF2F7" />
-    <text x="728" y="895" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#2D3748">
-      Multi-Agent RL • Neural Network Policy
     </text>
   </g>
 
   <!-- ==================== CARD 3: ZSPF FAILOVER (X=990, Width=415, Center X=1198) ==================== -->
   <g id="card-stage-3">
-    <!-- Solid Crisp 2px Border in Emerald Green (Height = 790px) -->
     <rect x="990" y="165" width="415" height="790" rx="12" fill="#F8FAFC" stroke="#006633" stroke-width="2" />
 
     <!-- Top Stage Banner -->
@@ -177,65 +129,43 @@
       STAGE 03 : NETWORK RESILIENCE
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="1198" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="1198" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="800" fill="#1A1A1A">
       ZSPF Failover
     </text>
-    <text x="1198" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#006633">
-      Active State Testing
-    </text>
 
-    <line x1="1015" y1="332" x2="1380" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="1015" y1="325" x2="1380" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 990 + 30 = 1020) -->
-    <g transform="translate(1020, 360)">
-      <!-- Item 1: Mode 0 -->
-      <circle cx="8" cy="20" r="6" fill="#006633" />
-      <text x="26" y="26" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Mode 0
-      </text>
-      <text x="26" y="54" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Global Full Mesh optimal operation
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(1008, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="12" cy="415" r="8" fill="#006633" />
+      <text x="32" y="424" font-family="'Inter', sans-serif" font-size="21.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Mode 0: Perfect cloud operation.
       </text>
 
-      <!-- Item 2: Mode 1 (+120px dy) -->
-      <circle cx="8" cy="140" r="6" fill="#006633" />
-      <text x="26" y="146" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Mode 1
-      </text>
-      <text x="26" y="174" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Autonomous P2P triggered by server crash
+      <!-- Bullet 2 -->
+      <circle cx="12" cy="535" r="8" fill="#006633" />
+      <text x="32" y="544" font-family="'Inter', sans-serif" font-size="21.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Mode 1: Autonomous P2P fallback.
       </text>
 
-      <!-- Item 3: Mode 2 (+120px dy) -->
-      <circle cx="8" cy="260" r="6" fill="#006633" />
-      <text x="26" y="266" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Mode 2
-      </text>
-      <text x="26" y="294" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Solo survival using backup formulas
+      <!-- Bullet 3 -->
+      <circle cx="12" cy="655" r="8" fill="#006633" />
+      <text x="32" y="664" font-family="'Inter', sans-serif" font-size="21.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Mode 2: Solo math-based survival.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=1198) -->
-    <rect x="1015" y="755" width="365" height="95" rx="8" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
-    <text x="1198" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#006633">
+    <!-- Bottom KPI Card -->
+    <rect x="1015" y="760" width="365" height="135" rx="10" fill="#FFFFFF" stroke="#006633" stroke-width="2" />
+    <text x="1198" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#006633">
       Resilience Validation
-    </text>
-    <text x="1198" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#1A1A1A">
-      ≤25% Performance Degradation Floor
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="1015" y="868" width="365" height="44" rx="6" fill="#EDF2F7" />
-    <text x="1198" y="895" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#2D3748">
-      paho-mqtt • MessagePack • ZSPF State Engine
     </text>
   </g>
 
   <!-- ==================== CARD 4: HITL VALIDATION (X=1460, Width=415, Center X=1668) ==================== -->
   <g id="card-stage-4">
-    <!-- Solid Crisp 2px Border in Corporate Blue (Height = 790px) -->
     <rect x="1460" y="165" width="415" height="790" rx="12" fill="#F8FAFC" stroke="#004080" stroke-width="2" />
 
     <!-- Top Stage Banner -->
@@ -244,59 +174,38 @@
       STAGE 04 : ETHICS &amp; VALIDATION
     </text>
 
-    <!-- Centered Header with Strict Bounding Limits -->
-    <text x="1668" y="275" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="#1A1A1A">
+    <!-- Centered Header -->
+    <text x="1668" y="285" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" font-weight="800" fill="#1A1A1A">
       HITL Validation
     </text>
-    <text x="1668" y="308" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#004080">
-      Ethical Operator Gateway
-    </text>
 
-    <line x1="1485" y1="332" x2="1850" y2="332" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="1485" y1="325" x2="1850" y2="325" stroke="#CBD5E1" stroke-width="1.5" />
 
-    <!-- Feature List (Shared relative starting X = 1460 + 30 = 1490) -->
-    <g transform="translate(1490, 360)">
-      <!-- Item 1: Safety Pause -->
-      <circle cx="8" cy="20" r="6" fill="#004080" />
-      <text x="26" y="26" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Safety Pause
-      </text>
-      <text x="26" y="54" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Strict digital checkpoint freezes automated traps
+    <!-- Massive Single-Line Bullet Points -->
+    <g transform="translate(1478, 0)">
+      <!-- Bullet 1 -->
+      <circle cx="12" cy="415" r="8" fill="#004080" />
+      <text x="32" y="424" font-family="'Inter', sans-serif" font-size="21.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Digital safety checkpoint lock.
       </text>
 
-      <!-- Item 2: Human Approval (+120px dy) -->
-      <circle cx="8" cy="140" r="6" fill="#004080" />
-      <text x="26" y="146" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Human Approval
-      </text>
-      <text x="26" y="174" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        System requires simulated dispatcher approval
+      <!-- Bullet 2 -->
+      <circle cx="12" cy="535" r="8" fill="#004080" />
+      <text x="32" y="544" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Requires human dispatcher approval.
       </text>
 
-      <!-- Item 3: Automated Testing (+120px dy) -->
-      <circle cx="8" cy="260" r="6" fill="#004080" />
-      <text x="26" y="266" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1A1A1A">
-        Automated Testing
-      </text>
-      <text x="26" y="294" font-family="'Inter', sans-serif" font-size="14.5" font-weight="500" fill="#4A5568">
-        Developer bypass for rapid statistical evaluation
+      <!-- Bullet 3 -->
+      <circle cx="12" cy="655" r="8" fill="#004080" />
+      <text x="32" y="664" font-family="'Inter', sans-serif" font-size="20.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.3">
+        Developer mode for rapid testing.
       </text>
     </g>
 
-    <!-- Bottom KPI Card (Centered at X=1668) -->
-    <rect x="1485" y="755" width="365" height="95" rx="8" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
-    <text x="1668" y="796" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#004080">
+    <!-- Bottom KPI Card -->
+    <rect x="1485" y="760" width="365" height="135" rx="10" fill="#FFFFFF" stroke="#004080" stroke-width="2" />
+    <text x="1668" y="838" text-anchor="middle" font-family="'Inter', sans-serif" font-size="26" font-weight="800" fill="#004080">
       Empirical Validation
-    </text>
-    <text x="1668" y="828" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#1A1A1A">
-      Zero False Autonomous Lockdowns
-    </text>
-
-    <!-- Technical Specification Pill -->
-    <rect x="1485" y="868" width="365" height="44" rx="6" fill="#EDF2F7" />
-    <text x="1668" y="895" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#2D3748">
-      Multi-Episode Benchmark • Halting Metrics
     </text>
   </g>
 
